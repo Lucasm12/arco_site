@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: trocar arco.example pelo domínio definitivo
+Sitemap: https://arco.example/sitemap.xml

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <style>
+    .arc { stroke: #024D57; }
+    @media (prefers-color-scheme: dark) { .arc { stroke: #AEE6F4; } }
+  </style>
+  <!-- Versão reduzida do símbolo (traço constante 7/48), recomendada abaixo de 32 px -->
+  <circle class="arc" cx="24" cy="24" r="15" fill="none" stroke-width="7" stroke-linecap="round" stroke-dasharray="68.07 26.18" transform="rotate(10 24 24)"/>
+  <circle cx="35.49" cy="14.36" r="4.8" fill="#FF7549"/>
+</svg>

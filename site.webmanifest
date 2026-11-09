@@ -1,0 +1,14 @@
+{
+  "name": "Arco · Treino guiado por profissionais e IA",
+  "short_name": "Arco",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "display": "browser",
+  "background_color": "#F5F8F9",
+  "theme_color": "#024D57",
+  "icons": [
+    { "src": "assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "assets/img/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/img/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

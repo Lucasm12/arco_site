@@ -1,0 +1,544 @@
+/* ==========================================================================
+   ARCO · Design Tokens v1.0 (nov/2026)
+   Convenção: --arco-{categoria}-{grupo}-{papel}-{variante}-{estado}
+   Primitivos (--arco-color-petroleo-500) nunca são usados direto em componentes;
+   componentes consomem apenas tokens semânticos (--arco-color-text-primary).
+   ========================================================================== */
+
+:root {
+  /* ---- Cor · primitivos ---- */
+  --arco-color-white: #FFFFFF;
+  /* Petróleo */
+  --arco-color-petroleo-50: #EAFAFF;
+  --arco-color-petroleo-100: #D4F3FC;
+  --arco-color-petroleo-200: #AEE6F4;
+  --arco-color-petroleo-300: #78D0E5;
+  --arco-color-petroleo-400: #3FB6CD;
+  --arco-color-petroleo-500: #079AB0;
+  --arco-color-petroleo-600: #067E8F;
+  --arco-color-petroleo-700: #046572;
+  --arco-color-petroleo-800: #024D57;
+  --arco-color-petroleo-900: #00363D;
+  --arco-color-petroleo-950: #002125;
+  /* Brasa */
+  --arco-color-brasa-50: #FFF4F1;
+  --arco-color-brasa-100: #FFE7E0;
+  --arco-color-brasa-200: #FECEC1;
+  --arco-color-brasa-300: #FFA88E;
+  --arco-color-brasa-400: #FF7549;
+  --arco-color-brasa-500: #E74F00;
+  --arco-color-brasa-600: #BC4202;
+  --arco-color-brasa-700: #973500;
+  --arco-color-brasa-800: #742800;
+  --arco-color-brasa-900: #521B00;
+  --arco-color-brasa-950: #340E00;
+  /* Lume */
+  --arco-color-lume-50: #F6F6FF;
+  --arco-color-lume-100: #EBEAFF;
+  --arco-color-lume-200: #D8D6FE;
+  --arco-color-lume-300: #BDB7FE;
+  --arco-color-lume-400: #A193FF;
+  --arco-color-lume-500: #876FF3;
+  --arco-color-lume-600: #6F56D3;
+  --arco-color-lume-700: #5940B1;
+  --arco-color-lume-800: #442E8C;
+  --arco-color-lume-900: #2F1F65;
+  --arco-color-lume-950: #1C0E44;
+  /* Grafite */
+  --arco-color-grafite-50: #F5F8F9;
+  --arco-color-grafite-100: #EBF0F2;
+  --arco-color-grafite-200: #D9E1E4;
+  --arco-color-grafite-300: #C0C9CC;
+  --arco-color-grafite-400: #9BA5A8;
+  --arco-color-grafite-500: #778386;
+  --arco-color-grafite-600: #5F6B6F;
+  --arco-color-grafite-700: #4A565A;
+  --arco-color-grafite-800: #2F3C3F;
+  --arco-color-grafite-900: #1B272A;
+  --arco-color-grafite-950: #0D1719;
+  /* Sucesso */
+  --arco-color-sucesso-50: #EBFCF0;
+  --arco-color-sucesso-100: #D6F6E0;
+  --arco-color-sucesso-200: #B2EBC4;
+  --arco-color-sucesso-300: #7FD7A0;
+  --arco-color-sucesso-400: #4DBE7D;
+  --arco-color-sucesso-500: #17A35F;
+  --arco-color-sucesso-600: #05864C;
+  --arco-color-sucesso-700: #006B3B;
+  --arco-color-sucesso-800: #00522C;
+  --arco-color-sucesso-900: #003A1D;
+  --arco-color-sucesso-950: #00230F;
+  /* Alerta */
+  --arco-color-alerta-50: #FFF6E6;
+  --arco-color-alerta-100: #FEEAC8;
+  --arco-color-alerta-200: #F9D59A;
+  --arco-color-alerta-300: #EEB657;
+  --arco-color-alerta-400: #D89609;
+  --arco-color-alerta-500: #B67C07;
+  --arco-color-alerta-600: #976404;
+  --arco-color-alerta-700: #7A4F01;
+  --arco-color-alerta-800: #5E3B00;
+  --arco-color-alerta-900: #442800;
+  --arco-color-alerta-950: #2B1700;
+  /* Erro */
+  --arco-color-erro-50: #FFF4F3;
+  --arco-color-erro-100: #FEE7E4;
+  --arco-color-erro-200: #FECDC8;
+  --arco-color-erro-300: #FEA69E;
+  --arco-color-erro-400: #FF726B;
+  --arco-color-erro-500: #E94646;
+  --arco-color-erro-600: #C82A2F;
+  --arco-color-erro-700: #A7101E;
+  --arco-color-erro-800: #830011;
+  --arco-color-erro-900: #5F0009;
+  --arco-color-erro-950: #3D0003;
+  /* Informação */
+  --arco-color-info-50: #F1F8FF;
+  --arco-color-info-100: #E0EFFF;
+  --arco-color-info-200: #C2DEFE;
+  --arco-color-info-300: #93C5FE;
+  --arco-color-info-400: #5DA8FA;
+  --arco-color-info-500: #3A8CE0;
+  --arco-color-info-600: #1F72C1;
+  --arco-color-info-700: #085AA2;
+  --arco-color-info-800: #00447E;
+  --arco-color-info-900: #002F5C;
+  --arco-color-info-950: #001C3B;
+  /* Céu */
+  --arco-color-ceu-50: #F0F8FF;
+  --arco-color-ceu-100: #DFEFFE;
+  --arco-color-ceu-200: #BDDFFE;
+  --arco-color-ceu-300: #88C8FE;
+  --arco-color-ceu-400: #4CACF6;
+  --arco-color-ceu-500: #1C90DD;
+  --arco-color-ceu-600: #0075BA;
+  --arco-color-ceu-700: #005E96;
+  --arco-color-ceu-800: #004773;
+  --arco-color-ceu-900: #003253;
+  --arco-color-ceu-950: #001D35;
+  /* Musgo */
+  --arco-color-musgo-50: #F2FAEA;
+  --arco-color-musgo-100: #E5F3D5;
+  --arco-color-musgo-200: #CDE5B1;
+  --arco-color-musgo-300: #ACCF81;
+  --arco-color-musgo-400: #8DB455;
+  --arco-color-musgo-500: #70982F;
+  --arco-color-musgo-600: #597E11;
+  --arco-color-musgo-700: #456500;
+  --arco-color-musgo-800: #344D00;
+  --arco-color-musgo-900: #233600;
+  --arco-color-musgo-950: #132100;
+  /* Rosa */
+  --arco-color-rosa-50: #FFF3F7;
+  --arco-color-rosa-100: #FEE5EE;
+  --arco-color-rosa-200: #FFCADD;
+  --arco-color-rosa-300: #FE9FC5;
+  --arco-color-rosa-400: #F075AA;
+  --arco-color-rosa-500: #D4558E;
+  --arco-color-rosa-600: #B53C75;
+  --arco-color-rosa-700: #96285E;
+  --arco-color-rosa-800: #751947;
+  --arco-color-rosa-900: #540F32;
+  --arco-color-rosa-950: #37031E;
+  /* Ocre */
+  --arco-color-ocre-50: #FEF6E5;
+  --arco-color-ocre-100: #FBEBCB;
+  --arco-color-ocre-200: #F3D7A0;
+  --arco-color-ocre-300: #E4BB62;
+  --arco-color-ocre-400: #CD9C1C;
+  --arco-color-ocre-500: #AC8205;
+  --arco-color-ocre-600: #8E6A01;
+  --arco-color-ocre-700: #725401;
+  --arco-color-ocre-800: #574000;
+  --arco-color-ocre-900: #3D2C00;
+  --arco-color-ocre-950: #261900;
+
+  /* ---- Tipografia ---- */
+  --arco-font-display: "Bricolage Grotesque", "Plus Jakarta Sans", system-ui, sans-serif;
+  --arco-font-text: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", "Figtree", system-ui, sans-serif;
+  --arco-font-data: "Barlow Semi Condensed", "Barlow", "Roboto Condensed", system-ui, sans-serif;
+  --arco-font-weight-regular: 400;
+  --arco-font-weight-medium: 500;
+  --arco-font-weight-semibold: 600;
+  --arco-font-weight-bold: 700;
+  --arco-font-weight-extrabold: 800;
+  --arco-type-display-size: 2.5rem;
+  --arco-type-display-line: 1.05;
+  --arco-type-display-tracking: -0.03em;
+  --arco-type-display-weight: 800;
+  --arco-type-h1-size: 2rem;
+  --arco-type-h1-line: 1.1;
+  --arco-type-h1-tracking: -0.025em;
+  --arco-type-h1-weight: 700;
+  --arco-type-h2-size: 1.75rem;
+  --arco-type-h2-line: 1.15;
+  --arco-type-h2-tracking: -0.02em;
+  --arco-type-h2-weight: 700;
+  --arco-type-h3-size: 1.375rem;
+  --arco-type-h3-line: 1.2;
+  --arco-type-h3-tracking: -0.015em;
+  --arco-type-h3-weight: 700;
+  --arco-type-h4-size: 1.25rem;
+  --arco-type-h4-line: 1.25;
+  --arco-type-h4-tracking: -0.01em;
+  --arco-type-h4-weight: 600;
+  --arco-type-h5-size: 1.125rem;
+  --arco-type-h5-line: 1.3;
+  --arco-type-h5-tracking: 0em;
+  --arco-type-h5-weight: 700;
+  --arco-type-h6-size: 1rem;
+  --arco-type-h6-line: 1.35;
+  --arco-type-h6-tracking: 0em;
+  --arco-type-h6-weight: 700;
+  --arco-type-body-lg-size: 1.125rem;
+  --arco-type-body-lg-line: 1.55;
+  --arco-type-body-lg-tracking: 0em;
+  --arco-type-body-lg-weight: 400;
+  --arco-type-body-size: 1rem;
+  --arco-type-body-line: 1.5;
+  --arco-type-body-tracking: 0em;
+  --arco-type-body-weight: 400;
+  --arco-type-body-sm-size: 0.875rem;
+  --arco-type-body-sm-line: 1.45;
+  --arco-type-body-sm-tracking: 0.005em;
+  --arco-type-body-sm-weight: 400;
+  --arco-type-caption-size: 0.75rem;
+  --arco-type-caption-line: 1.4;
+  --arco-type-caption-tracking: 0.01em;
+  --arco-type-caption-weight: 400;
+  --arco-type-label-size: 0.875rem;
+  --arco-type-label-line: 1.2;
+  --arco-type-label-tracking: 0.01em;
+  --arco-type-label-weight: 700;
+  --arco-type-overline-size: 0.75rem;
+  --arco-type-overline-line: 1.3;
+  --arco-type-overline-tracking: 0.08em;
+  --arco-type-overline-weight: 700;
+  --arco-type-data-xl-size: 4.5rem;
+  --arco-type-data-xl-line: 1;
+  --arco-type-data-xl-tracking: -0.01em;
+  --arco-type-data-xl-weight: 600;
+  --arco-type-data-lg-size: 2.5rem;
+  --arco-type-data-lg-line: 1;
+  --arco-type-data-lg-tracking: -0.005em;
+  --arco-type-data-lg-weight: 600;
+  --arco-type-data-md-size: 1.5rem;
+  --arco-type-data-md-line: 1.1;
+  --arco-type-data-md-tracking: 0em;
+  --arco-type-data-md-weight: 600;
+  --arco-type-data-sm-size: 0.875rem;
+  --arco-type-data-sm-line: 1.2;
+  --arco-type-data-sm-tracking: 0.02em;
+  --arco-type-data-sm-weight: 500;
+
+  /* ---- Espaçamento (base 4) ---- */
+  --arco-space-0: 0;
+  --arco-space-0-5: 0.125rem;
+  --arco-space-1: 0.25rem;
+  --arco-space-2: 0.5rem;
+  --arco-space-3: 0.75rem;
+  --arco-space-4: 1rem;
+  --arco-space-5: 1.25rem;
+  --arco-space-6: 1.5rem;
+  --arco-space-8: 2rem;
+  --arco-space-10: 2.5rem;
+  --arco-space-12: 3rem;
+  --arco-space-16: 4rem;
+  --arco-space-20: 5rem;
+  --arco-space-24: 6rem;
+
+  /* ---- Raios ---- */
+  --arco-radius-none: 0px;
+  --arco-radius-xs: 4px;
+  --arco-radius-sm: 8px;
+  --arco-radius-md: 12px;
+  --arco-radius-lg: 16px;
+  --arco-radius-xl: 24px;
+  --arco-radius-2xl: 32px;
+  --arco-radius-full: 9999px;
+
+  /* ---- Bordas ---- */
+  --arco-border-1: 1px;
+  --arco-border-2: 2px;
+  --arco-border-3: 3px;
+
+  /* ---- Opacidade ---- */
+  --arco-opacity-0: 0;
+  --arco-opacity-4: 0.04;
+  --arco-opacity-8: 0.08;
+  --arco-opacity-12: 0.12;
+  --arco-opacity-16: 0.16;
+  --arco-opacity-24: 0.24;
+  --arco-opacity-38: 0.38;
+  --arco-opacity-56: 0.56;
+  --arco-opacity-72: 0.72;
+  --arco-opacity-100: 1;
+
+  /* ---- Motion ---- */
+  --arco-duration-instant: 80ms;
+  --arco-duration-fast: 150ms;
+  --arco-duration-base: 240ms;
+  --arco-duration-moderate: 360ms;
+  --arco-duration-slow: 520ms;
+  --arco-duration-celebrate: 900ms;
+  --arco-duration-pulse: 1600ms;
+  --arco-duration-breathe: 2400ms;
+  --arco-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --arco-ease-enter: cubic-bezier(0, 0, 0.2, 1);
+  --arco-ease-exit: cubic-bezier(0.4, 0, 1, 1);
+  --arco-ease-impulso: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --arco-ease-respiro: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* ---- Dimensões ---- */
+  --arco-size-touch-min: 3rem;
+  --arco-size-touch-exec: 4rem;
+  --arco-size-icon-sm: 1rem;
+  --arco-size-icon-md: 1.5rem;
+  --arco-size-icon-lg: 2rem;
+
+  /* ---- Semânticos · tema claro (padrão) ---- */
+  --arco-color-bg-canvas: var(--arco-color-grafite-50);
+  --arco-color-bg-surface: var(--arco-color-white);
+  --arco-color-bg-raised: var(--arco-color-white);
+  --arco-color-bg-muted: var(--arco-color-grafite-100);
+  --arco-color-bg-inverse: var(--arco-color-grafite-950);
+  --arco-color-border-subtle: var(--arco-color-grafite-200);
+  --arco-color-border-default: var(--arco-color-grafite-300);
+  --arco-color-border-strong: var(--arco-color-grafite-500);
+  --arco-color-text-primary: var(--arco-color-grafite-950);
+  --arco-color-text-secondary: var(--arco-color-grafite-700);
+  --arco-color-text-tertiary: var(--arco-color-grafite-600);
+  --arco-color-text-disabled: var(--arco-color-grafite-400);
+  --arco-color-text-inverse: var(--arco-color-white);
+  --arco-color-text-link: var(--arco-color-petroleo-700);
+  --arco-color-action-primary-bg: var(--arco-color-petroleo-700);
+  --arco-color-action-primary-bg-hover: var(--arco-color-petroleo-800);
+  --arco-color-action-primary-fg: var(--arco-color-white);
+  --arco-color-action-secondary-bg: var(--arco-color-petroleo-50);
+  --arco-color-action-secondary-bg-hover: var(--arco-color-petroleo-100);
+  --arco-color-action-secondary-fg: var(--arco-color-petroleo-800);
+  --arco-color-action-energy-bg: var(--arco-color-brasa-400);
+  --arco-color-action-energy-bg-hover: var(--arco-color-brasa-500);
+  --arco-color-action-energy-fg: var(--arco-color-brasa-950);
+  --arco-color-focus-ring: var(--arco-color-petroleo-500);
+  --arco-color-brand-primary: var(--arco-color-petroleo-800);
+  --arco-color-brand-energy: var(--arco-color-brasa-400);
+  --arco-color-ai-bg: var(--arco-color-lume-50);
+  --arco-color-ai-border: var(--arco-color-lume-500);
+  --arco-color-ai-fg: var(--arco-color-lume-700);
+  --arco-color-ai-solid: var(--arco-color-lume-600);
+  --arco-color-ai-on-solid: var(--arco-color-white);
+  --arco-color-live: var(--arco-color-brasa-500);
+  --arco-color-success-bg: var(--arco-color-sucesso-50);
+  --arco-color-success-fg: var(--arco-color-sucesso-700);
+  --arco-color-success-solid: var(--arco-color-sucesso-600);
+  --arco-color-warning-bg: var(--arco-color-alerta-50);
+  --arco-color-warning-fg: var(--arco-color-alerta-700);
+  --arco-color-warning-solid: var(--arco-color-alerta-400);
+  --arco-color-error-bg: var(--arco-color-erro-50);
+  --arco-color-error-fg: var(--arco-color-erro-700);
+  --arco-color-error-solid: var(--arco-color-erro-600);
+  --arco-color-info-bg: var(--arco-color-info-50);
+  --arco-color-info-fg: var(--arco-color-info-700);
+  --arco-color-info-solid: var(--arco-color-info-600);
+  --arco-color-dataviz-cat-1: var(--arco-color-petroleo-500);
+  --arco-color-dataviz-cat-2: var(--arco-color-brasa-500);
+  --arco-color-dataviz-cat-3: var(--arco-color-ceu-600);
+  --arco-color-dataviz-cat-4: var(--arco-color-musgo-600);
+  --arco-color-dataviz-cat-5: var(--arco-color-rosa-500);
+  --arco-color-dataviz-cat-6: var(--arco-color-ocre-600);
+  --arco-color-dataviz-ai-forecast: var(--arco-color-lume-500);
+  --arco-color-dataviz-hr-z1: var(--arco-color-grafite-400);
+  --arco-color-dataviz-hr-z2: var(--arco-color-ceu-500);
+  --arco-color-dataviz-hr-z3: var(--arco-color-sucesso-500);
+  --arco-color-dataviz-hr-z4: var(--arco-color-alerta-400);
+  --arco-color-dataviz-hr-z5: var(--arco-color-erro-500);
+  --arco-color-dataviz-intensity-1: var(--arco-color-brasa-400);
+  --arco-color-dataviz-intensity-2: var(--arco-color-brasa-500);
+  --arco-color-dataviz-intensity-3: var(--arco-color-brasa-600);
+  --arco-color-dataviz-intensity-4: var(--arco-color-brasa-700);
+  --arco-color-dataviz-intensity-5: var(--arco-color-brasa-800);
+  --arco-color-dataviz-grid: var(--arco-color-grafite-200);
+  --arco-color-dataviz-axis: var(--arco-color-grafite-500);
+  --arco-shadow-1: 0 1px 2px rgba(13,23,25,.06), 0 1px 1px rgba(13,23,25,.04);
+  --arco-shadow-2: 0 4px 12px -2px rgba(13,23,25,.08), 0 2px 4px rgba(13,23,25,.04);
+  --arco-shadow-3: 0 12px 24px -6px rgba(13,23,25,.12), 0 4px 8px rgba(13,23,25,.05);
+  --arco-shadow-4: 0 24px 48px -12px rgba(13,23,25,.20), 0 8px 16px rgba(13,23,25,.06);
+  --arco-shadow-focus: 0 0 0 2px var(--arco-color-bg-surface), 0 0 0 4px var(--arco-color-focus-ring);
+}
+
+/* Escala tipográfica desktop (≥ 1024px) */
+@media (min-width: 1024px) {
+  :root {
+    --arco-type-display-size: 4rem;
+    --arco-type-h1-size: 3rem;
+    --arco-type-h2-size: 2.25rem;
+    --arco-type-h3-size: 1.75rem;
+    --arco-type-h4-size: 1.375rem;
+    --arco-type-caption-size: 0.8125rem;
+    --arco-type-data-xl-size: 7.5rem;
+    --arco-type-data-lg-size: 3.5rem;
+    --arco-type-data-md-size: 1.75rem;
+  }
+}
+
+/* Tema escuro: segue o sistema, a menos que o usuário escolha claro */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --arco-color-bg-canvas: var(--arco-color-grafite-950);
+    --arco-color-bg-surface: var(--arco-color-grafite-900);
+    --arco-color-bg-raised: var(--arco-color-grafite-800);
+    --arco-color-bg-muted: var(--arco-color-grafite-800);
+    --arco-color-bg-inverse: var(--arco-color-grafite-50);
+    --arco-color-border-subtle: var(--arco-color-grafite-800);
+    --arco-color-border-default: var(--arco-color-grafite-700);
+    --arco-color-border-strong: var(--arco-color-grafite-500);
+    --arco-color-text-primary: var(--arco-color-grafite-50);
+    --arco-color-text-secondary: var(--arco-color-grafite-300);
+    --arco-color-text-tertiary: var(--arco-color-grafite-400);
+    --arco-color-text-disabled: var(--arco-color-grafite-600);
+    --arco-color-text-inverse: var(--arco-color-grafite-950);
+    --arco-color-text-link: var(--arco-color-petroleo-300);
+    --arco-color-action-primary-bg: var(--arco-color-petroleo-300);
+    --arco-color-action-primary-bg-hover: var(--arco-color-petroleo-200);
+    --arco-color-action-primary-fg: var(--arco-color-petroleo-950);
+    --arco-color-action-secondary-bg: var(--arco-color-petroleo-900);
+    --arco-color-action-secondary-bg-hover: var(--arco-color-petroleo-800);
+    --arco-color-action-secondary-fg: var(--arco-color-petroleo-100);
+    --arco-color-action-energy-bg: var(--arco-color-brasa-400);
+    --arco-color-action-energy-bg-hover: var(--arco-color-brasa-300);
+    --arco-color-action-energy-fg: var(--arco-color-brasa-950);
+    --arco-color-focus-ring: var(--arco-color-petroleo-300);
+    --arco-color-brand-primary: var(--arco-color-petroleo-200);
+    --arco-color-brand-energy: var(--arco-color-brasa-400);
+    --arco-color-ai-bg: var(--arco-color-lume-950);
+    --arco-color-ai-border: var(--arco-color-lume-400);
+    --arco-color-ai-fg: var(--arco-color-lume-200);
+    --arco-color-ai-solid: var(--arco-color-lume-400);
+    --arco-color-ai-on-solid: var(--arco-color-lume-950);
+    --arco-color-live: var(--arco-color-brasa-400);
+    --arco-color-success-bg: var(--arco-color-sucesso-950);
+    --arco-color-success-fg: var(--arco-color-sucesso-300);
+    --arco-color-success-solid: var(--arco-color-sucesso-400);
+    --arco-color-warning-bg: var(--arco-color-alerta-950);
+    --arco-color-warning-fg: var(--arco-color-alerta-300);
+    --arco-color-warning-solid: var(--arco-color-alerta-400);
+    --arco-color-error-bg: var(--arco-color-erro-950);
+    --arco-color-error-fg: var(--arco-color-erro-300);
+    --arco-color-error-solid: var(--arco-color-erro-400);
+    --arco-color-info-bg: var(--arco-color-info-950);
+    --arco-color-info-fg: var(--arco-color-info-300);
+    --arco-color-info-solid: var(--arco-color-info-400);
+    --arco-color-dataviz-cat-1: var(--arco-color-petroleo-500);
+    --arco-color-dataviz-cat-2: var(--arco-color-brasa-500);
+    --arco-color-dataviz-cat-3: var(--arco-color-ceu-500);
+    --arco-color-dataviz-cat-4: var(--arco-color-musgo-500);
+    --arco-color-dataviz-cat-5: var(--arco-color-rosa-500);
+    --arco-color-dataviz-cat-6: var(--arco-color-ocre-500);
+    --arco-color-dataviz-ai-forecast: var(--arco-color-lume-400);
+    --arco-color-dataviz-hr-z1: var(--arco-color-grafite-500);
+    --arco-color-dataviz-hr-z2: var(--arco-color-ceu-500);
+    --arco-color-dataviz-hr-z3: var(--arco-color-sucesso-500);
+    --arco-color-dataviz-hr-z4: var(--arco-color-alerta-400);
+    --arco-color-dataviz-hr-z5: var(--arco-color-erro-400);
+    --arco-color-dataviz-intensity-1: var(--arco-color-brasa-700);
+    --arco-color-dataviz-intensity-2: var(--arco-color-brasa-600);
+    --arco-color-dataviz-intensity-3: var(--arco-color-brasa-500);
+    --arco-color-dataviz-intensity-4: var(--arco-color-brasa-400);
+    --arco-color-dataviz-intensity-5: var(--arco-color-brasa-300);
+    --arco-color-dataviz-grid: var(--arco-color-grafite-800);
+    --arco-color-dataviz-axis: var(--arco-color-grafite-500);
+    --arco-shadow-1: 0 1px 2px rgba(0,0,0,.40);
+    --arco-shadow-2: 0 4px 12px -2px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.30);
+    --arco-shadow-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 4px 8px rgba(0,0,0,.30);
+    --arco-shadow-4: 0 24px 48px -12px rgba(0,0,0,.65), 0 8px 16px rgba(0,0,0,.35);
+    --arco-shadow-focus: 0 0 0 2px var(--arco-color-bg-surface), 0 0 0 4px var(--arco-color-focus-ring);
+    color-scheme: dark;
+  }
+}
+
+/* Tema escuro escolhido explicitamente */
+:root[data-theme="dark"] {
+  --arco-color-bg-canvas: var(--arco-color-grafite-950);
+  --arco-color-bg-surface: var(--arco-color-grafite-900);
+  --arco-color-bg-raised: var(--arco-color-grafite-800);
+  --arco-color-bg-muted: var(--arco-color-grafite-800);
+  --arco-color-bg-inverse: var(--arco-color-grafite-50);
+  --arco-color-border-subtle: var(--arco-color-grafite-800);
+  --arco-color-border-default: var(--arco-color-grafite-700);
+  --arco-color-border-strong: var(--arco-color-grafite-500);
+  --arco-color-text-primary: var(--arco-color-grafite-50);
+  --arco-color-text-secondary: var(--arco-color-grafite-300);
+  --arco-color-text-tertiary: var(--arco-color-grafite-400);
+  --arco-color-text-disabled: var(--arco-color-grafite-600);
+  --arco-color-text-inverse: var(--arco-color-grafite-950);
+  --arco-color-text-link: var(--arco-color-petroleo-300);
+  --arco-color-action-primary-bg: var(--arco-color-petroleo-300);
+  --arco-color-action-primary-bg-hover: var(--arco-color-petroleo-200);
+  --arco-color-action-primary-fg: var(--arco-color-petroleo-950);
+  --arco-color-action-secondary-bg: var(--arco-color-petroleo-900);
+  --arco-color-action-secondary-bg-hover: var(--arco-color-petroleo-800);
+  --arco-color-action-secondary-fg: var(--arco-color-petroleo-100);
+  --arco-color-action-energy-bg: var(--arco-color-brasa-400);
+  --arco-color-action-energy-bg-hover: var(--arco-color-brasa-300);
+  --arco-color-action-energy-fg: var(--arco-color-brasa-950);
+  --arco-color-focus-ring: var(--arco-color-petroleo-300);
+  --arco-color-brand-primary: var(--arco-color-petroleo-200);
+  --arco-color-brand-energy: var(--arco-color-brasa-400);
+  --arco-color-ai-bg: var(--arco-color-lume-950);
+  --arco-color-ai-border: var(--arco-color-lume-400);
+  --arco-color-ai-fg: var(--arco-color-lume-200);
+  --arco-color-ai-solid: var(--arco-color-lume-400);
+  --arco-color-ai-on-solid: var(--arco-color-lume-950);
+  --arco-color-live: var(--arco-color-brasa-400);
+  --arco-color-success-bg: var(--arco-color-sucesso-950);
+  --arco-color-success-fg: var(--arco-color-sucesso-300);
+  --arco-color-success-solid: var(--arco-color-sucesso-400);
+  --arco-color-warning-bg: var(--arco-color-alerta-950);
+  --arco-color-warning-fg: var(--arco-color-alerta-300);
+  --arco-color-warning-solid: var(--arco-color-alerta-400);
+  --arco-color-error-bg: var(--arco-color-erro-950);
+  --arco-color-error-fg: var(--arco-color-erro-300);
+  --arco-color-error-solid: var(--arco-color-erro-400);
+  --arco-color-info-bg: var(--arco-color-info-950);
+  --arco-color-info-fg: var(--arco-color-info-300);
+  --arco-color-info-solid: var(--arco-color-info-400);
+  --arco-color-dataviz-cat-1: var(--arco-color-petroleo-500);
+  --arco-color-dataviz-cat-2: var(--arco-color-brasa-500);
+  --arco-color-dataviz-cat-3: var(--arco-color-ceu-500);
+  --arco-color-dataviz-cat-4: var(--arco-color-musgo-500);
+  --arco-color-dataviz-cat-5: var(--arco-color-rosa-500);
+  --arco-color-dataviz-cat-6: var(--arco-color-ocre-500);
+  --arco-color-dataviz-ai-forecast: var(--arco-color-lume-400);
+  --arco-color-dataviz-hr-z1: var(--arco-color-grafite-500);
+  --arco-color-dataviz-hr-z2: var(--arco-color-ceu-500);
+  --arco-color-dataviz-hr-z3: var(--arco-color-sucesso-500);
+  --arco-color-dataviz-hr-z4: var(--arco-color-alerta-400);
+  --arco-color-dataviz-hr-z5: var(--arco-color-erro-400);
+  --arco-color-dataviz-intensity-1: var(--arco-color-brasa-700);
+  --arco-color-dataviz-intensity-2: var(--arco-color-brasa-600);
+  --arco-color-dataviz-intensity-3: var(--arco-color-brasa-500);
+  --arco-color-dataviz-intensity-4: var(--arco-color-brasa-400);
+  --arco-color-dataviz-intensity-5: var(--arco-color-brasa-300);
+  --arco-color-dataviz-grid: var(--arco-color-grafite-800);
+  --arco-color-dataviz-axis: var(--arco-color-grafite-500);
+  --arco-shadow-1: 0 1px 2px rgba(0,0,0,.40);
+  --arco-shadow-2: 0 4px 12px -2px rgba(0,0,0,.45), 0 2px 4px rgba(0,0,0,.30);
+  --arco-shadow-3: 0 12px 24px -6px rgba(0,0,0,.55), 0 4px 8px rgba(0,0,0,.30);
+  --arco-shadow-4: 0 24px 48px -12px rgba(0,0,0,.65), 0 8px 16px rgba(0,0,0,.35);
+  --arco-shadow-focus: 0 0 0 2px var(--arco-color-bg-surface), 0 0 0 4px var(--arco-color-focus-ring);
+  color-scheme: dark;
+}
+
+/* Respeita usuários que reduzem movimento */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --arco-duration-instant: 1ms;
+    --arco-duration-fast: 1ms;
+    --arco-duration-base: 1ms;
+    --arco-duration-moderate: 1ms;
+    --arco-duration-slow: 1ms;
+    --arco-duration-celebrate: 1ms;
+    /* pulse e breathe são loops: desligue-os no componente com animation: none */
+  }
+}
