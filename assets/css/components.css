@@ -119,6 +119,16 @@
   --btn-bg-hover: var(--arco-color-bg-muted);
 }
 
+/* Sobre vídeo: vidro claro com borda; o texto branco mantém contraste sobre o véu */
+.btn--glass {
+  --btn-bg: rgb(255 255 255 / .08);
+  --btn-bg-hover: rgb(255 255 255 / .16);
+  --btn-fg: var(--arco-color-white);
+  --btn-bd: rgb(255 255 255 / .34);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
 .btn--ai {
   --btn-bg: var(--arco-color-ai-solid);
   --btn-bg-hover: color-mix(in oklab, var(--arco-color-ai-solid) 86%, var(--arco-color-text-primary));
@@ -169,14 +179,6 @@
   flex: none;
 }
 
-.overline__index {
-  font-family: var(--arco-font-data);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .06em;
-  color: var(--arco-color-brand-primary);
-}
-
 .section-head {
   display: grid;
   gap: var(--arco-space-5);
@@ -184,7 +186,7 @@
   margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
 }
 
-.section-head .t-lead { max-width: 42rem; }
+.section-head .t-lead { max-width: 40rem; }
 .section-head--center { margin-inline: auto; text-align: center; justify-items: center; }
 
 /* ---- Superfícies ---- */
@@ -194,21 +196,6 @@
   border: 1px solid var(--arco-color-border-subtle);
   border-radius: var(--arco-radius-lg);
   box-shadow: var(--arco-shadow-1);
-}
-
-.card--interactive {
-  transition:
-    transform var(--arco-duration-base) var(--arco-ease-standard),
-    box-shadow var(--arco-duration-base) var(--arco-ease-standard),
-    border-color var(--arco-duration-base) var(--arco-ease-standard);
-}
-
-@media (hover: hover) {
-  .card--interactive:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--arco-shadow-3);
-    border-color: var(--arco-color-border-default);
-  }
 }
 
 /* ---- Chips e status (sempre ícone/ponto + texto) ---- */
@@ -273,6 +260,13 @@
   80%, 100% { transform: scale(2.8); opacity: 0; }
 }
 
+/* Contadores ao vivo: o número sobe 8 px ao mudar (manual §8.1) */
+[data-countdown],
+[data-bpm] { display: inline-block; }
+.is-tick { animation: digit-roll var(--arco-duration-fast) var(--arco-ease-enter); }
+
+@keyframes digit-roll { from { transform: translateY(8px); opacity: .35; } }
+
 /* ---- Avatar (iniciais) ---- */
 .avatar {
   display: inline-grid;
@@ -290,6 +284,74 @@
 
 .avatar--energy { background: var(--site-avatar-energy-bg); color: var(--site-avatar-energy-fg); }
 .avatar--sm { width: 1.625rem; height: 1.625rem; font-size: .6875rem; }
+
+/* ---- Mídia (vídeo em loop com poster) ----
+   O poster é uma <img> comum (aparece sem JS e com "reduzir movimento").
+   O vídeo só recebe as fontes quando chega perto da tela e entra com fade. */
+.media {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--site-band-brand-deep);
+}
+
+.media > picture,
+.media__poster,
+.media__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.media__poster,
+.media__video,
+.media > picture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.media__video {
+  opacity: 0;
+  transition: opacity 700ms var(--arco-ease-standard);
+}
+
+.media.is-ready .media__video { opacity: 1; }
+
+/* Pausar/reproduzir: exigido para movimento automático com mais de 5 s (WCAG 2.2.2) */
+.media__toggle {
+  position: absolute;
+  right: .75rem;
+  bottom: .75rem;
+  z-index: 4;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgb(255 255 255 / .3);
+  border-radius: 50%;
+  background: rgb(13 23 25 / .52);
+  color: var(--arco-color-white);
+  cursor: pointer;
+  opacity: .82;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition:
+    opacity var(--arco-duration-fast) var(--arco-ease-standard),
+    background-color var(--arco-duration-fast) var(--arco-ease-standard),
+    transform var(--arco-duration-fast) var(--arco-ease-standard);
+}
+
+.media__toggle:hover,
+.media__toggle:focus-visible { opacity: 1; background: rgb(13 23 25 / .76); }
+.media__toggle:active { transform: scale(.94); }
+.media__toggle:focus-visible { outline-color: var(--arco-color-white); }
+.media__toggle .icon { --icon-size: 1.125rem; }
+.media__icon-play { fill: currentColor; stroke: none; display: none; }
+.media__toggle[data-state="paused"] .media__icon-play { display: block; }
+.media__toggle[data-state="paused"] .media__icon-pause { display: none; }
 
 /* ---- Dispositivo (celular) ----
    Tudo dentro do aparelho usa em: a tela escala junto com --phone-w. */
@@ -426,11 +488,107 @@
   font-weight: 700;
 }
 
+/* ---- Telas claras do app do aluno (dentro de .phone) ---- */
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: .75em;
+  height: 100%;
+  padding: 2.9em 1.1em 1.15em;
+  font-size: .8125em;
+  line-height: 1.35;
+}
+
+.app__over { font-size: .78em; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--arco-color-text-tertiary); }
+.app__title { font-family: var(--arco-font-display); font-size: 1.75em; font-weight: 700; letter-spacing: -.02em; line-height: 1.05; }
+.app__sub { margin-top: -.35em; color: var(--arco-color-text-secondary); }
+
+.app__card {
+  display: grid;
+  gap: .4em;
+  padding: 1em;
+  border-radius: 1.1em;
+  background: var(--arco-color-petroleo-800);
+  color: var(--arco-color-white);
+}
+
+.app__card .workout__over { color: var(--arco-color-petroleo-200); font-size: .75em; }
+.app__card-title { font-family: var(--arco-font-display); font-size: 1.3em; font-weight: 700; letter-spacing: -.01em; line-height: 1.15; }
+.app__meta { display: flex; gap: .9em; color: var(--arco-color-petroleo-100); }
+.app__meta .data { font-size: 1.15em; color: var(--arco-color-white); }
+
+.app__cta {
+  display: grid;
+  place-items: center;
+  min-height: 3em;
+  margin-top: .35em;
+  border-radius: .8em;
+  background: var(--arco-color-action-energy-bg);
+  color: var(--arco-color-action-energy-fg);
+  font-weight: 700;
+}
+
+.app__list { display: grid; padding: 0; margin: 0; }
+.app__list li {
+  display: grid;
+  grid-template-columns: 1.4em minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .5em;
+  padding: .7em 0;
+  border-bottom: 1px solid var(--arco-color-border-subtle);
+}
+
+.app__n { color: var(--arco-color-text-tertiary); }
+.app__ex { font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.app__list .data:last-child { color: var(--arco-color-text-secondary); }
+.app__note { display: flex; align-items: center; gap: .5em; margin-top: auto; font-size: .88em; color: var(--arco-color-text-tertiary); }
+.app__note .avatar { font-size: .62em; }
+
+.app__done { display: inline-flex; align-items: center; gap: .45em; color: var(--arco-color-success-fg); font-weight: 700; }
+.app__done .icon { --icon-size: 1.3em; }
+.app__stats { display: flex; gap: 1em; color: var(--arco-color-text-secondary); font-weight: 700; }
+.app__stats .data { font-size: 1.25em; color: var(--arco-color-text-primary); }
+
+.app__hero,
+.app__chart {
+  display: grid;
+  gap: .35em;
+  padding: 1em;
+  border-radius: 1.1em;
+  background: var(--arco-color-bg-surface);
+  border: 1px solid var(--arco-color-border-subtle);
+}
+
+.app__pct { font-size: 3.3em; color: var(--arco-color-text-primary); }
+.app__pct-caption { color: var(--arco-color-text-secondary); font-size: .92em; }
+.app__chart-title { font-weight: 700; font-size: .9em; }
+.app__chart svg { width: 100%; height: auto; }
+.app__grid { fill: none; stroke: var(--arco-color-dataviz-grid); stroke-width: 1; }
+.app__area { fill: var(--site-chart-line); opacity: .1; }
+.app__line { fill: none; stroke: var(--site-chart-line); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.app__dot { fill: var(--site-chart-line); stroke: var(--arco-color-bg-surface); stroke-width: 2; }
+.app__chart-axis { display: flex; justify-content: space-between; font-size: .8em; color: var(--arco-color-text-tertiary); }
+.app__chart-axis .data { font-size: 1.1em; color: var(--arco-color-text-primary); }
+
+.app__pain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45em;
+  min-height: 3em;
+  margin-top: auto;
+  border-radius: .8em;
+  border: 1px solid var(--arco-color-border-default);
+  font-weight: 700;
+}
+
+.app__pain .icon { --icon-size: 1.15em; color: var(--arco-color-warning-fg); }
+
 /* ---- Cartão de treino ---- */
 .workout {
   display: grid;
-  gap: .75rem;
-  padding: 1.1rem 1.2rem;
+  gap: .6rem;
+  padding: 1rem 1.1rem;
   border-radius: var(--arco-radius-lg);
   background: var(--arco-color-bg-surface);
   border: 1px solid var(--arco-color-border-default);
@@ -438,11 +596,8 @@
 
 .workout__over { font-size: .6875rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--arco-color-text-tertiary); }
 .workout__title { font-family: var(--arco-font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; }
-.workout__meta { display: flex; flex-wrap: wrap; gap: .25rem 1rem; color: var(--arco-color-text-secondary); font-size: .875rem; }
-.workout__meta .data { font-size: 1rem; color: var(--arco-color-text-primary); }
-.workout__bar { height: 4px; border-radius: 4px; background: var(--arco-color-bg-muted); overflow: hidden; }
-.workout__bar span { display: block; height: 100%; width: var(--value, 60%); background: var(--arco-color-action-primary-bg); }
 .workout__foot { display: flex; align-items: center; justify-content: space-between; gap: .75rem; font-size: .875rem; color: var(--arco-color-text-secondary); }
+.workout__foot .data { font-size: 1rem; color: var(--arco-color-text-primary); }
 .workout__author { display: inline-flex; align-items: center; gap: .5rem; }
 
 /* ---- Linha de proposta da IA: tracejado Lume (6/4, 2 px) que vira linha sólida ---- */
@@ -451,8 +606,8 @@
   --ai-dash: 6 4;
   position: relative;
   display: grid;
-  gap: .7rem;
-  padding: 1.1rem 1.2rem;
+  gap: .6rem;
+  padding: 1rem 1.15rem;
   border-radius: var(--arco-radius-lg);
   background: var(--arco-color-ai-bg);
   color: var(--arco-color-text-primary);
@@ -503,7 +658,7 @@
 
 .live-row {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
   gap: .75rem;
   padding: .7rem .85rem;
@@ -512,35 +667,81 @@
   border: 1px solid var(--arco-color-border-subtle);
 }
 
-.live-row__name { display: block; font-weight: 700; font-size: .9375rem; line-height: 1.25; }
-.live-row__status { display: flex; align-items: center; gap: .35rem; font-size: .8125rem; color: var(--arco-color-text-secondary); line-height: 1.3; }
+.live-row__name { display: block; font-weight: 700; font-size: .9375rem; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.live-row__status { display: flex; align-items: center; gap: .35rem; font-size: .8125rem; color: var(--arco-color-text-secondary); line-height: 1.3; white-space: nowrap; }
 .live-row__status .icon { --icon-size: .95rem; }
+.live-row__status--warn { color: var(--arco-color-warning-fg); }
 
-/* ---- Gráfico de evolução ---- */
-.chart { display: grid; gap: .75rem; }
-.chart__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1rem; align-items: baseline; }
+/* ---- Gráfico de evolução (linha 2 px, marcador sólido com anel, grade em linha fina) ---- */
+.chart { display: grid; gap: .75rem; margin: 0; }
+.chart__head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .4rem 1rem; align-items: baseline; }
 .chart__title { font-weight: 700; font-size: .9375rem; }
 .chart__sub { font-size: .8125rem; color: var(--arco-color-text-tertiary); }
 .chart__legend { display: flex; gap: 1rem; font-size: .8125rem; color: var(--arco-color-text-secondary); }
 .chart__legend span { display: inline-flex; align-items: center; gap: .4rem; }
-.chart__legend span::before { content: ""; width: 1.1rem; height: 0; border-top: 2.5px solid var(--arco-color-dataviz-cat-1); }
-.chart__legend .is-ai::before { border-top-style: dashed; border-top-color: var(--arco-color-dataviz-ai-forecast); }
+.chart__legend span::before { content: ""; width: 1.1rem; height: 0; border-top: 2px solid var(--site-chart-line); }
+.chart__legend .is-ai::before { border-top-style: dashed; border-top-color: var(--site-chart-forecast); }
 .chart svg { width: 100%; height: auto; }
-.chart__grid { stroke: var(--arco-color-dataviz-grid); stroke-width: 1; }
-.chart__axis { fill: var(--arco-color-text-tertiary); font-family: var(--arco-font-data); font-size: 11px; font-weight: 500; }
-.chart__line { fill: none; stroke: var(--arco-color-dataviz-cat-1); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-.chart__area { fill: var(--arco-color-dataviz-cat-1); opacity: .08; }
-.chart__forecast { fill: none; stroke: var(--arco-color-dataviz-ai-forecast); stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 5 5; }
-.chart__point { fill: var(--arco-color-bg-surface); stroke: var(--arco-color-dataviz-cat-1); stroke-width: 2.5; }
+.chart__grid { fill: none; stroke: var(--arco-color-dataviz-grid); stroke-width: 1; }
+.chart__axis { fill: var(--arco-color-text-tertiary); font-family: var(--arco-font-data); font-size: 12px; font-weight: 500; }
+.chart__line { fill: none; stroke: var(--site-chart-line); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.chart__area { fill: var(--site-chart-line); opacity: .1; }
+.chart__forecast { fill: none; stroke: var(--site-chart-forecast); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 5 5; }
+.chart__today { fill: none; stroke: var(--arco-color-border-default); stroke-width: 1; }
+.chart__point { fill: var(--site-chart-line); stroke: var(--arco-color-bg-surface); stroke-width: 2; }
 .chart__label { font-family: var(--arco-font-data); font-weight: 600; font-size: 14px; fill: var(--arco-color-text-primary); }
 .chart__label-sub { font-family: var(--arco-font-text); font-size: 11px; fill: var(--arco-color-text-tertiary); }
 
-/* Em telas estreitas o SVG encolhe: compensa o corpo dos rótulos */
-@media (max-width: 639.98px) {
-  .chart__axis { font-size: 19px; }
-  .chart__label { font-size: 24px; }
-  .chart__label-sub { font-size: 18px; }
+.js .chart__forecast,
+.js .chart__area,
+.js .chart__point,
+.js .chart__label { opacity: 0; }
+.js .is-visible .chart__area { opacity: .1; transition: opacity 900ms var(--arco-ease-enter) .6s; }
+.js .is-visible .chart__point,
+.js .is-visible .chart__label { opacity: 1; transition: opacity var(--arco-duration-moderate) var(--arco-ease-enter) 1.4s; }
+.js .is-visible .chart__forecast { opacity: 1; transition: opacity var(--arco-duration-slow) var(--arco-ease-enter) 1.6s; }
+
+/* ---- Indicador (stat tile) ---- */
+.kpi {
+  display: grid;
+  gap: .4rem;
+  align-content: start;
+  padding: .8rem .9rem;
+  border-radius: var(--arco-radius-md);
+  background: var(--arco-color-bg-surface);
+  border: 1px solid var(--arco-color-border-subtle);
 }
+
+.kpi__label { display: inline-flex; align-items: center; gap: .4rem; font-size: .75rem; font-weight: 700; color: var(--arco-color-text-secondary); line-height: 1.3; }
+.kpi__label .icon { --icon-size: .95rem; }
+.kpi__value { font-size: 2rem; color: var(--arco-color-text-primary); }
+.kpi__action { font-size: .75rem; font-weight: 700; color: var(--arco-color-ai-fg); }
+.kpi--warn .kpi__label { color: var(--arco-color-warning-fg); }
+
+/* ---- Barras (uma série; semana atual em destaque) ---- */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 4.25rem;
+  border-bottom: 1px solid var(--arco-color-dataviz-grid);
+}
+
+.bars span {
+  flex: 0 1 1.5rem;
+  height: calc(var(--v, .5) * 100%);
+  border-radius: 4px 4px 0 0;
+  background: color-mix(in oklab, var(--site-chart-line) 36%, var(--arco-color-bg-surface));
+  transform-origin: 50% 100%;
+}
+
+.bars span.is-current { background: var(--site-chart-line); }
+
+/* ---- Minigráfico ---- */
+.spark { width: 100%; height: auto; }
+.spark__area { fill: var(--site-chart-line); opacity: .12; }
+.spark__line { fill: none; stroke: var(--site-chart-line); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.spark__dot { fill: var(--site-chart-line); stroke: var(--arco-color-bg-surface); stroke-width: 2; }
 
 /* ---- Escala PSE (Borg CR-10), ordinal em Brasa ---- */
 .pse { display: grid; grid-template-columns: repeat(10, 1fr); gap: .3rem; }
@@ -555,6 +756,7 @@
   font-family: var(--arco-font-data);
   font-weight: 600;
   font-size: .9375rem;
+  transition: background-color var(--arco-duration-base) var(--arco-ease-standard), color var(--arco-duration-base) var(--arco-ease-standard), transform var(--arco-duration-moderate) var(--arco-ease-impulso);
 }
 
 .pse span:nth-child(-n+2) { --lvl: var(--arco-color-dataviz-intensity-1); }
@@ -565,32 +767,34 @@
 .pse span { box-shadow: inset 0 -3px 0 var(--lvl); }
 /* text-inverse: branco no claro (sobre Brasa 700) e Grafite 950 no escuro (sobre Brasa 400) */
 .pse span.is-selected { background: var(--lvl); color: var(--arco-color-text-inverse); box-shadow: none; }
-.pse__caption { display: flex; justify-content: space-between; font-size: .8125rem; color: var(--arco-color-text-secondary); }
 
 /* ---- Zonas de frequência cardíaca ---- */
 .zones { display: grid; grid-template-columns: repeat(5, 1fr); gap: .3rem; }
 .zones__item { display: grid; gap: .45rem; }
 .zones__bar { height: .55rem; border-radius: 3px; background: var(--zone); }
 .zones__item.is-current .zones__bar { box-shadow: 0 0 0 2px var(--arco-color-bg-surface), 0 0 0 4px var(--zone); }
-.zones__label { font-family: var(--arco-font-data); font-size: .875rem; font-weight: 600; color: var(--arco-color-text-secondary); }
-.zones__item.is-current .zones__label { color: var(--arco-color-text-primary); }
 
-/* ---- Alerta ---- */
-.alert {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: .7rem;
-  align-items: start;
-  padding: .85rem 1rem;
-  border-radius: var(--arco-radius-md);
-  background: var(--arco-color-warning-bg);
-  color: var(--arco-color-warning-fg);
-  font-size: .9rem;
-  line-height: 1.4;
+/* ---- Janela de navegador (painel do profissional) ---- */
+.browser {
+  overflow: hidden;
+  border-radius: var(--arco-radius-lg);
+  background: var(--arco-color-bg-surface);
+  box-shadow: 0 40px 80px -28px rgb(0 0 0 / .55), 0 0 0 1px rgb(255 255 255 / .06);
 }
 
-.alert strong { color: inherit; }
-.alert .icon { --icon-size: 1.25rem; margin-top: .05rem; }
+.browser__bar {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  height: 2.25rem;
+  padding: 0 .9rem;
+  background: var(--arco-color-bg-muted);
+  border-bottom: 1px solid var(--arco-color-border-subtle);
+}
+
+.browser__dots { display: flex; gap: .35rem; }
+.browser__dots i { width: .625rem; height: .625rem; border-radius: 50%; background: var(--arco-color-border-default); }
+.browser__title { margin-inline: auto; padding-right: 2.5rem; font-size: .75rem; font-weight: 700; color: var(--arco-color-text-tertiary); }
 
 /* ---- Formulário ---- */
 .field { display: grid; gap: .5rem; }
@@ -645,15 +849,16 @@ select.field__control {
   color: var(--arco-color-text-secondary);
   font-weight: 700;
   cursor: pointer;
+  white-space: nowrap;
   transition: background-color var(--arco-duration-base) var(--arco-ease-standard), color var(--arco-duration-base) var(--arco-ease-standard), box-shadow var(--arco-duration-base) var(--arco-ease-standard);
 }
 
 .tabs__tab:hover { color: var(--arco-color-text-primary); }
 .tabs__tab[aria-selected="true"] { background: var(--arco-color-bg-surface); color: var(--arco-color-text-primary); box-shadow: var(--arco-shadow-2); }
 .tabs__panel:focus-visible { outline-offset: 6px; border-radius: var(--arco-radius-lg); }
-.js .tabs__panel:not([hidden]) { animation: panel-in var(--arco-duration-moderate) var(--arco-ease-enter); }
+.js .tabs__panel:not([hidden]) { animation: panel-in var(--arco-duration-slow) var(--arco-ease-enter); }
 
-@keyframes panel-in { from { opacity: 0; transform: translateY(8px); } }
+@keyframes panel-in { from { opacity: 0; transform: translateY(10px); } }
 
 /* ---- Acordeão (details/summary nativo) ---- */
 .accordion { border-top: 1px solid var(--arco-color-border-subtle); }
@@ -716,39 +921,12 @@ select.field__control {
   .accordion__item[open]::details-content { height: auto; }
 }
 
-/* ---- Anel de séries (o arco vira indicador de progresso) ---- */
-.ring { position: relative; display: grid; place-items: center; width: 100%; max-width: 22rem; aspect-ratio: 1; }
-.ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-
-.ring__seg {
-  fill: none;
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke: var(--arco-color-bg-muted);
-  transition: stroke var(--arco-duration-moderate) var(--arco-ease-standard);
-}
-
-.ring__seg[data-state="done"] { stroke: var(--arco-color-action-primary-bg); }
-.ring__seg[data-state="current"] { stroke: var(--arco-color-brand-energy); }
-
-.ring__dot {
-  fill: var(--arco-color-brand-energy);
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0);
-  transition: transform var(--arco-duration-moderate) var(--arco-ease-impulso);
-}
-
-.is-complete .ring__dot { transform: scale(1); }
-
-.ring__center { position: relative; display: grid; justify-items: center; gap: .5rem; text-align: center; padding: 0 18%; }
-.ring__num { font-size: clamp(4rem, 3rem + 3vw, 6rem); }
-.ring__label { font-family: var(--arco-font-display); font-size: 1.25rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.2; min-height: 2.4em; text-wrap: balance; }
-
 /* ---- Movimento reduzido: só o essencial ---- */
 @media (prefers-reduced-motion: reduce) {
   .live-dot::after,
   .ai-card--breathing .ai-card__border rect { animation: none; }
   .live-dot::after { display: none; }
-  .card--interactive:hover { transform: none; }
+  .media__video { transition: none; }
+  .js .chart__forecast, .js .chart__point, .js .chart__label { opacity: 1; transition: none; }
+  .js .chart__area { opacity: .1; transition: none; }
 }

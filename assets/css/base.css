@@ -8,8 +8,12 @@
 :root {
   --site-max: 76rem;
   --site-gutter: 1rem;
-  --site-section-y: 5rem;
+  --site-section-y: clamp(4.5rem, 3rem + 5vw, 8rem);
   --site-header-h: 4.5rem;
+
+  /* Molduras de mídia e faixas escuras: recuadas da borda, cantos de campanha (manual §6.3) */
+  --site-frame-gap: .5rem;
+  --site-frame-radius: var(--arco-radius-xl);
 
   --site-hero-size: clamp(2.75rem, 1.55rem + 4.9vw, 5.5rem);
   --site-h2-size: clamp(2rem, 1.4rem + 2.4vw, 3.375rem);
@@ -28,18 +32,32 @@
   --site-on-brand-line: rgb(255 255 255 / .14);
   --site-device: #0B1315;
 
+  /* Véu sobre vídeo: Petróleo 950 em RGB (as sombras da fotografia puxam para petróleo, manual §6.5) */
+  --site-scrim: 0 33 37;
+
+  /* Gráficos: Petróleo 500 (realizado) + Lume 500 (projeção da IA). O par passa no validador
+     de paleta nos dois temas (daltonismo ΔE 12,3; contraste ≥ 3:1 sobre branco, Grafite 900
+     e Petróleo 900). O Lume 400 do tema escuro fica fora da faixa de luminosidade, por isso
+     a projeção usa Lume 500 em qualquer tema. */
+  --site-chart-line: var(--arco-color-petroleo-500);
+  --site-chart-forecast: var(--arco-color-lume-500);
+
   --site-noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (min-width: 640px) {
-  :root { --site-gutter: 1.5rem; }
+  :root {
+    --site-gutter: 1.5rem;
+    --site-frame-gap: .75rem;
+  }
 }
 
 @media (min-width: 1024px) {
   :root {
     --site-gutter: 2rem;
-    --site-section-y: 8rem;
     --site-header-h: 5rem;
+    --site-frame-gap: 1rem;
+    --site-frame-radius: var(--arco-radius-2xl);
   }
 }
 
@@ -68,7 +86,7 @@
 }
 
 /* Escopo escuro local: seções e peças que são sempre escuras (faixas, telas
-   do modo execução). Reaplica os semânticos do tema escuro do manual. */
+   do modo execução, hero sobre vídeo). Reaplica os semânticos do tema escuro do manual. */
 .surface-dark {
   color-scheme: dark;
   --arco-color-bg-canvas: var(--arco-color-grafite-950);
@@ -81,6 +99,7 @@
   --arco-color-text-primary: var(--arco-color-grafite-50);
   --arco-color-text-secondary: var(--arco-color-grafite-300);
   --arco-color-text-tertiary: var(--arco-color-grafite-400);
+  --arco-color-text-inverse: var(--arco-color-grafite-950);
   --arco-color-text-link: var(--arco-color-petroleo-300);
   --arco-color-action-primary-bg: var(--arco-color-petroleo-300);
   --arco-color-action-primary-bg-hover: var(--arco-color-petroleo-200);
@@ -104,6 +123,14 @@
   --arco-color-error-bg: var(--arco-color-erro-950);
   --arco-color-error-fg: var(--arco-color-erro-300);
   --arco-color-error-solid: var(--arco-color-erro-400);
+  --arco-color-dataviz-grid: var(--arco-color-grafite-800);
+  --arco-color-dataviz-hr-z1: var(--arco-color-grafite-500);
+  --arco-color-dataviz-hr-z5: var(--arco-color-erro-400);
+  --arco-color-dataviz-intensity-1: var(--arco-color-brasa-700);
+  --arco-color-dataviz-intensity-2: var(--arco-color-brasa-600);
+  --arco-color-dataviz-intensity-3: var(--arco-color-brasa-500);
+  --arco-color-dataviz-intensity-4: var(--arco-color-brasa-400);
+  --arco-color-dataviz-intensity-5: var(--arco-color-brasa-300);
   --arco-shadow-1: 0 1px 2px rgb(0 0 0 / .4);
   --arco-shadow-2: 0 4px 12px -2px rgb(0 0 0 / .45), 0 2px 4px rgb(0 0 0 / .3);
   --arco-shadow-3: 0 12px 24px -6px rgb(0 0 0 / .55), 0 4px 8px rgb(0 0 0 / .3);
@@ -112,6 +139,64 @@
   --site-avatar-fg: var(--arco-color-petroleo-100);
   --site-avatar-energy-bg: var(--arco-color-brasa-900);
   --site-avatar-energy-fg: var(--arco-color-brasa-100);
+  color: var(--arco-color-text-primary);
+}
+
+/* Escopo claro local: telas do produto mostradas como "capturas" dentro de faixas
+   escuras. Ficam claras em qualquer tema, como uma imagem do produto. */
+.surface-light {
+  color-scheme: light;
+  --arco-color-bg-canvas: var(--arco-color-grafite-50);
+  --arco-color-bg-surface: var(--arco-color-white);
+  --arco-color-bg-raised: var(--arco-color-white);
+  --arco-color-bg-muted: var(--arco-color-grafite-100);
+  --arco-color-border-subtle: var(--arco-color-grafite-200);
+  --arco-color-border-default: var(--arco-color-grafite-300);
+  --arco-color-border-strong: var(--arco-color-grafite-500);
+  --arco-color-text-primary: var(--arco-color-grafite-950);
+  --arco-color-text-secondary: var(--arco-color-grafite-700);
+  --arco-color-text-tertiary: var(--arco-color-grafite-600);
+  --arco-color-text-inverse: var(--arco-color-white);
+  --arco-color-text-link: var(--arco-color-petroleo-700);
+  --arco-color-action-primary-bg: var(--arco-color-petroleo-700);
+  --arco-color-action-primary-bg-hover: var(--arco-color-petroleo-800);
+  --arco-color-action-primary-fg: var(--arco-color-white);
+  --arco-color-action-secondary-bg: var(--arco-color-petroleo-50);
+  --arco-color-action-secondary-bg-hover: var(--arco-color-petroleo-100);
+  --arco-color-action-secondary-fg: var(--arco-color-petroleo-800);
+  --arco-color-action-energy-bg-hover: var(--arco-color-brasa-500);
+  --arco-color-focus-ring: var(--arco-color-petroleo-500);
+  --arco-color-brand-primary: var(--arco-color-petroleo-800);
+  --arco-color-ai-bg: var(--arco-color-lume-50);
+  --arco-color-ai-border: var(--arco-color-lume-500);
+  --arco-color-ai-fg: var(--arco-color-lume-700);
+  --arco-color-ai-solid: var(--arco-color-lume-600);
+  --arco-color-ai-on-solid: var(--arco-color-white);
+  --arco-color-live: var(--arco-color-brasa-500);
+  --arco-color-success-bg: var(--arco-color-sucesso-50);
+  --arco-color-success-fg: var(--arco-color-sucesso-700);
+  --arco-color-success-solid: var(--arco-color-sucesso-600);
+  --arco-color-warning-bg: var(--arco-color-alerta-50);
+  --arco-color-warning-fg: var(--arco-color-alerta-700);
+  --arco-color-error-bg: var(--arco-color-erro-50);
+  --arco-color-error-fg: var(--arco-color-erro-700);
+  --arco-color-error-solid: var(--arco-color-erro-600);
+  --arco-color-dataviz-grid: var(--arco-color-grafite-200);
+  --arco-color-dataviz-hr-z1: var(--arco-color-grafite-400);
+  --arco-color-dataviz-hr-z5: var(--arco-color-erro-500);
+  --arco-color-dataviz-intensity-1: var(--arco-color-brasa-400);
+  --arco-color-dataviz-intensity-2: var(--arco-color-brasa-500);
+  --arco-color-dataviz-intensity-3: var(--arco-color-brasa-600);
+  --arco-color-dataviz-intensity-4: var(--arco-color-brasa-700);
+  --arco-color-dataviz-intensity-5: var(--arco-color-brasa-800);
+  --arco-shadow-1: 0 1px 2px rgba(13,23,25,.06), 0 1px 1px rgba(13,23,25,.04);
+  --arco-shadow-2: 0 4px 12px -2px rgba(13,23,25,.08), 0 2px 4px rgba(13,23,25,.04);
+  --arco-shadow-3: 0 12px 24px -6px rgba(13,23,25,.12), 0 4px 8px rgba(13,23,25,.05);
+  --arco-shadow-4: 0 24px 48px -12px rgba(13,23,25,.20), 0 8px 16px rgba(13,23,25,.06);
+  --site-avatar-bg: var(--arco-color-petroleo-100);
+  --site-avatar-fg: var(--arco-color-petroleo-900);
+  --site-avatar-energy-bg: var(--arco-color-brasa-100);
+  --site-avatar-energy-fg: var(--arco-color-brasa-900);
   color: var(--arco-color-text-primary);
 }
 
@@ -167,6 +252,9 @@ a { color: var(--arco-color-text-link); text-underline-offset: .2em; }
 
 .section { position: relative; padding-block: var(--site-section-y); }
 .section--surface { background: var(--arco-color-bg-surface); }
+
+/* Âncora antiga (#problema) que agora aponta para a seção que absorveu o conteúdo */
+.anchor-alias { position: absolute; top: 0; left: 0; width: 1px; height: 1px; pointer-events: none; }
 
 /* ---- Tipografia ---- */
 .t-display {
@@ -255,6 +343,7 @@ a { color: var(--arco-color-text-link); text-underline-offset: .2em; }
 
 .skip-link:focus-visible { transform: none; }
 
+/* Grão fino do piso emborrachado (manual §2.2), a 4–5% */
 .noise { position: relative; isolation: isolate; }
 .noise::before {
   content: "";
@@ -264,6 +353,7 @@ a { color: var(--arco-color-text-link); text-underline-offset: .2em; }
   background-image: var(--site-noise);
   opacity: .05;
   pointer-events: none;
+  border-radius: inherit;
 }
 
 /* ---- Revelação no scroll (só com JS; sem JS, tudo aparece) ---- */

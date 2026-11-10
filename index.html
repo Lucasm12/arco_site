@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Arco · Treino guiado por profissionais e IA</title>
-  <meta name="description" content="Arco é a plataforma de treino guiado que conecta personal trainers e alunos: treinos montados com apoio da IA e aprovados pelo profissional, acompanhamento ao vivo e evolução medida em números.">
+  <meta name="description" content="Arco é a plataforma de treino guiado que conecta personal trainers e alunos: treinos com apoio da IA, acompanhamento ao vivo e evolução medida em números.">
   <meta name="theme-color" content="#F5F8F9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0D1719" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
@@ -26,6 +26,10 @@
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="site.webmanifest">
+
+  <!-- Poster do hero: é a primeira imagem que o visitante vê (LCP) -->
+  <link rel="preload" as="image" href="assets/video/hero-mobile.webp" type="image/webp" media="(max-width: 767.98px)" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/video/hero.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,6 +110,7 @@
       <symbol id="i-relogio" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6V3h6v3M9 18v3h6v-3M12 10v2.2l1.5 1"/></symbol>
       <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M10.3 4.6a2 2 0 0 1 3.4 0l7 12.2A2 2 0 0 1 19 19.8H5a2 2 0 0 1-1.7-3l7-12.2z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.6" r=".9" fill="currentColor" stroke="none"/></symbol>
       <symbol id="i-pausa" viewBox="0 0 24 24"><path d="M9 6.5v11M15 6.5v11"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 6.2v11.6a.8.8 0 0 0 1.2.7l9.1-5.8a.8.8 0 0 0 0-1.4L9.7 5.5a.8.8 0 0 0-1.2.7z"/></symbol>
       <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
       <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
       <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
@@ -130,8 +135,8 @@
           <li><a class="site-nav__link" href="#plataforma">Plataforma</a></li>
           <li><a class="site-nav__link" href="#funcionalidades">Funcionalidades</a></li>
           <li><a class="site-nav__link" href="#como-funciona">Como funciona</a></li>
-          <li><a class="site-nav__link" href="#ia">IA com autoria</a></li>
-          <li><a class="site-nav__link" href="#beneficios">Benefícios</a></li>
+          <li><a class="site-nav__link" href="#diferenciais">Diferenciais</a></li>
+          <li><a class="site-nav__link" href="#perguntas">Perguntas</a></li>
         </ul>
         <a class="btn btn--primary site-nav__cta" href="#demonstracao">Agendar demonstração</a>
       </nav>
@@ -153,39 +158,39 @@
 
   <main id="conteudo" tabindex="-1">
 
-    <!-- ===================== Hero ===================== -->
+    <!-- ===================== 01 · Hero ===================== -->
     <section class="hero" aria-labelledby="hero-title">
-      <div class="container hero__grid">
-        <div class="hero__copy">
-          <p class="overline hero__overline">Plataforma de treino guiado</p>
-          <h1 class="hero__title t-display" id="hero-title">
-            <span class="hero__line hero__line--soft">A IA propõe.</span>
-            <span class="hero__line">Você decide.</span>
-            <span class="hero__line hero__line--brand">Seu aluno evolui<span class="hero__dot">.</span></span>
-          </h1>
-          <p class="hero__lead t-lead">O Arco conecta personal trainers e alunos em uma só trajetória: treinos montados com apoio da IA, acompanhamento de cada série em tempo real e evolução medida em números. O método continua sendo seu.</p>
-          <div class="hero__actions">
-            <a class="btn btn--energy btn--lg" href="#demonstracao">
-              Agendar demonstração
-              <svg class="icon btn__icon btn__icon--move" aria-hidden="true"><use href="#i-seta"/></svg>
-            </a>
-            <a class="btn btn--ghost btn--lg" href="#como-funciona">Ver como funciona</a>
-          </div>
-          <p class="hero__note">Para personal trainers, treinadores e professores de academia, e para os alunos que treinam com eles.</p>
+      <div class="hero__frame surface-dark">
+        <!-- Montagem: corrida, natação, orientação profissional, ciclismo e treino funcional -->
+        <div class="hero__media media" data-media>
+          <picture>
+            <source media="(max-width: 767.98px)" srcset="assets/video/hero-mobile.webp" width="540" height="960">
+            <img class="media__poster" src="assets/video/hero.webp" alt="" width="1280" height="720" fetchpriority="high" decoding="async">
+          </picture>
+          <video class="media__video" id="hero-video" data-src="assets/video/hero" data-src-mobile="assets/video/hero-mobile" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+          <span class="hero__scrim" aria-hidden="true"></span>
         </div>
 
-        <div class="hero__visual" role="img" aria-label="Ilustração do Arco: celular no modo execução com descanso de 1 minuto e 24 segundos antes da última série de agachamento, uma sugestão da IA aguardando revisão e o indicador ao vivo com 4 alunos treinando.">
-          <div class="hero-stage noise" data-reveal>
-            <svg class="hero-stage__arcs" viewBox="0 0 600 660" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-              <g fill="none" stroke-linecap="round">
-                <path class="draw" pathLength="1" d="M667.4 382.1A300 300 0 1 1 372 30" stroke="#fff" stroke-opacity=".1" stroke-width="2" style="--draw-delay:100ms;--draw-duration:1400ms"/>
-                <path class="draw" pathLength="1" d="M618.2 373.4A250 250 0 1 1 372 80" stroke="#fff" stroke-opacity=".16" stroke-width="3" style="--draw-delay:220ms;--draw-duration:1400ms"/>
-                <path class="draw" pathLength="1" d="M568.96 364.73A200 200 0 1 1 372 130" stroke="#fff" stroke-opacity=".26" stroke-width="5" style="--draw-delay:340ms;--draw-duration:1400ms"/>
-                <path class="draw" pathLength="1" d="M519.72 356.05A150 150 0 1 1 372 180" stroke="#fff" stroke-opacity=".4" stroke-width="8" style="--draw-delay:460ms;--draw-duration:1400ms"/>
-              </g>
-              <circle class="hero-stage__dot" cx="563.5" cy="169.3" r="14"/>
-            </svg>
-            <div class="hero-stage__phone">
+        <div class="container hero__grid">
+          <div class="hero__copy">
+            <p class="overline hero__overline">Plataforma de treino guiado</p>
+            <h1 class="hero__title t-display" id="hero-title">
+              <span class="hero__line hero__line--soft">A IA propõe.</span>
+              <span class="hero__line">Você decide.</span>
+              <span class="hero__line hero__line--brand">Seu aluno evolui<span class="hero__dot">.</span></span>
+            </h1>
+            <p class="hero__lead">O Arco conecta personal trainers e alunos: treinos com apoio da IA, acompanhamento ao vivo e evolução medida em números.</p>
+            <div class="hero__actions">
+              <a class="btn btn--energy btn--lg" href="#demonstracao">
+                Agendar demonstração
+                <svg class="icon btn__icon btn__icon--move" aria-hidden="true"><use href="#i-seta"/></svg>
+              </a>
+              <a class="btn btn--glass btn--lg" href="#como-funciona">Ver como funciona</a>
+            </div>
+          </div>
+
+          <div class="hero__visual" role="img" aria-label="Prévia do Arco: celular no modo execução com descanso de 1 minuto e 24 segundos antes da última série de agachamento, uma sugestão da IA aguardando revisão e 4 alunos treinando ao vivo.">
+            <div class="hero__phone">
               <div class="phone">
                 <div class="phone__screen surface-dark">
                   <span class="phone__island"></span>
@@ -211,389 +216,398 @@
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="hero-float hero-float--ai" data-reveal style="--reveal-delay:500ms">
-            <div class="ai-card ai-card--breathing">
-              <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
-              <span class="ai-card__label"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
-              <p class="ai-card__title">Afundo búlgaro</p>
-              <p class="ai-card__values"><span class="data">3×10</span><span class="data">12<span class="data__unit">kg</span></span><span class="data">60<span class="data__unit">s</span></span></p>
-              <p class="ai-card__reason">Substitui o leg press: Rafael treina em casa às quintas.</p>
+            <div class="hero-float hero-float--ai">
+              <div class="ai-card ai-card--breathing">
+                <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
+                <span class="ai-card__label"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
+                <p class="ai-card__title">Afundo búlgaro</p>
+                <p class="ai-card__values"><span class="data">3×10</span><span class="data">12<span class="data__unit">kg</span></span><span class="data">60<span class="data__unit">s</span></span></p>
+                <p class="ai-card__reason">Substitui o leg press: Rafael treina em casa às quintas.</p>
+              </div>
             </div>
-          </div>
 
-          <div class="hero-float hero-float--live card" data-reveal style="--reveal-delay:700ms">
-            <div class="hero-live__head">
-              <span class="chip chip--live"><span class="live-dot"></span>Ao vivo</span>
-              <span class="hero-live__count"><span class="data">4</span> alunos treinando</span>
-            </div>
-            <div class="hero-live__row">
-              <span class="avatar avatar--energy">RS</span>
-              <span>
-                <span class="live-row__name">Rafael Souza</span>
-                <span class="live-row__status">Agachamento · 3/4</span>
-              </span>
-              <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z4)">Z4 · 162</span>
+            <div class="hero-float hero-float--live">
+              <div class="hero-live__head">
+                <span class="chip chip--live"><span class="live-dot"></span>Ao vivo</span>
+                <span class="hero-live__count"><span class="data">4</span> alunos treinando</span>
+              </div>
+              <div class="hero-live__row">
+                <span class="avatar avatar--energy">RS</span>
+                <span>
+                  <span class="live-row__name">Rafael Souza</span>
+                  <span class="live-row__status">Agachamento · 3/4</span>
+                </span>
+                <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z4)">Z4 · 162</span>
+              </div>
             </div>
           </div>
         </div>
+
+        <button class="media__toggle hero__toggle" type="button" data-media-toggle aria-controls="hero-video" aria-label="Pausar vídeo" hidden>
+          <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+          <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+        </button>
       </div>
     </section>
 
-    <!-- ===================== Pilares ===================== -->
-    <section class="pillars" aria-label="Pilares da plataforma">
-      <div class="container">
-        <ul class="pillars__list" role="list">
-          <li class="pillar" data-reveal>
-            <span class="icon-badge icon-badge--ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg></span>
-            <span class="pillar__text"><strong>IA com autoria</strong>Sugere; você aprova</span>
-          </li>
-          <li class="pillar" data-reveal style="--reveal-delay:80ms">
-            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-tempo-real"/></svg></span>
-            <span class="pillar__text"><strong>Ao vivo</strong>Cada série, na hora</span>
-          </li>
-          <li class="pillar" data-reveal style="--reveal-delay:160ms">
-            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg></span>
-            <span class="pillar__text"><strong>Modo execução</strong>Legível a 1,5 m</span>
-          </li>
-          <li class="pillar" data-reveal style="--reveal-delay:240ms">
-            <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span>
-            <span class="pillar__text"><strong>Evolução</strong>Em números, semana a semana</span>
-          </li>
-        </ul>
-      </div>
-    </section>
+    <!-- ===================== 02 · O que é o Arco ===================== -->
+    <section class="section about" id="plataforma" aria-labelledby="plataforma-title">
+      <div class="container about__grid">
+        <div class="about__copy">
+          <div class="section-head" data-reveal>
+            <p class="overline">O que é o Arco</p>
+            <h2 class="t-h2" id="plataforma-title">Todo treino é um arco.</h2>
+            <p class="t-lead">Uma plataforma de treino guiado que liga quem orienta, quem treina e a IA que calcula o caminho.</p>
+          </div>
 
-    <!-- ===================== 01 · Problema ===================== -->
-    <section class="section problem" id="problema" aria-labelledby="problema-title">
-      <div class="container problem__grid">
-        <div class="problem__intro" data-reveal>
-          <p class="overline"><span class="overline__index">01</span>O problema</p>
-          <h2 class="t-h2" id="problema-title">O treino acontece entre duas pessoas. As ferramentas, não.</h2>
-          <p class="t-lead">De um lado, apps que falam a língua da performance extrema. Do outro, sistemas de gestão que transformam o professor em digitador. No meio fica o que faz o aluno evoluir de verdade: a relação entre quem orienta e quem treina. E ela ainda roda em planilha, PDF e mensagem solta.</p>
+          <!-- Ordem do manual (§2.1): a IA calcula a curva, o profissional traça a direção, o aluno percorre.
+               O trecho IA → profissional é tracejado (proposta); profissional → aluno é linha (aprovado). -->
+          <ol class="roles" role="list" data-reveal>
+            <li class="role role--ai">
+              <span class="role__node" aria-hidden="true"></span>
+              <div>
+                <h3 class="role__title">IA</h3>
+                <p class="role__text">Calcula a curva: propõe treinos e cargas a partir dos dados.</p>
+              </div>
+            </li>
+            <li class="role role--pro">
+              <span class="role__node" aria-hidden="true"></span>
+              <div>
+                <h3 class="role__title">Profissional</h3>
+                <p class="role__text">Traça a direção: revisa, ajusta e aprova.</p>
+              </div>
+            </li>
+            <li class="role role--student">
+              <span class="role__node" aria-hidden="true"></span>
+              <div>
+                <h3 class="role__title">Aluno</h3>
+                <p class="role__text">Percorre o caminho: treina, registra o esforço e evolui.</p>
+              </div>
+            </li>
+          </ol>
         </div>
 
-        <ol class="pains" role="list">
-          <li class="pain" data-reveal>
-            <span class="pain__index data">01</span>
-            <div>
-              <h3 class="pain__title">Horas montando treino, um aluno por vez.</h3>
-              <p class="pain__text">Planilhas copiadas e coladas consomem o tempo que deveria ir para a orientação.</p>
-              <p class="pain__evidence"><svg class="icon" aria-hidden="true"><use href="#i-treino"/></svg>treinos_alunos_v7_FINAL.xlsx</p>
+        <figure class="about__figure" data-reveal style="--reveal-delay:120ms">
+          <div class="about__media media" data-media>
+            <img class="media__poster" src="assets/video/relacao.webp" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <video class="media__video" data-src="assets/video/relacao" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+            <div class="about__overlay" aria-hidden="true">
+              <div class="ai-card ai-card--breathing about__ai">
+                <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
+                <span class="ai-card__label"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
+                <span class="ai-card__values"><span class="data">4×8</span><span class="data">62,5<span class="data__unit">kg</span></span></span>
+              </div>
+              <span class="chip chip--live about__live"><span class="live-dot"></span>Ao vivo · série <span class="data">3</span> de <span class="data">4</span></span>
             </div>
-          </li>
-          <li class="pain" data-reveal>
-            <span class="pain__index data">02</span>
-            <div>
-              <h3 class="pain__title">O relato de dor chega tarde.</h3>
-              <p class="pain__text">Sem um canal no momento da série, o desconforto do aluno só aparece na aula seguinte.</p>
-              <p class="pain__evidence"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>“Prof, ontem senti o joelho no agachamento.” · 22h47</p>
-            </div>
-          </li>
-          <li class="pain" data-reveal>
-            <span class="pain__index data">03</span>
-            <div>
-              <h3 class="pain__title">Evolução que ninguém enxerga.</h3>
-              <p class="pain__text">Sem números claros, o aluno não percebe o próprio progresso e perde o motivo para continuar.</p>
-              <p class="pain__evidence"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg>“Treino há 3 meses e não vejo diferença.”</p>
-            </div>
-          </li>
-          <li class="pain" data-reveal>
-            <span class="pain__index data">04</span>
-            <div>
-              <h3 class="pain__title">IA que decide sozinha.</h3>
-              <p class="pain__text">Ferramentas genéricas prescrevem sem o profissional, apagam o método e colocam em risco quem treina.</p>
-              <p class="pain__evidence"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>“A IA aumentou sua carga em 20%.” Sem revisão de ninguém.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ===================== 02 · Plataforma ===================== -->
-    <section class="section section--surface concept" id="plataforma" aria-labelledby="plataforma-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="overline"><span class="overline__index">02</span>A plataforma</p>
-          <h2 class="t-h2" id="plataforma-title">Todo treino é um arco.</h2>
-          <p class="t-lead">O Arco é uma plataforma de treino guiado. O profissional prescreve e acompanha, a IA calcula e sugere, o aluno executa e evolui. Tudo no mesmo fluxo, com a autoria sempre visível.</p>
-          <ul class="roles" role="list">
-            <li class="role"><span class="role__mark role__mark--pro" aria-hidden="true"></span><span><strong>Profissional</strong> traça a direção</span></li>
-            <li class="role"><span class="role__mark role__mark--ai" aria-hidden="true"></span><span><strong>IA</strong> calcula a curva</span></li>
-            <li class="role"><span class="role__mark role__mark--student" aria-hidden="true"></span><span><strong>Aluno</strong> percorre</span></li>
-          </ul>
-        </div>
-
-        <div class="concept__grid">
-          <article class="concept-card card card--interactive" data-reveal>
-            <div class="concept-card__art" aria-hidden="true">
-              <svg viewBox="0 0 240 140" focusable="false">
-                <g class="art-ticks"><path d="M28 120H20M40.3 74l-6.9-4M74 40.3l-4-6.9M120 28v-8M166 40.3l4-6.9M199.7 74l6.9-4M212 120h8"/></g>
-                <path class="art-track draw" pathLength="1" d="M40 120A80 80 0 0 1 200 120"/>
-                <g class="art-rep">
-                  <path class="art-arm" d="M120 120H52"/>
-                  <circle class="art-dot" cx="40" cy="120" r="9"/>
-                </g>
-                <circle class="art-pivot" cx="120" cy="120" r="4"/>
-              </svg>
-            </div>
-            <h3 class="t-h3">O arco da repetição</h3>
-            <p class="t-body">A amplitude de cada movimento, registrada série a série: carga, repetições, descanso e esforço percebido.</p>
-          </article>
-
-          <article class="concept-card card card--interactive" data-reveal style="--reveal-delay:100ms">
-            <div class="concept-card__art" aria-hidden="true">
-              <svg viewBox="0 0 240 140" focusable="false">
-                <path class="art-base" d="M20 124H224"/>
-                <path class="art-curve draw" pathLength="1" d="M24 116L53.3 109L82.7 97.5L112 83.4L141.3 67.3L170.7 49.4L200 30"/>
-                <path class="art-forecast" d="M200 30L230 12"/>
-                <g class="art-cadence">
-                  <circle cx="24" cy="116" r="3"/><circle cx="53.3" cy="109" r="3.8"/><circle cx="82.7" cy="97.5" r="4.6"/><circle cx="112" cy="83.4" r="5.4"/><circle cx="141.3" cy="67.3" r="6.2"/><circle cx="170.7" cy="49.4" r="7"/>
-                </g>
-                <circle class="art-dot" cx="200" cy="30" r="8"/>
-              </svg>
-            </div>
-            <h3 class="t-h3">O arco da evolução</h3>
-            <p class="t-body">A curva de progresso ao longo das semanas: carga, volume, frequência e bem-estar, com a projeção da IA sempre em tracejado.</p>
-          </article>
-
-          <article class="concept-card card card--interactive" data-reveal style="--reveal-delay:200ms">
-            <div class="concept-card__art" aria-hidden="true">
-              <svg viewBox="0 0 240 140" focusable="false">
-                <path class="art-bridge-ai" d="M56 62A75 75 0 0 1 184 62"/>
-                <path class="art-bridge draw" pathLength="1" d="M56 62A75 75 0 0 1 184 62" style="--draw-delay:600ms"/>
-                <path class="art-body" d="M38 116A18 18 0 0 1 74 116"/>
-                <circle class="art-head art-head--pro" cx="56" cy="80" r="9"/>
-                <path class="art-body" d="M166 116A18 18 0 0 1 202 116"/>
-                <circle class="art-dot" cx="184" cy="80" r="9"/>
-              </svg>
-            </div>
-            <h3 class="t-h3">O arco da relação</h3>
-            <p class="t-body">A ponte entre quem orienta e quem treina. A proposta da IA nasce tracejada e só vira linha quando o profissional aprova.</p>
-          </article>
-        </div>
+            <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+              <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+              <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+            </button>
+          </div>
+          <figcaption class="visually-hidden">Vídeo: um profissional corrige o agachamento de uma aluna em um campo ao ar livre.</figcaption>
+        </figure>
       </div>
     </section>
 
     <!-- ===================== 03 · Funcionalidades ===================== -->
-    <section class="section features" id="funcionalidades" aria-labelledby="funcionalidades-title">
+    <section class="section section--surface features" id="funcionalidades" aria-labelledby="funcionalidades-title">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="overline"><span class="overline__index">03</span>Funcionalidades</p>
-          <h2 class="t-h2" id="funcionalidades-title">Tudo o que o acompanhamento pede. Nada que atrapalhe a série.</h2>
-          <p class="t-lead">Ferramentas para o profissional montar, acompanhar e ajustar. Telas para o aluno treinar com clareza, mesmo com o celular no chão e a mão suada.</p>
+        <div class="section-head section-head--center" data-reveal>
+          <p class="overline">Funcionalidades</p>
+          <h2 class="t-h2" id="funcionalidades-title">Tudo o que o acompanhamento pede.</h2>
+          <p class="t-lead">Para o profissional montar e acompanhar. Para o aluno treinar com clareza.</p>
         </div>
 
-        <div class="bento">
-          <!-- IA + treino -->
-          <article class="feature feature--ai card" data-reveal>
-            <div class="feature__head">
+        <ul class="feature-grid" role="list">
+          <!-- IA -->
+          <li class="feature-card" data-reveal>
+            <div class="feature-card__media feature-card__media--ai" aria-hidden="true">
+              <div class="ai-stack">
+                <div class="workout ai-stack__back">
+                  <span class="workout__over">Treino B · Semana 6</span>
+                  <span class="workout__title">Membros inferiores</span>
+                  <span class="workout__foot"><span class="workout__author"><span class="avatar avatar--sm">CA</span>Por Carla</span><span><span class="data">6</span> exercícios</span></span>
+                </div>
+                <div class="ai-card ai-card--breathing ai-stack__front">
+                  <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
+                  <span class="ai-card__label"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
+                  <span class="ai-card__title">Agachamento livre · Rafael</span>
+                  <span class="ai-card__values"><span class="data">4×8</span><span class="data">62,5<span class="data__unit">kg</span></span><span class="data">90<span class="data__unit">s</span></span></span>
+                  <span class="ai-card__reason">Base: 3 últimas sessões com PSE até 6.</span>
+                </div>
+              </div>
+            </div>
+            <div class="feature-card__body">
               <span class="icon-badge icon-badge--ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg></span>
-              <h3 class="t-h3">Treinos montados com apoio da IA</h3>
-              <p class="t-body">A IA usa a avaliação, o objetivo e o histórico de cada aluno para propor treino, carga e volume. Você revisa, edita e publica. Cada sugestão mostra em uma linha os dados em que se baseou.</p>
+              <h3 class="feature-card__title">Treinos criados com IA</h3>
+              <p class="feature-card__text">Treino, carga e volume propostos a partir do histórico de cada aluno.</p>
             </div>
-            <div class="feature__visual feature__visual--stack" role="img" aria-label="Exemplo: cartão do Treino B, semana 6, assinado por Carla, e uma sugestão da IA para trocar o leg press por afundo búlgaro.">
-              <div class="workout">
-                <span class="workout__over">Treino B · Semana 6</span>
-                <span class="workout__title">Membros inferiores</span>
-                <span class="workout__meta"><span><span class="data">6</span> exercícios</span><span><span class="data">45</span> min</span><span>PSE alvo <span class="data">7</span></span></span>
-                <span class="workout__bar" style="--value:66%"><span></span></span>
-                <span class="workout__foot"><span class="workout__author"><span class="avatar avatar--sm">CA</span>Por Carla</span><span>4 de 6 publicados</span></span>
-              </div>
-              <div class="ai-card ai-card--breathing">
-                <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
-                <span class="ai-card__label"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
-                <span class="ai-card__title">Agachamento livre · Rafael</span>
-                <span class="ai-card__values"><span class="data">4×8</span><span class="data">62,5<span class="data__unit">kg</span></span><span class="data">90<span class="data__unit">s</span></span></span>
-                <span class="ai-card__reason">Base: 3 últimas sessões com PSE até 6.</span>
-              </div>
-            </div>
-          </article>
+          </li>
 
-          <!-- Sala ao vivo -->
-          <article class="feature card" data-reveal style="--reveal-delay:80ms">
-            <div class="feature__head">
+          <!-- Tempo real -->
+          <li class="feature-card" data-reveal style="--reveal-delay:80ms">
+            <div class="feature-card__media media" data-media>
+              <img class="media__poster" src="assets/video/ao-vivo.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <video class="media__video" data-src="assets/video/ao-vivo" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <div class="feature-card__ui ui-live" aria-hidden="true">
+                <div class="ui-live__head"><span class="chip chip--live"><span class="live-dot"></span>Ao vivo</span><span><span class="data">4</span> treinando</span></div>
+                <div class="live-row">
+                  <span class="avatar avatar--energy">RS</span>
+                  <span><span class="live-row__name">Rafael Souza</span><span class="live-row__status">Agachamento · 3/4</span></span>
+                  <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z4)">Z4 · 162</span>
+                </div>
+                <div class="live-row">
+                  <span class="avatar">AL</span>
+                  <span><span class="live-row__name">Ana Lima</span><span class="live-row__status"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg><span>Descanso · <span class="data" data-countdown="45">0:45</span></span></span></span>
+                  <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z2)">Z2 · 118</span>
+                </div>
+              </div>
+              <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+                <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+                <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+              </button>
+            </div>
+            <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-tempo-real"/></svg></span>
-              <h3 class="t-h3">Sala ao vivo</h3>
-              <p class="t-body">Veja quem está treinando agora, em que série está, quanto falta de descanso e em que zona de frequência cardíaca.</p>
+              <h3 class="feature-card__title">Acompanhamento em tempo real</h3>
+              <p class="feature-card__text">Veja quem está treinando, em que série e em que zona cardíaca.</p>
             </div>
-            <div class="feature__visual live-list" role="img" aria-label="Exemplo da sala ao vivo: Rafael em série na zona 4, Ana em descanso na zona 2 e João pausado após relatar desconforto.">
-              <div class="live-row">
-                <span class="avatar avatar--energy">RS</span>
-                <span><span class="live-row__name">Rafael Souza</span><span class="live-row__status"><span class="live-dot"></span>Agachamento · 3/4</span></span>
-                <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z4)">Z4 · 162</span>
-              </div>
-              <div class="live-row">
-                <span class="avatar">AL</span>
-                <span><span class="live-row__name">Ana Lima</span><span class="live-row__status"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg>Descanso · 0:45</span></span>
-                <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z2)">Z2 · 118</span>
-              </div>
-              <div class="live-row">
-                <span class="avatar">JP</span>
-                <span><span class="live-row__name">João Pedro</span><span class="live-row__status live-row__status--warn"><svg class="icon" aria-hidden="true"><use href="#i-pausa"/></svg>Pausado · desconforto</span></span>
-                <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z1)">Z1 · 96</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Modo execução -->
-          <article class="feature feature--exec card" data-reveal>
-            <div class="feature__head">
-              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg></span>
-              <h3 class="t-h3">Modo execução</h3>
-              <p class="t-body">Números grandes, legíveis a 1,5 m. Botões de 64 px para a mão suada. Sem internet, as séries ficam salvas no celular e sincronizam depois.</p>
-            </div>
-            <div class="feature__visual exec-peek surface-dark" role="img" aria-label="Exemplo do modo execução: 8 repetições com 62,5 quilos e o botão Concluir série.">
-              <span class="exec-peek__over">Agachamento livre · série 4 de 4</span>
-              <span class="exec-peek__nums">
-                <span class="data">8<span class="data__unit">reps</span></span>
-                <span class="data">62,5<span class="data__unit">kg</span></span>
-              </span>
-              <span class="exec-peek__cta">Concluir série</span>
-            </div>
-          </article>
+          </li>
 
           <!-- Evolução -->
-          <article class="feature feature--chart card" data-reveal style="--reveal-delay:80ms">
-            <div class="feature__head">
-              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span>
-              <h3 class="t-h3">Evolução em números</h3>
-              <p class="t-body">Carga, volume e frequência por aluno, semana a semana. A projeção da IA aparece sempre tracejada, para separar o que foi feito do que é previsto.</p>
+          <li class="feature-card" data-reveal style="--reveal-delay:160ms">
+            <div class="feature-card__media media" data-media>
+              <img class="media__poster" src="assets/video/evolucao.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <video class="media__video" data-src="assets/video/evolucao" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <div class="feature-card__ui ui-bars" aria-hidden="true">
+                <div class="ui-bars__head"><span class="ui-bars__title">Treinos por semana</span><span class="ui-bars__value"><span class="data">4</span> nesta semana</span></div>
+                <div class="bars">
+                  <span style="--v:.5"></span><span style="--v:.5"></span><span style="--v:.75"></span><span style="--v:.75"></span><span style="--v:.75"></span><span style="--v:1"></span><span style="--v:.75"></span><span class="is-current" style="--v:1"></span>
+                </div>
+                <div class="ui-bars__axis"><span>Sem 1</span><span>Sem 8</span></div>
+              </div>
+              <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+                <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+                <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+              </button>
             </div>
-            <figure class="feature__visual chart">
-              <figcaption class="chart__head">
-                <span><span class="chart__title">Carga no agachamento</span> <span class="chart__sub">Rafael · kg por semana</span></span>
-                <span class="chart__legend" aria-hidden="true"><span>Realizado</span><span class="is-ai">Projeção da IA</span></span>
-              </figcaption>
-              <svg viewBox="0 0 520 226" role="img" aria-label="Gráfico de linha: a carga no agachamento subiu de 50 quilos na semana 1 para 62,5 quilos na semana 8. A projeção da IA indica 67,5 quilos na semana 11." focusable="false">
-                <g class="chart__grid">
-                  <path d="M44 171.11H500M44 133.33H500M44 95.56H500M44 57.78H500M44 20H500"/>
-                </g>
-                <g class="chart__axis" text-anchor="end">
-                  <text x="34" y="175">50</text><text x="34" y="137">55</text><text x="34" y="99.5">60</text><text x="34" y="62">65</text><text x="34" y="24">70</text>
-                </g>
-                <g class="chart__axis" text-anchor="middle">
-                  <text x="44" y="216">Sem 1</text><text x="180.8" y="216">Sem 4</text><text x="363.2" y="216">Sem 8</text><text x="500" y="216">Sem 11</text>
-                </g>
-                <path class="chart__today" d="M363.2 20V190"/>
-                <path class="chart__area" d="M44 171.11L89.6 152.22L135.2 152.22L180.8 133.33L226.4 114.44L272 114.44L317.6 95.56L363.2 76.67L363.2 190L44 190Z"/>
-                <path class="chart__line draw" pathLength="1" d="M44 171.11L89.6 152.22L135.2 152.22L180.8 133.33L226.4 114.44L272 114.44L317.6 95.56L363.2 76.67" style="--draw-duration:1400ms"/>
-                <path class="chart__forecast" d="M363.2 76.67L408.8 57.78L454.4 57.78L500 38.89"/>
-                <circle class="chart__point" cx="363.2" cy="76.67" r="5"/>
-                <text class="chart__label" x="351" y="62" text-anchor="end">62,5 kg</text>
-                <text class="chart__label-sub" x="363.2" y="12" text-anchor="middle">hoje</text>
-              </svg>
-            </figure>
-          </article>
+            <div class="feature-card__body">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span>
+              <h3 class="feature-card__title">Evolução em números</h3>
+              <p class="feature-card__text">Carga, volume e frequência semana a semana, com conquistas sem exagero.</p>
+            </div>
+          </li>
 
           <!-- Esforço e dor -->
-          <article class="feature card" data-reveal>
-            <div class="feature__head">
+          <li class="feature-card" data-reveal>
+            <div class="feature-card__media media" data-media>
+              <img class="media__poster" src="assets/video/esforco.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <video class="media__video" data-src="assets/video/esforco" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <div class="feature-card__ui ui-effort" aria-hidden="true">
+                <p class="ui-effort__q">Esforço da série</p>
+                <div class="pse pse--compact"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span class="is-selected">7</span><span>8</span><span>9</span><span>10</span></div>
+                <p class="ui-effort__alert"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span><strong>Dor no joelho · 4 de 10.</strong> Carla foi avisada.</span></p>
+              </div>
+              <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+                <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+                <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+              </button>
+            </div>
+            <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-intensidade"/></svg></span>
-              <h3 class="t-h3">Esforço e dor no momento certo</h3>
-              <p class="t-body">Ao fim de cada série, o aluno informa a percepção de esforço. Sentiu dor? Relata com um toque, e você recebe o alerta na hora.</p>
+              <h3 class="feature-card__title">Esforço e dor registrados</h3>
+              <p class="feature-card__text">PSE ao fim de cada série. Dor relatada com um toque, alerta na hora.</p>
             </div>
-            <div class="feature__visual feature__visual--stack" role="img" aria-label="Exemplo: escala de esforço de 1 a 10 com o 7, intensa, selecionado, e um alerta de dor no joelho de nível 4 de 10.">
-              <div>
-                <div class="pse"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span class="is-selected">7</span><span>8</span><span>9</span><span>10</span></div>
-                <div class="pse__caption"><span>Leve</span><span class="t-strong">7 · Intensa</span><span>Máxima</span></div>
-              </div>
-              <div class="alert">
-                <svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>
-                <span><strong>Rafael relatou dor no joelho (4 de 10)</strong> no Treino B. Revise o treino antes da próxima sessão.</span>
-              </div>
-            </div>
-          </article>
+          </li>
 
-          <!-- Wearables -->
-          <article class="feature card" data-reveal style="--reveal-delay:80ms">
-            <div class="feature__head">
+          <!-- Dispositivos -->
+          <li class="feature-card" data-reveal style="--reveal-delay:80ms">
+            <div class="feature-card__media media" data-media>
+              <img class="media__poster" src="assets/video/dispositivos.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <video class="media__video" data-src="assets/video/dispositivos" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+              <div class="feature-card__ui ui-hr" aria-hidden="true">
+                <div class="ui-hr__top">
+                  <span class="ui-hr__label"><svg class="icon" aria-hidden="true"><use href="#i-relogio"/></svg>Frequência cardíaca</span>
+                  <span class="ui-hr__zone">Z4 · Limiar</span>
+                </div>
+                <p class="ui-hr__value"><span class="data" data-bpm="162">162</span><span class="data__unit">bpm</span><span class="ui-hr__pct">83% da FC máx.</span></p>
+                <div class="zones zones--compact">
+                  <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z1)"><span class="zones__bar"></span></span>
+                  <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z2)"><span class="zones__bar"></span></span>
+                  <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z3)"><span class="zones__bar"></span></span>
+                  <span class="zones__item is-current" style="--zone:var(--arco-color-dataviz-hr-z4)"><span class="zones__bar"></span></span>
+                  <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z5)"><span class="zones__bar"></span></span>
+                </div>
+              </div>
+              <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+                <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+                <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+              </button>
+            </div>
+            <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-relogio"/></svg></span>
-              <h3 class="t-h3">Relógios e cintas cardíacas</h3>
-              <p class="t-body">A frequência cardíaca entra em zonas de Z1 a Z5, nas mesmas cores que os principais wearables já usam. O aluno não precisa reaprender nada.</p>
+              <h3 class="feature-card__title">Integração com dispositivos</h3>
+              <p class="feature-card__text">Relógios e cintas cardíacas, com zonas de Z1 a Z5 nas cores que os wearables já usam.</p>
             </div>
-            <div class="feature__visual" role="img" aria-label="Exemplo: escala de zonas de frequência cardíaca de Z1 a Z5, com o aluno na zona 4, a 162 batimentos por minuto.">
-              <div class="zones">
-                <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z1)"><span class="zones__bar"></span><span class="zones__label">Z1</span></span>
-                <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z2)"><span class="zones__bar"></span><span class="zones__label">Z2</span></span>
-                <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z3)"><span class="zones__bar"></span><span class="zones__label">Z3</span></span>
-                <span class="zones__item is-current" style="--zone:var(--arco-color-dataviz-hr-z4)"><span class="zones__bar"></span><span class="zones__label">Z4 · Limiar</span></span>
-                <span class="zones__item" style="--zone:var(--arco-color-dataviz-hr-z5)"><span class="zones__bar"></span><span class="zones__label">Z5</span></span>
-              </div>
-              <p class="zones__reading"><span class="data">162</span><span class="data__unit">bpm</span><span class="zones__pct">83% da FC máxima</span></p>
-            </div>
-          </article>
-        </div>
+          </li>
 
-        <ul class="feature-more" role="list" data-reveal>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-agenda"/></svg>Agenda de sessões</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-treino"/></svg>Biblioteca de exercícios</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg>Relatórios para o aluno</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-conquista"/></svg>Conquistas sem exagero</li>
-          <li><svg class="icon" aria-hidden="true"><use href="#i-vinculo"/></svg>Mensagens entre profissional e aluno</li>
+          <!-- Gestão de alunos -->
+          <li class="feature-card" data-reveal style="--reveal-delay:160ms">
+            <div class="feature-card__media feature-card__media--plain" aria-hidden="true">
+              <div class="ui-roster">
+                <div class="ui-roster__head"><span>Seus alunos</span><span class="data">12</span></div>
+                <div class="ui-roster__row"><span class="avatar avatar--energy">RS</span><span class="ui-roster__name">Rafael Souza</span><span class="chip chip--warning"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>Relatou dor</span></div>
+                <div class="ui-roster__row"><span class="avatar">AL</span><span class="ui-roster__name">Ana Lima</span><span class="chip chip--success"><svg class="icon" aria-hidden="true"><use href="#i-conquista"/></svg>Bateu a meta</span></div>
+                <div class="ui-roster__row"><span class="avatar">JP</span><span class="ui-roster__name">João Pedro</span><span class="chip"><svg class="icon" aria-hidden="true"><use href="#i-agenda"/></svg>7 dias sem treino</span></div>
+              </div>
+            </div>
+            <div class="feature-card__body">
+              <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg></span>
+              <h3 class="feature-card__title">Gestão de alunos</h3>
+              <p class="feature-card__text">Agenda, biblioteca de exercícios, mensagens e relatórios em um só lugar.</p>
+            </div>
+          </li>
         </ul>
       </div>
     </section>
 
     <!-- ===================== 04 · Como funciona ===================== -->
-    <section class="section section--surface how" id="como-funciona" aria-labelledby="como-funciona-title">
+    <section class="section how" id="como-funciona" aria-labelledby="como-funciona-title">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="overline"><span class="overline__index">04</span>Como funciona</p>
-          <h2 class="t-h2" id="como-funciona-title">Do método ao resultado, em quatro passos.</h2>
+        <div class="section-head section-head--center" data-reveal>
+          <p class="overline">Como funciona</p>
+          <h2 class="t-h2" id="como-funciona-title">Do objetivo à evolução, em três passos.</h2>
         </div>
 
         <div class="steps" data-steps>
-          <div class="steps__aside" aria-hidden="true">
-            <div class="ring">
-              <svg viewBox="0 0 200 200" focusable="false">
-                <circle class="ring__seg" data-ring-seg cx="100" cy="100" r="88" pathLength="360" stroke-dasharray="75.5 284.5" transform="rotate(-82.75 100 100)"/>
-                <circle class="ring__seg" data-ring-seg cx="100" cy="100" r="88" pathLength="360" stroke-dasharray="75.5 284.5" transform="rotate(7.25 100 100)"/>
-                <circle class="ring__seg" data-ring-seg cx="100" cy="100" r="88" pathLength="360" stroke-dasharray="75.5 284.5" transform="rotate(97.25 100 100)"/>
-                <circle class="ring__seg" data-ring-seg cx="100" cy="100" r="88" pathLength="360" stroke-dasharray="75.5 284.5" transform="rotate(187.25 100 100)"/>
-                <circle class="ring__dot" cx="100" cy="12" r="6"/>
-              </svg>
-              <div class="ring__center">
-                <span class="overline">Passo</span>
-                <span class="data ring__num"><span data-ring-num>01</span><span class="data__unit">/04</span></span>
-                <span class="ring__label" data-ring-label>Você define o ponto de partida</span>
-              </div>
-            </div>
-            <p class="steps__caption">O anel de séries do Arco: um segmento por etapa. O ponto aparece quando o ciclo se fecha.</p>
-          </div>
+          <span class="steps__rail" aria-hidden="true"><span class="steps__fill" data-rail-fill></span><span class="steps__dot"></span></span>
 
           <ol class="steps__list" role="list">
+            <!-- Passo 1 -->
             <li class="step" data-step>
-              <span class="step__index data">01</span>
-              <div class="step__body">
-                <h3 class="t-h3" data-step-title>Você define o ponto de partida</h3>
-                <p class="t-body">Cadastre a avaliação, o objetivo e a rotina de cada aluno. É a partir desse retrato que o Arco trabalha.</p>
-                <p class="step__quote"><span class="avatar avatar--sm">CA</span><span>Objetivo: hipertrofia · <span class="data">3</span>× por semana · treina em casa às quintas</span></p>
+              <span class="step__num data" aria-hidden="true">01</span>
+              <div class="step__copy" data-reveal>
+                <h3 class="t-h3"><span class="visually-hidden">Passo 1: </span>O profissional define o objetivo</h3>
+                <p class="t-body">Avaliação, objetivo e rotina de cada aluno viram o ponto de partida.</p>
+              </div>
+              <div class="step__visual" data-reveal style="--reveal-delay:120ms">
+                <div class="profile" role="img" aria-label="Ficha do aluno Rafael Souza: objetivo hipertrofia, 3 treinos por semana, treina em casa às quintas, referência de 60 quilos no agachamento com PSE até 6.">
+                  <div class="profile__head">
+                    <span class="avatar avatar--energy">RS</span>
+                    <span class="profile__who"><span class="profile__name">Rafael Souza</span><span class="profile__meta">Aluno de Carla</span></span>
+                    <span class="chip chip--success"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Avaliação</span>
+                  </div>
+                  <dl class="profile__rows">
+                    <div class="profile__row"><dt>Objetivo</dt><dd>Hipertrofia</dd></div>
+                    <div class="profile__row"><dt>Frequência</dt><dd><span class="data">3×</span> por semana</dd></div>
+                    <div class="profile__row"><dt>Rotina</dt><dd>Treina em casa às quintas</dd></div>
+                    <div class="profile__row"><dt>Referência</dt><dd>Agachamento <span class="data">60 kg</span> · PSE até <span class="data">6</span></dd></div>
+                  </dl>
+                  <p class="profile__foot"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Pronto para a proposta da IA</p>
+                </div>
               </div>
             </li>
-            <li class="step" data-step>
-              <span class="step__index data">02</span>
-              <div class="step__body">
-                <h3 class="t-h3" data-step-title>A IA propõe</h3>
-                <p class="t-body">A IA monta uma proposta de treino e de cargas com base no histórico. Tudo aparece em tracejado, porque ainda é só uma sugestão, e só você a vê.</p>
-                <p class="step__quote step__quote--ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg><span>Sugestão: agachamento 4×8 com 62,5 kg. Base: últimas 3 sessões de Rafael com PSE até 6.</span></p>
+
+            <!-- Passo 2 · demonstração interativa da IA -->
+            <li class="step" data-step id="ia">
+              <span class="step__num data" aria-hidden="true">02</span>
+              <div class="step__copy" data-reveal>
+                <h3 class="t-h3"><span class="visually-hidden">Passo 2: </span>A IA ajuda a montar o treino</h3>
+                <p class="t-body">Treino, carga e volume propostos com base no histórico. Você revisa, ajusta e publica.</p>
+                <p class="step__hint"><svg class="icon" aria-hidden="true"><use href="#i-editar"/></svg>Experimente: aplique, edite ou descarte a sugestão.</p>
+              </div>
+              <div class="step__visual" data-reveal style="--reveal-delay:120ms">
+                <div class="demo" data-ai-demo data-state="ai">
+                  <ol class="demo__stages" role="list" aria-label="Estados da autoria">
+                    <li class="demo__stage" data-stage="ai" aria-current="step">Sugestão da IA</li>
+                    <li class="demo__stage" data-stage="edit">Em revisão</li>
+                    <li class="demo__stage" data-stage="approved">Aprovado</li>
+                  </ol>
+
+                  <div class="demo__card ai-card ai-card--breathing" data-ai-card>
+                    <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
+
+                    <div class="demo__card-top">
+                      <span class="ai-card__label" data-show="ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
+                      <span class="demo__author" data-show="edit" hidden><span class="avatar avatar--sm">CA</span>Editando · base da IA</span>
+                      <span class="demo__author" data-show="approved" hidden><span class="avatar avatar--sm">CA</span>Por Carla · sugerido pela IA</span>
+                      <span class="demo__visibility" data-show="ai edit">Só você vê</span>
+                      <span class="chip chip--success" data-show="approved" hidden><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Publicado</span>
+                    </div>
+
+                    <div data-show="ai edit approved">
+                      <p class="ai-card__title">Agachamento livre · Rafael</p>
+                      <div class="demo__values">
+                        <span class="demo__old" data-show="ai"><span class="visually-hidden">Antes: </span><span class="data">4×8 · 60<span class="data__unit">kg</span></span></span>
+                        <svg class="icon demo__arrow" data-show="ai" aria-hidden="true"><use href="#i-seta"/></svg>
+                        <span class="demo__new"><span class="visually-hidden">Carga proposta: </span><span class="data">4×8 · <span data-ai-load>62,5</span><span class="data__unit">kg</span></span></span>
+                        <span class="demo__stepper" data-show="edit" hidden>
+                          <button class="icon-btn demo__step-btn" type="button" data-action="dec" aria-label="Diminuir carga em 2,5 kg"><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg></button>
+                          <button class="icon-btn demo__step-btn" type="button" data-action="inc" aria-label="Aumentar carga em 2,5 kg"><svg class="icon" aria-hidden="true"><use href="#i-mais"/></svg></button>
+                        </span>
+                      </div>
+                      <p class="ai-card__reason">Base: 3 últimas sessões com PSE até 6 e técnica marcada como “boa” por você.</p>
+                    </div>
+
+                    <div class="demo__discarded" data-show="discarded" hidden>
+                      <p class="t-strong">Sugestão descartada.</p>
+                      <p class="ai-card__reason">Nada foi enviado ao Rafael. A IA considera a sua decisão nas próximas propostas.</p>
+                    </div>
+
+                    <div class="demo__actions">
+                      <button class="btn btn--ai btn--sm" type="button" data-action="apply" data-show="ai">Aplicar sugestão</button>
+                      <button class="btn btn--ghost btn--sm" type="button" data-action="edit" data-show="ai"><svg class="icon btn__icon" aria-hidden="true"><use href="#i-editar"/></svg>Editar</button>
+                      <button class="btn btn--ghost btn--sm demo__discard" type="button" data-action="discard" data-show="ai">Descartar</button>
+                      <button class="btn btn--primary btn--sm" type="button" data-action="publish" data-show="edit" hidden>Publicar treino</button>
+                      <button class="btn btn--ghost btn--sm" type="button" data-action="cancel" data-show="edit" hidden>Cancelar</button>
+                      <button class="btn btn--ghost btn--sm" type="button" data-action="reset" data-show="approved discarded" hidden>Recomeçar demonstração</button>
+                    </div>
+                  </div>
+
+                  <div class="demo__student">
+                    <span class="demo__student-label"><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg>O que o Rafael vê</span>
+                    <p class="demo__student-empty" data-show="ai edit discarded">Nada ainda. O aluno só recebe o treino depois da sua aprovação.</p>
+                    <p class="demo__student-ok" data-show="approved" hidden>Agachamento livre · <span class="data">4×8 · <span data-ai-load>62,5</span> kg</span> · montado por Carla com apoio da IA</p>
+                  </div>
+
+                  <p class="visually-hidden" aria-live="polite" data-ai-status></p>
+                </div>
               </div>
             </li>
+
+            <!-- Passo 3 -->
             <li class="step" data-step>
-              <span class="step__index data">03</span>
-              <div class="step__body">
-                <h3 class="t-h3" data-step-title>Você decide</h3>
-                <p class="t-body">Revise, ajuste e publique. Ao aprovar, a linha fica sólida e o treino passa a levar o seu nome. Nada chega ao aluno sem o seu aval.</p>
-                <p class="step__quote"><span class="avatar avatar--sm">CA</span><span>Ajuste aprovado pela Carla: descanso de 90 s nesta série.</span></p>
+              <span class="step__num data" aria-hidden="true">03</span>
+              <div class="step__copy" data-reveal>
+                <h3 class="t-h3"><span class="visually-hidden">Passo 3: </span>O aluno executa e evolui</h3>
+                <p class="t-body">Séries, esforço e relatos chegam ao vivo. A evolução aparece em números.</p>
               </div>
-            </li>
-            <li class="step" data-step>
-              <span class="step__index data">04</span>
-              <div class="step__body">
-                <h3 class="t-h3" data-step-title>O aluno treina. Você acompanha.</h3>
-                <p class="t-body">O aluno executa no modo execução e séries, esforço e relatos chegam ao vivo. A cada sessão, a IA aprende com os seus ajustes e o arco recomeça, um pouco mais alto.</p>
-                <p class="step__quote"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg><span>Rafael concluiu o Treino B · 42 min · PSE média 7 · 1 ajuste de carga registrado.</span></p>
+              <div class="step__visual" data-reveal style="--reveal-delay:120ms">
+                <div class="exec-shot">
+                  <div class="exec-shot__media media" data-media>
+                    <img class="media__poster" src="assets/video/execucao.webp" alt="" width="960" height="720" loading="lazy" decoding="async">
+                    <video class="media__video" data-src="assets/video/execucao" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+                    <span class="chip chip--live exec-shot__live" aria-hidden="true"><span class="live-dot"></span>Ao vivo · série <span class="data">4</span> de <span class="data">4</span></span>
+                    <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
+                      <svg class="icon media__icon-pause" aria-hidden="true"><use href="#i-pausa"/></svg>
+                      <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
+                    </button>
+                  </div>
+                  <div class="exec-shot__note" role="img" aria-label="Notificação para o aluno: treino concluído, 18 séries em 42 minutos; no agachamento, 6% mais carga que na semana passada.">
+                    <span class="note__app"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#arco-mark"/></svg>Arco · agora</span>
+                    <p class="note__text"><strong>Treino concluído.</strong> <span class="data">18</span> séries em <span class="data">42</span> min.</p>
+                    <div class="note__delta">
+                      <span class="note__pct data" data-count="6" data-prefix="+" data-suffix="%">+6%</span>
+                      <span class="note__caption">de carga no agachamento em relação à semana passada</span>
+                    </div>
+                    <svg class="spark" viewBox="0 0 160 40" aria-hidden="true" focusable="false">
+                      <path class="spark__area" d="M2 34L23 30L44 30L65 25L86 20L107 20L128 15L149 10L149 40L2 40Z"/>
+                      <path class="spark__line draw" pathLength="1" d="M2 34L23 30L44 30L65 25L86 20L107 20L128 15L149 10"/>
+                      <circle class="spark__dot" cx="149" cy="10" r="4"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
             </li>
           </ol>
@@ -601,269 +615,223 @@
       </div>
     </section>
 
-    <!-- ===================== 05 · IA com autoria ===================== -->
-    <section class="section ai surface-dark noise" id="ia" aria-labelledby="ia-title">
-      <svg class="ai__orbit" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
-        <g fill="none" stroke-linecap="round">
-          <path d="M560 300A260 260 0 0 1 300 560" stroke-width="2"/>
-          <path d="M500 300A200 200 0 0 1 300 500" stroke-width="3"/>
-          <path d="M440 300A140 140 0 0 1 300 440" stroke-width="5"/>
-        </g>
-      </svg>
-      <div class="container ai__grid">
-        <div class="ai__intro">
+    <!-- ===================== 05 · Acompanhamento (para profissionais e alunos) ===================== -->
+    <section class="section band surface-dark noise" id="beneficios" aria-labelledby="beneficios-title">
+      <div class="container" data-tabs>
+        <div class="band__head">
           <div class="section-head" data-reveal>
-            <p class="overline"><span class="overline__index">05</span>Inteligência artificial</p>
-            <h2 class="t-h2" id="ia-title">A IA desenha em tracejado. Você transforma em linha.</h2>
-            <p class="t-lead">No Arco, a IA é assistente do profissional, não personagem. Não tem rosto, não fala com o aluno em nome próprio e não publica nada sozinha. Toda sugestão diz de onde veio e espera o seu aval.</p>
+            <p class="overline">Acompanhamento</p>
+            <h2 class="t-h2" id="beneficios-title">Mais alcance para quem orienta. Mais clareza para quem treina.</h2>
           </div>
-          <ul class="principles" role="list">
-            <li class="principle" data-reveal><h3 class="principle__title">Bastidor, não palco</h3><p>A IA aparece onde o profissional trabalha. Não há mascote nem avatar.</p></li>
-            <li class="principle" data-reveal style="--reveal-delay:80ms"><h3 class="principle__title">Autoria visível</h3><p>Todo conteúdo diz quem o criou e quem o aprovou.</p></li>
-            <li class="principle" data-reveal style="--reveal-delay:160ms"><h3 class="principle__title">Mostra o porquê</h3><p>Cada sugestão traz, em uma linha, os dados em que se baseou.</p></li>
-            <li class="principle" data-reveal style="--reveal-delay:240ms"><h3 class="principle__title">Aval antes do aluno</h3><p>Carga, volume e saúde só chegam ao aluno depois da sua aprovação.</p></li>
-          </ul>
-        </div>
-
-        <div class="demo" data-ai-demo data-state="ai" data-reveal>
-          <p class="demo__hint">Experimente: aprove, edite ou descarte a sugestão.</p>
-          <ol class="demo__stages" role="list" aria-label="Estados da autoria">
-            <li class="demo__stage" data-stage="ai" aria-current="step">Sugestão da IA</li>
-            <li class="demo__stage" data-stage="edit">Em revisão</li>
-            <li class="demo__stage" data-stage="approved">Aprovado</li>
-          </ol>
-
-          <div class="demo__card ai-card ai-card--breathing" data-ai-card>
-            <svg class="ai-card__border" aria-hidden="true" focusable="false"><rect x="0" y="0" width="100%" height="100%" rx="15"/></svg>
-
-            <div class="demo__card-top">
-              <span class="ai-card__label" data-show="ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg>Sugestão da IA</span>
-              <span class="demo__author" data-show="edit" hidden><span class="avatar avatar--sm">CA</span>Editando · base da IA</span>
-              <span class="demo__author" data-show="approved" hidden><span class="avatar avatar--sm">CA</span>Por Carla · sugerido pela IA</span>
-              <span class="demo__visibility" data-show="ai edit">Só você vê</span>
-              <span class="chip chip--success" data-show="approved" hidden><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Publicado</span>
-            </div>
-
-            <div data-show="ai edit approved">
-              <h3 class="ai-card__title">Agachamento livre · Rafael</h3>
-              <div class="demo__values">
-                <span class="demo__old" data-show="ai"><span class="visually-hidden">Antes: </span><span class="data">4×8 · 60<span class="data__unit">kg</span></span></span>
-                <svg class="icon demo__arrow" data-show="ai" aria-hidden="true"><use href="#i-seta"/></svg>
-                <span class="demo__new"><span class="visually-hidden">Carga proposta: </span><span class="data">4×8 · <span data-ai-load>62,5</span><span class="data__unit">kg</span></span></span>
-                <span class="demo__stepper" data-show="edit" hidden>
-                  <button class="icon-btn demo__step-btn" type="button" data-action="dec" aria-label="Diminuir carga em 2,5 kg"><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg></button>
-                  <button class="icon-btn demo__step-btn" type="button" data-action="inc" aria-label="Aumentar carga em 2,5 kg"><svg class="icon" aria-hidden="true"><use href="#i-mais"/></svg></button>
-                </span>
-              </div>
-              <p class="ai-card__reason">Base: 3 últimas sessões com PSE até 6 e técnica marcada como “boa” por você.</p>
-            </div>
-
-            <div class="demo__discarded" data-show="discarded" hidden>
-              <p class="t-strong">Sugestão descartada.</p>
-              <p class="ai-card__reason">Nada foi enviado ao Rafael. A IA considera a sua decisão nas próximas propostas.</p>
-            </div>
-
-            <div class="demo__actions">
-              <button class="btn btn--ai btn--sm" type="button" data-action="apply" data-show="ai">Aplicar sugestão</button>
-              <button class="btn btn--ghost btn--sm" type="button" data-action="edit" data-show="ai"><svg class="icon btn__icon" aria-hidden="true"><use href="#i-editar"/></svg>Editar</button>
-              <button class="btn btn--ghost btn--sm demo__discard" type="button" data-action="discard" data-show="ai">Descartar</button>
-              <button class="btn btn--primary btn--sm" type="button" data-action="publish" data-show="edit" hidden>Publicar treino</button>
-              <button class="btn btn--ghost btn--sm" type="button" data-action="cancel" data-show="edit" hidden>Cancelar</button>
-              <button class="btn btn--ghost btn--sm" type="button" data-action="reset" data-show="approved discarded" hidden>Recomeçar demonstração</button>
-            </div>
-          </div>
-
-          <div class="demo__student">
-            <span class="demo__student-label"><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg>O que o Rafael vê</span>
-            <p class="demo__student-empty" data-show="ai edit discarded">Nada ainda. O aluno só recebe o treino depois da sua aprovação.</p>
-            <p class="demo__student-ok" data-show="approved" hidden>Agachamento livre · <span class="data">4×8 · <span data-ai-load>62,5</span> kg</span> · montado por Carla com apoio da IA</p>
-          </div>
-
-          <p class="visually-hidden" aria-live="polite" data-ai-status></p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== 06 · Benefícios ===================== -->
-    <section class="section benefits" id="beneficios" aria-labelledby="beneficios-title">
-      <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="overline"><span class="overline__index">06</span>Benefícios</p>
-          <h2 class="t-h2" id="beneficios-title">Mais alcance para quem orienta. Mais clareza para quem treina.</h2>
-        </div>
-
-        <div class="tabs" data-tabs>
-          <div class="tabs__list" role="tablist" aria-label="Benefícios por público" data-reveal>
+          <div class="tabs__list" role="tablist" aria-label="Acompanhamento por público" data-reveal>
             <button class="tabs__tab" type="button" role="tab" id="tab-pro" aria-controls="panel-pro" aria-selected="true">Para profissionais</button>
             <button class="tabs__tab" type="button" role="tab" id="tab-aluno" aria-controls="panel-aluno" aria-selected="false" tabindex="-1">Para alunos</button>
           </div>
+        </div>
 
-          <div class="tabs__panel benefits__panel" role="tabpanel" id="panel-pro" aria-labelledby="tab-pro" tabindex="0">
-            <ul class="benefit-grid" role="list">
-              <li class="benefit"><span class="benefit__num data">01</span><h3 class="benefit__title">Menos tempo na planilha</h3><p class="t-body">A proposta de treino chega pronta para revisão. Seu tempo vai para a correção de postura, não para a digitação.</p></li>
-              <li class="benefit"><span class="benefit__num data">02</span><h3 class="benefit__title">Mais alunos, mesmo cuidado</h3><p class="t-body">A sala ao vivo mostra quem precisa de você agora: quem relatou dor, quem está sem treino há 7 dias, quem bateu a meta.</p></li>
-              <li class="benefit"><span class="benefit__num data">03</span><h3 class="benefit__title">Seu método, sua assinatura</h3><p class="t-body">Tudo o que chega ao aluno leva o seu nome. A IA amplia o seu método sem substituir você.</p></li>
-              <li class="benefit"><span class="benefit__num data">04</span><h3 class="benefit__title">Retenção com dados</h3><p class="t-body">Alunos que enxergam a própria evolução têm motivos concretos para continuar. Mostre com números, semana a semana.</p></li>
-            </ul>
-            <figure class="message card" aria-label="Exemplo de mensagem para o profissional">
-              <span class="message__app"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#arco-mark"/></svg>Arco · agora</span>
-              <p class="message__text">Bom dia, Carla. <span class="data">12</span> alunos treinam com você esta semana. Três ainda estão sem treino montado.</p>
-              <span class="message__action">Montar com a IA <svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></span>
-            </figure>
+        <!-- Profissional: painel -->
+        <div class="tabs__panel showcase" role="tabpanel" id="panel-pro" aria-labelledby="tab-pro" tabindex="0">
+          <ul class="showcase__points" role="list">
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-treino"/></svg></span><div><h3 class="point__title">Menos tempo na planilha</h3><p class="point__text">A proposta de treino chega pronta para revisão.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-tempo-real"/></svg></span><div><h3 class="point__title">Mais alunos, mesmo cuidado</h3><p class="point__text">A sala ao vivo mostra quem precisa de você agora.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-vinculo"/></svg></span><div><h3 class="point__title">Seu método, sua assinatura</h3><p class="point__text">Tudo o que chega ao aluno leva o seu nome.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span><div><h3 class="point__title">Retenção com dados</h3><p class="point__text">Quem enxerga a própria evolução tem motivo para continuar.</p></div></li>
+          </ul>
+
+          <div class="showcase__visual surface-light" data-reveal>
+            <div class="browser" role="img" aria-label="Painel do profissional: 12 alunos ativos, 4 treinando agora, 3 sem treino montado e 1 alerta de dor. Sala ao vivo com Rafael na zona 4, Ana em descanso e João pausado após relatar desconforto. Gráfico de carga no agachamento de Rafael: de 50 para 62,5 quilos em 8 semanas, com projeção da IA de 67,5 quilos na semana 11.">
+              <div class="browser__bar"><span class="browser__dots"><i></i><i></i><i></i></span><span class="browser__title">Arco · Painel</span></div>
+              <div class="dash">
+                <div class="dash__head">
+                  <div><p class="dash__hello">Bom dia, Carla.</p><p class="dash__sub"><span class="data">12</span> alunos treinam com você esta semana.</p></div>
+                  <span class="avatar">CA</span>
+                </div>
+
+                <div class="dash__kpis">
+                  <div class="kpi"><span class="kpi__label">Alunos ativos</span><span class="kpi__value data" data-count="12">12</span></div>
+                  <div class="kpi"><span class="kpi__label"><span class="live-dot"></span>Treinando agora</span><span class="kpi__value data" data-count="4">4</span></div>
+                  <div class="kpi kpi--ai"><span class="kpi__label">Sem treino montado</span><span class="kpi__value data" data-count="3">3</span><span class="kpi__action">Montar com a IA</span></div>
+                  <div class="kpi kpi--warn"><span class="kpi__label"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>Alerta de dor</span><span class="kpi__value data" data-count="1">1</span></div>
+                </div>
+
+                <div class="dash__grid">
+                  <div class="dash__panel dash__panel--live">
+                    <p class="dash__title">Sala ao vivo</p>
+                    <div class="live-list">
+                      <div class="live-row">
+                        <span class="avatar avatar--energy">RS</span>
+                        <span><span class="live-row__name">Rafael Souza</span><span class="live-row__status"><span class="live-dot"></span>Agachamento · 3/4</span></span>
+                        <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z4)">Z4 · 162</span>
+                      </div>
+                      <div class="live-row">
+                        <span class="avatar">AL</span>
+                        <span><span class="live-row__name">Ana Lima</span><span class="live-row__status"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg><span>Descanso · <span class="data" data-countdown="45">0:45</span></span></span></span>
+                        <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z2)">Z2 · 118</span>
+                      </div>
+                      <div class="live-row">
+                        <span class="avatar">JP</span>
+                        <span><span class="live-row__name">João Pedro</span><span class="live-row__status live-row__status--warn"><svg class="icon" aria-hidden="true"><use href="#i-pausa"/></svg>Pausado · desconforto</span></span>
+                        <span class="chip chip--zone" style="--zone:var(--arco-color-dataviz-hr-z1)">Z1 · 96</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <figure class="dash__panel chart">
+                    <figcaption class="chart__head">
+                      <span><span class="chart__title">Carga no agachamento</span> <span class="chart__sub">Rafael · kg por semana</span></span>
+                      <span class="chart__legend"><span>Realizado</span><span class="is-ai">Projeção da IA</span></span>
+                    </figcaption>
+                    <svg viewBox="0 0 520 226" aria-hidden="true" focusable="false">
+                      <g class="chart__grid">
+                        <path d="M44 171.11H500M44 133.33H500M44 95.56H500M44 57.78H500M44 20H500"/>
+                      </g>
+                      <g class="chart__axis" text-anchor="end">
+                        <text x="34" y="175">50</text><text x="34" y="137">55</text><text x="34" y="99.5">60</text><text x="34" y="62">65</text><text x="34" y="24">70</text>
+                      </g>
+                      <g class="chart__axis" text-anchor="middle">
+                        <text x="44" y="216">Sem 1</text><text x="180.8" y="216">Sem 4</text><text x="363.2" y="216">Sem 8</text><text x="500" y="216">Sem 11</text>
+                      </g>
+                      <path class="chart__today" d="M363.2 20V190"/>
+                      <path class="chart__area" d="M44 171.11L89.6 152.22L135.2 152.22L180.8 133.33L226.4 114.44L272 114.44L317.6 95.56L363.2 76.67L363.2 190L44 190Z"/>
+                      <path class="chart__line draw" pathLength="1" d="M44 171.11L89.6 152.22L135.2 152.22L180.8 133.33L226.4 114.44L272 114.44L317.6 95.56L363.2 76.67" style="--draw-duration:1400ms"/>
+                      <path class="chart__forecast" d="M363.2 76.67L408.8 57.78L454.4 57.78L500 38.89"/>
+                      <circle class="chart__point" cx="363.2" cy="76.67" r="5"/>
+                      <text class="chart__label" x="351" y="62" text-anchor="end">62,5 kg</text>
+                      <text class="chart__label-sub" x="363.2" y="12" text-anchor="middle">hoje</text>
+                    </svg>
+                  </figure>
+                </div>
+              </div>
+            </div>
           </div>
+        </div>
 
-          <div class="tabs__panel benefits__panel" role="tabpanel" id="panel-aluno" aria-labelledby="tab-aluno" tabindex="0" hidden>
-            <ul class="benefit-grid" role="list">
-              <li class="benefit"><span class="benefit__num data">01</span><h3 class="benefit__title">Sabe exatamente o que fazer</h3><p class="t-body">Treino do dia, séries, cargas e descanso em uma tela legível a 1,5 m, mesmo com o celular no chão.</p></li>
-              <li class="benefit"><span class="benefit__num data">02</span><h3 class="benefit__title">Entende o porquê</h3><p class="t-body">Cada ajuste vem explicado e assinado pelo seu profissional. Nada de mudança sem motivo.</p></li>
-              <li class="benefit"><span class="benefit__num data">03</span><h3 class="benefit__title">É ouvido na hora</h3><p class="t-body">Sentiu dor? Pare a série e avise. O profissional recebe o relato no mesmo instante.</p></li>
-              <li class="benefit"><span class="benefit__num data">04</span><h3 class="benefit__title">Vê a própria evolução</h3><p class="t-body">Número em vez de adjetivo: carga, volume e frequência comparados com as semanas anteriores.</p></li>
-            </ul>
-            <figure class="message card" aria-label="Exemplo de mensagem para o aluno">
-              <span class="message__app"><svg class="mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#arco-mark"/></svg>Arco · agora</span>
-              <p class="message__text">Treino concluído. <span class="data">18</span> séries em <span class="data">42</span> min. No agachamento, você moveu <span class="data">6%</span> mais carga que na semana passada.</p>
-              <span class="message__action">Ver evolução <svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></span>
-            </figure>
+        <!-- Aluno: app -->
+        <div class="tabs__panel showcase" role="tabpanel" id="panel-aluno" aria-labelledby="tab-aluno" tabindex="0" hidden>
+          <ul class="showcase__points" role="list">
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg></span><div><h3 class="point__title">Sabe exatamente o que fazer</h3><p class="point__text">Treino do dia, cargas e descanso em uma tela.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg></span><div><h3 class="point__title">Entende cada ajuste</h3><p class="point__text">Toda mudança vem explicada e assinada pelo profissional.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg></span><div><h3 class="point__title">É ouvido na hora</h3><p class="point__text">Sentiu dor? Um toque e o profissional é avisado.</p></div></li>
+            <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span><div><h3 class="point__title">Vê a própria evolução</h3><p class="point__text">Número em vez de adjetivo, semana a semana.</p></div></li>
+          </ul>
+
+          <div class="showcase__visual showcase__visual--phones surface-light" data-reveal role="img" aria-label="App do aluno em dois celulares. Treino de hoje: Carla preparou 45 minutos de membros inferiores, com agachamento livre 4×8 com 62,5 quilos, afundo búlgaro 3×10 com 12 quilos e cadeira extensora 3×12. Evolução: treino concluído, 18 séries em 42 minutos, 6% mais carga no agachamento que na semana passada.">
+            <div class="phone phone--light">
+              <div class="phone__screen">
+                <span class="phone__island"></span>
+                <div class="app">
+                  <p class="app__over">Hoje</p>
+                  <p class="app__title">Oi, Rafael.</p>
+                  <p class="app__sub">A Carla preparou seu treino de hoje.</p>
+                  <div class="app__card">
+                    <span class="workout__over">Treino B</span>
+                    <span class="app__card-title">Membros inferiores</span>
+                    <span class="app__meta"><span><span class="data">45</span> min</span><span><span class="data">6</span> exercícios</span></span>
+                    <span class="app__cta">Começar treino</span>
+                  </div>
+                  <ol class="app__list" role="list">
+                    <li><span class="app__n data">1</span><span class="app__ex">Agachamento livre</span><span class="data">4×8 · 62,5</span></li>
+                    <li><span class="app__n data">2</span><span class="app__ex">Afundo búlgaro</span><span class="data">3×10 · 12</span></li>
+                    <li><span class="app__n data">3</span><span class="app__ex">Cadeira extensora</span><span class="data">3×12</span></li>
+                  </ol>
+                  <p class="app__note"><span class="avatar avatar--sm">CA</span>Por Carla · montado com apoio da IA</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="phone phone--light phone--offset">
+              <div class="phone__screen">
+                <span class="phone__island"></span>
+                <div class="app">
+                  <p class="app__over">Evolução</p>
+                  <p class="app__done"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg>Treino concluído</p>
+                  <p class="app__stats"><span><span class="data">18</span> séries</span><span><span class="data">42</span> min</span><span>PSE <span class="data">7</span></span></p>
+                  <div class="app__hero">
+                    <span class="app__pct data" data-count="6" data-prefix="+" data-suffix="%">+6%</span>
+                    <span class="app__pct-caption">de carga no agachamento vs. semana passada</span>
+                  </div>
+                  <div class="app__chart">
+                    <span class="app__chart-title">Agachamento · kg</span>
+                    <svg viewBox="0 0 200 84" aria-hidden="true" focusable="false">
+                      <path class="app__grid" d="M0 70H200M0 42H200M0 14H200"/>
+                      <path class="app__area" d="M4 66L30 58L56 58L82 50L108 42L134 42L160 34L186 26L186 84L4 84Z"/>
+                      <path class="app__line draw" pathLength="1" d="M4 66L30 58L56 58L82 50L108 42L134 42L160 34L186 26"/>
+                      <circle class="app__dot" cx="186" cy="26" r="4.5"/>
+                    </svg>
+                    <span class="app__chart-axis"><span>Sem 1</span><span class="data">62,5 kg</span></span>
+                  </div>
+                  <span class="app__pain"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>Sentiu dor? Avise a Carla</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ===================== 07 · Diferenciais ===================== -->
-    <section class="section section--surface differentials" id="diferenciais" aria-labelledby="diferenciais-title">
+    <!-- ===================== 06 · Diferenciais ===================== -->
+    <section class="section differentials" id="diferenciais" aria-labelledby="diferenciais-title">
+      <span class="anchor-alias" id="problema" aria-hidden="true"></span>
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="overline"><span class="overline__index">07</span>Diferenciais</p>
-          <h2 class="t-h2" id="diferenciais-title">Nem performance extrema, nem planilha de gestão. A plataforma da relação.</h2>
-          <p class="t-lead">O mercado se divide em dois mundos que não conversam. O Arco ocupa o espaço entre eles.</p>
+        <div class="section-head section-head--center" data-reveal>
+          <p class="overline">Diferenciais</p>
+          <h2 class="t-h2" id="diferenciais-title">Nem app de performance, nem planilha de gestão.</h2>
+          <p class="t-lead">O Arco ocupa o espaço entre os dois: a relação entre quem orienta e quem treina.</p>
         </div>
 
-        <div class="compare-wrap" data-reveal>
-          <table class="compare">
-            <caption class="visually-hidden">Comparação entre apps de performance, sistemas de gestão e o Arco</caption>
-            <thead>
-              <tr>
-                <td class="compare__corner"></td>
-                <th scope="col">Apps de performance</th>
-                <th scope="col">Sistemas de gestão</th>
-                <th scope="col" class="compare__arco"><svg class="mark compare__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#arco-mark"/></svg>Arco</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">Feito para</th>
-                <td data-label="Apps de performance">O aluno, sozinho</td>
-                <td data-label="Sistemas de gestão">A administração da academia</td>
-                <td data-label="Arco" class="compare__arco">O profissional e o aluno, juntos</td>
-              </tr>
-              <tr>
-                <th scope="row">Papel da IA</th>
-                <td data-label="Apps de performance">Prescreve direto para o aluno</td>
-                <td data-label="Sistemas de gestão">Ausente ou genérica</td>
-                <td data-label="Arco" class="compare__arco">Propõe; o profissional decide</td>
-              </tr>
-              <tr>
-                <th scope="row">Acompanhamento</th>
-                <td data-label="Apps de performance">Depois do treino</td>
-                <td data-label="Sistemas de gestão">Por presença e mensalidade</td>
-                <td data-label="Arco" class="compare__arco">Ao vivo, série a série</td>
-              </tr>
-              <tr>
-                <th scope="row">Leitura no treino</th>
-                <td data-label="Apps de performance">Tela escura com neon</td>
-                <td data-label="Sistemas de gestão">Formulários densos</td>
-                <td data-label="Arco" class="compare__arco">Números legíveis a 1,5 m, contraste AA em todo texto</td>
-              </tr>
-              <tr>
-                <th scope="row">Tom de voz</th>
-                <td data-label="Apps de performance">“Sem desculpas!”</td>
-                <td data-label="Sistemas de gestão">“Usuário inativo há 7 dias.”</td>
-                <td data-label="Arco" class="compare__arco">“Rafael não treina há 7 dias. Mandar uma mensagem?”</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="versus">
+          <article class="versus__col" data-reveal>
+            <h3 class="versus__name">Apps de performance</h3>
+            <dl class="versus__list">
+              <div class="versus__row"><dt>Feito para</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>O aluno, sozinho</dd></div>
+              <div class="versus__row"><dt>Papel da IA</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>Prescreve direto ao aluno</dd></div>
+              <div class="versus__row"><dt>Acompanhamento</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>Depois do treino</dd></div>
+            </dl>
+          </article>
+
+          <article class="versus__col versus__col--arco surface-dark" data-reveal style="--reveal-delay:100ms">
+            <h3 class="versus__name"><svg class="mark versus__mark" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><use href="#arco-mark"/></svg>Arco</h3>
+            <dl class="versus__list">
+              <div class="versus__row"><dt>Feito para</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Profissional e aluno, juntos</dd></div>
+              <div class="versus__row"><dt>Papel da IA</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Propõe; o profissional decide</dd></div>
+              <div class="versus__row"><dt>Acompanhamento</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Ao vivo, série a série</dd></div>
+            </dl>
+          </article>
+
+          <article class="versus__col" data-reveal style="--reveal-delay:200ms">
+            <h3 class="versus__name">Sistemas de gestão</h3>
+            <dl class="versus__list">
+              <div class="versus__row"><dt>Feito para</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>A administração da academia</dd></div>
+              <div class="versus__row"><dt>Papel da IA</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>Ausente ou genérica</dd></div>
+              <div class="versus__row"><dt>Acompanhamento</dt><dd><svg class="icon" aria-hidden="true"><use href="#i-menos"/></svg>Por presença e mensalidade</dd></div>
+            </dl>
+          </article>
         </div>
 
-        <div class="manifesto surface-dark noise" data-reveal>
-          <svg class="manifesto__trail" viewBox="0 0 320 180" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
-            <g fill="none" stroke-linecap="round" stroke="#fff">
-              <path d="M300 170A140 140 0 0 1 160 30" stroke-opacity=".12" stroke-width="2"/>
-              <path d="M270 170A110 110 0 0 1 160 60" stroke-opacity=".2" stroke-width="3"/>
-              <path d="M240 170A80 80 0 0 1 160 90" stroke-opacity=".32" stroke-width="4"/>
-              <path d="M210 170A50 50 0 0 1 160 120" stroke-opacity=".5" stroke-width="6"/>
-            </g>
-            <circle cx="150" cy="122" r="7" class="manifesto__dot"/>
-          </svg>
-          <blockquote class="manifesto__quote">
-            <p>No Arco, o herói é o aluno. A plataforma é o mentor que acompanha: com a precisão de um método e o calor de quem está perto.</p>
-          </blockquote>
+        <div class="facts-band" data-reveal>
+          <p class="facts-band__title">Feito para ser lido no meio da série</p>
           <dl class="facts">
             <div class="fact"><dt class="fact__value data">1,5<span class="data__unit">m</span></dt><dd>distância de leitura dos números no modo execução</dd></div>
-            <div class="fact"><dt class="fact__value data">64<span class="data__unit">px</span></dt><dd>alvos de toque durante o treino, pensados para a mão suada</dd></div>
-            <div class="fact"><dt class="fact__value data">AA</dt><dd>contraste mínimo de todo o texto, segundo a WCAG 2.2</dd></div>
-            <div class="fact"><dt class="fact__value data">0</dt><dd>sugestões da IA enviadas ao aluno sem o aval do profissional</dd></div>
+            <div class="fact"><dt class="fact__value data">64<span class="data__unit">px</span></dt><dd>botões pensados para a mão suada</dd></div>
+            <div class="fact"><dt class="fact__value data">AA</dt><dd>contraste mínimo de todo o texto (WCAG 2.2)</dd></div>
           </dl>
         </div>
       </div>
     </section>
 
-    <!-- ===================== 08 · Perguntas ===================== -->
-    <section class="section faq" id="perguntas" aria-labelledby="perguntas-title">
-      <div class="container faq__grid">
-        <div class="section-head faq__head" data-reveal>
-          <p class="overline"><span class="overline__index">08</span>Perguntas frequentes</p>
-          <h2 class="t-h2" id="perguntas-title">O que costumam nos perguntar.</h2>
-          <p class="t-lead">Ficou alguma dúvida? Na demonstração, mostramos tudo com os dados de um aluno seu.</p>
-        </div>
-
-        <div class="accordion" data-reveal>
-          <details class="accordion__item">
-            <summary class="accordion__summary">A IA substitui o personal trainer?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>Não. A IA trabalha nos bastidores: propõe treinos e ajustes com base nos dados, e o profissional revisa, edita e aprova. O aluno só recebe o que tem o seu aval.</p></div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">O aluno vê as sugestões da IA?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>Só depois que você aprova. Para o aluno, o treino aparece assinado por você, com a nota “montado com apoio da IA” nos detalhes, por transparência.</p></div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">Em que dados a IA se baseia?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>Na avaliação que você cadastrou, no objetivo e na rotina do aluno, no histórico de cargas e na percepção de esforço (PSE) de cada série. Cada sugestão mostra essa base em uma linha.</p></div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">Funciona sem internet na academia?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>Sim. No modo execução, as séries ficam salvas no celular e são enviadas assim que a conexão volta.</p></div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">Integra com relógios e cintas cardíacas?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>Sim. A frequência cardíaca aparece em zonas de Z1 a Z5, com as cores que os principais wearables já usam, sempre acompanhadas do rótulo.</p></div>
-          </details>
-          <details class="accordion__item">
-            <summary class="accordion__summary">O Arco está disponível em espanhol?<span class="accordion__sign" aria-hidden="true"></span></summary>
-            <div class="accordion__body"><p>O Arco nasce em português, no Brasil, com expansão prevista para a América Latina em espanhol.</p></div>
-          </details>
-        </div>
+    <!-- ===================== 07 · Chamada final ===================== -->
+    <section class="cta surface-dark" id="demonstracao" aria-labelledby="demonstracao-title">
+      <div class="cta__bg" aria-hidden="true">
+        <img src="assets/video/raia.webp" alt="" width="1280" height="640" loading="lazy" decoding="async">
       </div>
-    </section>
-
-    <!-- ===================== CTA final ===================== -->
-    <section class="cta surface-dark noise" id="demonstracao" aria-labelledby="demonstracao-title">
-      <svg class="cta__arcs" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
-        <g fill="none" stroke="#fff" stroke-linecap="round">
-          <path d="M556.05 345.15A260 260 0 1 1 300 40" stroke-opacity=".08" stroke-width="2"/>
-          <path d="M496.96 334.73A200 200 0 1 1 300 100" stroke-opacity=".14" stroke-width="4"/>
-          <path d="M437.9 324.3A140 140 0 1 1 300 160" stroke-opacity=".22" stroke-width="7"/>
-        </g>
-        <circle cx="499.2" cy="132.9" r="13" class="cta__dot"/>
-      </svg>
       <div class="container cta__grid">
         <div class="cta__copy" data-reveal>
           <p class="overline">Demonstração</p>
           <h2 class="t-h2" id="demonstracao-title">Seu método merece ir mais longe.</h2>
-          <p class="t-lead">Agende uma demonstração e veja o Arco montar a primeira proposta de treino para um dos seus alunos, com você no comando.</p>
+          <p class="t-lead">Veja o Arco montar a primeira proposta de treino para um aluno seu, com você no comando.</p>
           <ul class="cta__list" role="list">
             <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Com um caso real da sua rotina</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>A IA monta a proposta; você revisa</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Nada vai para o aluno sem a sua aprovação</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Proposta montada ao vivo, revisada por você</li>
           </ul>
         </div>
 
@@ -905,6 +873,37 @@
         </div>
       </div>
     </section>
+
+    <!-- ===================== 08 · Perguntas ===================== -->
+    <section class="section faq" id="perguntas" aria-labelledby="perguntas-title">
+      <div class="container faq__grid">
+        <div class="section-head faq__head" data-reveal>
+          <p class="overline">Perguntas frequentes</p>
+          <h2 class="t-h2" id="perguntas-title">O que costumam nos perguntar.</h2>
+          <p class="t-lead">Na demonstração, mostramos tudo com os dados de um aluno seu.</p>
+          <a class="faq__link" href="#demonstracao">Agendar demonstração<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+
+        <div class="accordion" data-reveal>
+          <details class="accordion__item">
+            <summary class="accordion__summary">A IA substitui o personal trainer?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>Não. A IA propõe; o profissional revisa, ajusta e aprova. O aluno só recebe o que tem o seu aval, assinado por você, com a nota “montado com apoio da IA” nos detalhes.</p></div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">Em que dados a IA se baseia?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>Na avaliação, no objetivo e na rotina do aluno, no histórico de cargas e na percepção de esforço (PSE) de cada série. Cada sugestão mostra essa base em uma linha.</p></div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">Funciona sem internet na academia?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>Sim. No modo execução, as séries ficam salvas no celular e são enviadas assim que a conexão volta.</p></div>
+          </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">O Arco está disponível em espanhol?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>O Arco nasce em português, no Brasil, com expansão prevista para a América Latina em espanhol.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- ===================== Rodapé ===================== -->
@@ -915,7 +914,7 @@
           <a class="logo logo--inverse" href="#topo" aria-label="Arco, voltar ao início">
             <svg viewBox="0 0 160 48" aria-hidden="true" focusable="false"><use href="#arco-mark" width="48" height="48"/><text class="wm" x="58" y="39">arco</text></svg>
           </a>
-          <p>Treino guiado por profissionais e IA. A IA propõe, você decide, seu aluno evolui.</p>
+          <p>Treino guiado por profissionais e IA, para personal trainers, treinadores e os alunos que treinam com eles.</p>
         </div>
         <nav class="footer__col" aria-label="Plataforma">
           <h2 class="footer__title">Plataforma</h2>
@@ -929,14 +928,16 @@
         <nav class="footer__col" aria-label="Para quem">
           <h2 class="footer__title">Para quem</h2>
           <ul role="list">
-            <li><a href="#beneficios">Profissionais</a></li>
-            <li><a href="#beneficios">Alunos</a></li>
+            <li><a href="#beneficios" data-open-tab="tab-pro">Profissionais</a></li>
+            <li><a href="#beneficios" data-open-tab="tab-aluno">Alunos</a></li>
             <li><a href="#diferenciais">Diferenciais</a></li>
             <li><a href="#perguntas">Perguntas frequentes</a></li>
           </ul>
         </nav>
         <div class="footer__col">
           <h2 class="footer__title">Fale com a gente</h2>
+          <!-- TODO: adicionar e-mail, telefone e redes oficiais quando estiverem definidos (não publicar contatos provisórios) -->
+          <p class="footer__text">Mostramos o Arco com o caso de um aluno seu.</p>
           <a class="btn btn--ghost" href="#demonstracao">Agendar demonstração</a>
         </div>
       </div>

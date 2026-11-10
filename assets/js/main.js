@@ -16,10 +16,17 @@
 
   function $(selector, scope) { return (scope || document).querySelector(selector); }
   function $$(selector, scope) { return Array.prototype.slice.call((scope || document).querySelectorAll(selector)); }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
 
   function onChange(mq, handler) {
     if (mq.addEventListener) mq.addEventListener('change', handler);
     else if (mq.addListener) mq.addListener(handler);
+  }
+
+  /* Executa depois do carregamento da página (para não competir com o poster e as fontes) */
+  function afterLoad(fn) {
+    if (document.readyState === 'complete') fn();
+    else window.addEventListener('load', fn, { once: true });
   }
 
   /* ---- Tema claro/escuro (segue o sistema até o usuário escolher) ---- */
@@ -132,6 +139,217 @@
     items.forEach(function (el) { observer.observe(el); });
   }
 
+  /* ---- Vídeos: carregam perto da tela, tocam só quando visíveis, sempre com pausa ----
+     Sem JS, com "reduzir movimento" ou com economia de dados, fica o poster. */
+  function initMedia() {
+    var boxes = $$('[data-media]');
+    if (!boxes.length) return;
+    var mobile = window.matchMedia('(max-width: 767.98px)');
+    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    var saveData = !!(connection && connection.saveData);
+    var autoplay = !reduceMotion.matches && !saveData;
+    var items = [];
+
+    function sourceFor(item) {
+      return (mobile.matches && item.video.getAttribute('data-src-mobile')) || item.video.getAttribute('data-src');
+    }
+
+    function load(item) {
+      var base = sourceFor(item);
+      if (!base || item.src === base) return;
+      var video = item.video;
+      item.src = base;
+      while (video.firstChild) video.removeChild(video.firstChild);
+      [['webm', 'video/webm'], ['mp4', 'video/mp4']].forEach(function (format) {
+        var source = document.createElement('source');
+        source.src = base + '.' + format[0];
+        source.type = format[1];
+        video.appendChild(source);
+      });
+      video.preload = 'auto';
+      video.load();
+    }
+
+    function render(item) {
+      if (!item.toggle) return;
+      var playing = !item.paused;
+      item.toggle.setAttribute('data-state', playing ? 'playing' : 'paused');
+      item.toggle.setAttribute('aria-label', playing ? 'Pausar vídeo' : 'Reproduzir vídeo');
+    }
+
+    function play(item) {
+      var attempt = item.video.play();
+      if (attempt && typeof attempt.catch === 'function') {
+        attempt.catch(function (error) {
+          // AbortError = play() interrompido por pause() ou nova carga (rolagem rápida).
+          // Não é bloqueio do navegador: o vídeo volta a tocar quando reaparecer.
+          if (error && error.name === 'AbortError') return;
+          // Autoplay bloqueado (ex.: modo de economia de energia): o botão passa a oferecer "Reproduzir"
+          item.paused = true;
+          render(item);
+        });
+      }
+    }
+
+    function sync(item) {
+      if (item.visible && !item.paused && !document.hidden) { load(item); play(item); }
+      else if (!item.video.paused) item.video.pause();
+    }
+
+    boxes.forEach(function (box) {
+      var video = $('video', box);
+      if (!video) return;
+      var toggle = $('[data-media-toggle]', box) ||
+        (video.id ? document.querySelector('[data-media-toggle][aria-controls="' + video.id + '"]') : null);
+      var item = { box: box, video: video, toggle: toggle, src: null, visible: false, paused: !autoplay };
+      items.push(item);
+
+      video.muted = true; // o autoplay em linha exige vídeo mudo (iOS)
+      video.addEventListener('playing', function () { box.classList.add('is-ready'); });
+
+      if (toggle) {
+        toggle.hidden = false;
+        toggle.addEventListener('click', function () {
+          item.paused = !item.paused;
+          if (item.paused) video.pause();
+          else { item.visible = true; load(item); play(item); }
+          render(item);
+        });
+      }
+      render(item);
+    });
+
+    if (!items.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (item) { item.visible = true; sync(item); });
+      return;
+    }
+
+    afterLoad(function () {
+      // Perto da tela: começa a baixar para já estar pronto quando aparecer
+      var near = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var item = items.filter(function (i) { return i.box === entry.target; })[0];
+          if (entry.isIntersecting && item && !item.paused) { load(item); near.unobserve(entry.target); }
+        });
+      }, { rootMargin: '400px 0px' });
+
+      // Visível: toca; fora da tela: pausa (economiza bateria e processamento)
+      var seen = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var item = items.filter(function (i) { return i.box === entry.target; })[0];
+          if (!item) return;
+          item.visible = entry.isIntersecting;
+          sync(item);
+        });
+      }, { threshold: 0.2 });
+
+      items.forEach(function (item) { near.observe(item.box); seen.observe(item.box); });
+    });
+
+    document.addEventListener('visibilitychange', function () { items.forEach(sync); });
+
+    onChange(mobile, function () {
+      items.forEach(function (item) {
+        if (!item.src || !item.video.getAttribute('data-src-mobile')) return;
+        item.src = null;
+        load(item);
+        sync(item);
+      });
+    });
+
+    onChange(reduceMotion, function () {
+      if (!reduceMotion.matches) return;
+      items.forEach(function (item) { item.paused = true; item.video.pause(); render(item); });
+    });
+  }
+
+  /* ---- Números que contam até o valor final ao aparecer ---- */
+  function initCounters() {
+    var els = $$('[data-count]');
+    if (!els.length || reduceMotion.matches || !('IntersectionObserver' in window)) return;
+
+    function format(el, value) {
+      var decimals = Number(el.getAttribute('data-decimals')) || 0;
+      var text = decimals ? value.toFixed(decimals).replace('.', ',') : String(Math.round(value));
+      return (el.getAttribute('data-prefix') || '') + text + (el.getAttribute('data-suffix') || '');
+    }
+
+    function animate(el) {
+      var target = Number(el.getAttribute('data-count')) || 0;
+      var duration = 900;
+      var start = null;
+      function frame(now) {
+        if (start === null) start = now;
+        var t = Math.min(1, (now - start) / duration);
+        el.textContent = format(el, target * (1 - Math.pow(1 - t, 3)));
+        if (t < 1) window.requestAnimationFrame(frame);
+      }
+      window.requestAnimationFrame(frame);
+    }
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        observer.unobserve(entry.target);
+        animate(entry.target);
+      });
+    }, { threshold: 0.6 });
+
+    els.forEach(function (el) {
+      el.textContent = format(el, 0);
+      observer.observe(el);
+    });
+  }
+
+  /* ---- Indicadores ao vivo: descanso em contagem regressiva e frequência cardíaca ----
+     Só mudam enquanto visíveis; com "reduzir movimento", ficam parados. */
+  function initTickers() {
+    var countdowns = $$('[data-countdown]').map(function (el) {
+      var start = Number(el.getAttribute('data-countdown')) || 45;
+      return { el: el, start: start, value: start, visible: false };
+    });
+    var rates = $$('[data-bpm]').map(function (el) {
+      var base = Number(el.getAttribute('data-bpm')) || 160;
+      return { el: el, base: base, value: base, visible: false };
+    });
+    var all = countdowns.concat(rates);
+    if (!all.length || reduceMotion.matches || !('IntersectionObserver' in window)) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        all.forEach(function (item) { if (item.el === entry.target) item.visible = entry.isIntersecting; });
+      });
+    });
+    all.forEach(function (item) { observer.observe(item.el); });
+
+    // O dígito sobe 8 px em 150 ms ao mudar (manual §8.1): nada pisca
+    function tick(el, text) {
+      el.textContent = text;
+      el.classList.remove('is-tick');
+      void el.offsetWidth;
+      el.classList.add('is-tick');
+    }
+
+    window.setInterval(function () {
+      countdowns.forEach(function (item) {
+        if (!item.visible || document.hidden) return;
+        item.value = item.value > 0 ? item.value - 1 : item.start;
+        tick(item.el, Math.floor(item.value / 60) + ':' + pad(item.value % 60));
+      });
+    }, 1000);
+
+    window.setInterval(function () {
+      rates.forEach(function (item) {
+        if (!item.visible || document.hidden) return;
+        var step = (Math.random() < 0.5 ? -1 : 1) * (Math.random() < 0.6 ? 1 : 2);
+        item.value = Math.max(item.base - 3, Math.min(item.base + 3, item.value + step));
+        tick(item.el, String(item.value));
+      });
+    }, 1400);
+  }
+
   /* ---- Cronômetro de descanso do hero (anel esvazia; 3 s finais crescem 4%/s) ---- */
   function initRestTimer() {
     var el = $('[data-rest-timer]');
@@ -141,8 +359,6 @@
     var total = Number(el.getAttribute('data-total')) || 90;
     var remaining = Number(el.getAttribute('data-start')) || total;
     var timer = null;
-
-    function pad(n) { return (n < 10 ? '0' : '') + n; }
 
     function render() {
       output.textContent = pad(Math.floor(remaining / 60)) + ':' + pad(remaining % 60);
@@ -166,48 +382,59 @@
     }).observe(el);
   }
 
-  /* ---- Como funciona: anel de séries acompanha o passo em foco ---- */
+  /* ---- Como funciona: a trilha se preenche com a rolagem e marca o passo em foco ---- */
   function initSteps() {
     var section = $('[data-steps]');
     if (!section) return;
     var steps = $$('[data-step]', section);
-    var segments = $$('[data-ring-seg]', section);
-    var num = $('[data-ring-num]', section);
-    var label = $('[data-ring-label]', section);
-    var aside = $('.steps__aside', section);
-    var active = -1;
+    var nums = steps.map(function (step) { return $('.step__num', step); });
+    if (!nums.length || nums.indexOf(null) !== -1) return;
+    var railTop = 0;
+    var railHeight = 1;
+    var offsets = [];
+    var ticking = false;
 
-    function setActive(index) {
-      if (index === active || index < 0) return;
-      active = index;
-      var last = steps.length - 1;
-      var complete = index === last;
-
-      steps.forEach(function (step, i) {
-        step.classList.toggle('is-active', i === index && !complete);
-        step.classList.toggle('is-done', i < index || complete);
+    function measure() {
+      var box = section.getBoundingClientRect();
+      var first = nums[0].getBoundingClientRect();
+      var last = nums[nums.length - 1].getBoundingClientRect();
+      railTop = first.top + first.height / 2 - box.top;
+      var railBottom = box.bottom - (last.top + last.height / 2);
+      railHeight = Math.max(1, box.height - railTop - railBottom);
+      section.style.setProperty('--rail-top', railTop.toFixed(1) + 'px');
+      section.style.setProperty('--rail-bottom', railBottom.toFixed(1) + 'px');
+      offsets = nums.map(function (num) {
+        var r = num.getBoundingClientRect();
+        return (r.top + r.height / 2 - box.top - railTop) / railHeight;
       });
-
-      segments.forEach(function (seg, i) {
-        var state = i < index || complete ? 'done' : (i === index ? 'current' : 'pending');
-        seg.setAttribute('data-state', state);
-      });
-
-      num.textContent = (index + 1 < 10 ? '0' : '') + (index + 1);
-      label.textContent = $('[data-step-title]', steps[index]).textContent;
-      aside.classList.toggle('is-complete', complete);
     }
 
-    if (!('IntersectionObserver' in window)) { setActive(0); return; }
+    function update() {
+      ticking = false;
+      var box = section.getBoundingClientRect();
+      var line = window.innerHeight * 0.55;
+      var progress = Math.max(0, Math.min(1, (line - (box.top + railTop)) / railHeight));
+      var complete = progress >= 0.999;
+      var active = 0;
+      offsets.forEach(function (offset, i) { if (progress >= offset - 0.001) active = i; });
 
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) setActive(steps.indexOf(entry.target));
+      section.style.setProperty('--rail-progress', progress.toFixed(4));
+      section.classList.toggle('is-complete', complete);
+      steps.forEach(function (step, i) {
+        step.classList.toggle('is-active', i === active && !complete);
+        step.classList.toggle('is-done', i < active || complete);
       });
-    }, { rootMargin: '-45% 0px -45% 0px' });
+    }
 
-    steps.forEach(function (step) { observer.observe(step); });
-    setActive(0);
+    function refresh() { measure(); update(); }
+
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    window.addEventListener('resize', refresh);
+    afterLoad(refresh);
+    if ('ResizeObserver' in window) new ResizeObserver(refresh).observe(section);
+    refresh();
   }
 
   /* ---- Demonstração da autoria: IA (tracejado) → revisão → aprovado (linha) ---- */
@@ -293,7 +520,7 @@
     setState('ai');
   }
 
-  /* ---- Abas (padrão WAI-ARIA, setas/Home/End) ---- */
+  /* ---- Abas (padrão WAI-ARIA, setas/Home/End) + links que abrem uma aba ---- */
   function initTabs() {
     $$('[data-tabs]').forEach(function (container) {
       var tabs = $$('[role="tab"]', container);
@@ -322,6 +549,14 @@
         else if (event.key === 'Home') next = 0;
         else if (event.key === 'End') next = tabs.length - 1;
         if (next !== null) { event.preventDefault(); select(tabs[next], true); }
+      });
+    });
+
+    // Ex.: "Alunos" no rodapé abre a aba "Para alunos" antes de rolar até a seção
+    $$('[data-open-tab]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        var tab = document.getElementById(link.getAttribute('data-open-tab'));
+        if (tab) tab.click();
       });
     });
   }
@@ -397,6 +632,9 @@
   initNav();
   initScrollSpy();
   initReveal();
+  initMedia();
+  initCounters();
+  initTickers();
   initRestTimer();
   initSteps();
   initAiDemo();
