@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Política de Privacidade · Arco</title>
+  <meta name="description" content="Como o Arco coleta, usa e protege os dados de quem visita o site e pede uma demonstração, de acordo com a LGPD.">
+  <!-- MODELO: revisar com assessoria jurídica e preencher os campos "a definir" antes de divulgar.
+       TODO: depois da revisão, trocar "noindex, follow" por "index, follow" e incluir esta página no sitemap.xml. -->
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#F5F8F9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1719" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://arcosite.vercel.app/politica-de-privacidade.html">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- build:css -->
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <!-- /build:css -->
+
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('arco-theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <!-- build:js -->
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <!-- /build:js -->
+</head>
+
+<body id="topo">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="arco-mark" viewBox="0 0 48 48">
+        <path d="M40.05 26.83L39.86 27.84L39.62 28.84L39.31 29.83L38.94 30.79L38.52 31.74L38.03 32.65L37.49 33.54L36.89 34.39L36.23 35.21L35.53 35.99L34.78 36.72L33.98 37.40L33.13 38.04L32.25 38.62L31.33 39.15L30.38 39.61L29.40 40.02L28.39 40.37L27.36 40.66L26.31 40.88L25.24 41.03L24.17 41.12L23.09 41.14L22.00 41.09L20.92 40.97L19.85 40.79L18.79 40.53L17.74 40.21L16.71 39.83L15.71 39.38L14.73 38.86L13.79 38.29L12.88 37.65L12.01 36.96L11.19 36.21L10.41 35.40L9.68 34.55L9.01 33.66L8.39 32.71L7.83 31.73L7.33 30.72L6.89 29.67L6.52 28.59L6.22 27.49L5.99 26.37L5.83 25.24L5.74 24.09L5.72 22.94L5.78 21.78L5.91 20.63L6.11 19.48L6.38 18.35L6.73 17.23L7.14 16.14L7.63 15.07L8.18 14.03L8.80 13.03L9.49 12.06L10.23 11.13L11.03 10.26L11.89 9.43L12.81 8.65L13.77 7.94L14.78 7.28L15.82 6.69L16.91 6.16L18.03 5.70L19.19 5.31L20.36 5.00L21.56 4.76L22.78 4.59L24.00 4.50A4.50 4.50 0 0 1 24.00 13.50L23.34 13.47L22.67 13.48L22.00 13.54L21.33 13.63L20.67 13.78L20.01 13.96L19.36 14.18L18.73 14.45L18.11 14.76L17.51 15.11L16.93 15.50L16.38 15.92L15.85 16.38L15.35 16.88L14.88 17.41L14.44 17.97L14.03 18.56L13.67 19.18L13.34 19.82L13.05 20.49L12.80 21.17L12.60 21.88L12.44 22.59L12.33 23.32L12.26 24.06L12.24 24.80L12.27 25.54L12.34 26.29L12.46 27.03L12.63 27.77L12.85 28.49L13.11 29.21L13.42 29.91L13.77 30.59L14.17 31.24L14.61 31.88L15.09 32.49L15.61 33.06L16.17 33.61L16.77 34.12L17.39 34.59L18.05 35.03L18.74 35.42L19.45 35.77L20.19 36.08L20.95 36.34L21.72 36.55L22.51 36.71L23.32 36.82L24.12 36.88L24.94 36.89L25.75 36.85L26.57 36.75L27.38 36.61L28.18 36.41L28.97 36.16L29.74 35.86L30.50 35.51L31.23 35.11L31.94 34.66L32.62 34.17L33.27 33.64L33.88 33.06L34.46 32.44L35.01 31.79L35.50 31.10L35.96 30.37L36.37 29.62L36.73 28.84L37.04 28.04L37.29 27.22L37.49 26.38A1.30 1.30 0 0 1 40.05 26.83Z" style="fill:var(--mark-arc, currentColor)"/>
+        <circle cx="35.49" cy="14.36" r="4.5" style="fill:var(--mark-dot, currentColor)"/>
+      </symbol>
+      <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+      <symbol id="i-lua" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1z"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header site-header--simple" data-header>
+    <div class="container site-header__inner">
+      <a class="logo" href="./" aria-label="Arco, página inicial">
+        <svg viewBox="0 0 160 48" aria-hidden="true" focusable="false"><use href="#arco-mark" width="48" height="48"/><text class="wm" x="58" y="39">arco</text></svg>
+      </a>
+      <div class="site-header__actions">
+        <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Tema escuro">
+          <svg class="icon theme-toggle__moon" aria-hidden="true"><use href="#i-lua"/></svg>
+          <svg class="icon theme-toggle__sun" aria-hidden="true"><use href="#i-sol"/></svg>
+        </button>
+        <a class="btn btn--ghost btn--sm" href="./">Voltar ao site</a>
+      </div>
+    </div>
+    <span class="scroll-progress" data-progress aria-hidden="true"></span>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <article class="section legal" aria-labelledby="legal-title">
+      <div class="container legal__grid">
+        <header class="legal__head">
+          <p class="overline">LGPD</p>
+          <h1 class="t-h2" id="legal-title">Política de Privacidade</h1>
+          <p class="t-lead">Como tratamos os dados de quem visita este site e pede uma demonstração do Arco.</p>
+          <p class="legal__date">Última atualização: <time datetime="2026-11-11">11 de novembro de 2026</time></p>
+        </header>
+
+        <nav class="legal__toc" aria-label="Nesta página">
+          <p class="legal__toc-title">Nesta página</p>
+          <ol role="list">
+            <li><a href="#resumo">Em resumo</a></li>
+            <li><a href="#quem-somos">Quem somos</a></li>
+            <li><a href="#dados">Que dados coletamos</a></li>
+            <li><a href="#finalidades">Para que usamos</a></li>
+            <li><a href="#compartilhamento">Com quem compartilhamos</a></li>
+            <li><a href="#transferencia">Transferência internacional</a></li>
+            <li><a href="#retencao">Por quanto tempo guardamos</a></li>
+            <li><a href="#direitos">Seus direitos</a></li>
+            <li><a href="#contato">Como falar com a gente</a></li>
+            <li><a href="#cookies">Cookies e medição</a></li>
+            <li><a href="#seguranca">Segurança</a></li>
+            <li><a href="#menores">Crianças e adolescentes</a></li>
+            <li><a href="#mudancas">Mudanças nesta política</a></li>
+          </ol>
+        </nav>
+
+        <div class="prose">
+          <section class="legal__summary" id="resumo" aria-labelledby="resumo-title">
+            <h2 id="resumo-title">Em resumo</h2>
+            <ul role="list">
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Coletamos só o que você informa no formulário para combinar a demonstração.</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Não vendemos seus dados nem os usamos para publicidade de terceiros.</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>A medição de audiência só é ativada se você aceitar, e você pode mudar de ideia quando quiser.</li>
+              <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Você pode pedir acesso, correção ou exclusão dos seus dados a qualquer momento.</li>
+            </ul>
+          </section>
+
+          <section id="quem-somos" aria-labelledby="quem-somos-title">
+            <h2 id="quem-somos-title">1. Quem somos</h2>
+            <p>Este site (https://arcosite.vercel.app) é mantido por <mark class="todo">[a definir: razão social]</mark>, inscrita no CNPJ sob o nº <mark class="todo">[a definir]</mark>, com sede em <mark class="todo">[a definir: endereço completo]</mark> (“Arco” ou “nós”).</p>
+            <p>Somos os controladores dos dados pessoais tratados neste site, nos termos da Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018, a LGPD).</p>
+            <p>Esta política vale para o site e para os pedidos de demonstração feitos por ele. O aplicativo Arco, usado por profissionais e alunos, tem termos de uso e política de privacidade próprios: <mark class="todo">[a definir: link]</mark>.</p>
+          </section>
+
+          <section id="dados" aria-labelledby="dados-title">
+            <h2 id="dados-title">2. Que dados coletamos</h2>
+            <div class="table-wrap" role="region" aria-labelledby="dados-title" tabindex="0">
+              <table>
+                <thead><tr><th scope="col">Quando</th><th scope="col">Quais dados</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Você pede uma demonstração</th><td>Nome, e-mail, telefone (opcional), perfil profissional, quantos alunos você atende e a data e hora em que você concordou com esta política. No pedido rápido do topo da página, só o e-mail.</td></tr>
+                  <tr><th scope="row">Você envia qualquer formulário</th><td>A página de envio e, se você chegou por um link de campanha, os parâmetros dessa campanha (utm_source, utm_medium, utm_campaign, utm_content e utm_term).</td></tr>
+                  <tr><th scope="row">Você navega pelo site</th><td>Endereço IP, tipo de navegador e de aparelho, data e hora de acesso, registrados pelo provedor de hospedagem para segurança e funcionamento do site.</td></tr>
+                  <tr><th scope="row">Você aceita a medição de audiência</th><td>Páginas vistas e interações com o site: cliques nos botões de demonstração e de contato, abertura de abas e de perguntas frequentes, início e envio do formulário. Esses registros não incluem nome, e-mail ou telefone.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Não pedimos dados sensíveis, como informações de saúde. Por favor, não os escreva nos campos do formulário.</p>
+          </section>
+
+          <section id="finalidades" aria-labelledby="finalidades-title">
+            <h2 id="finalidades-title">3. Para que usamos e com qual base legal</h2>
+            <div class="table-wrap" role="region" aria-labelledby="finalidades-title" tabindex="0">
+              <table>
+                <thead><tr><th scope="col">Finalidade</th><th scope="col">Base legal (art. 7º da LGPD)</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Responder ao seu pedido e combinar a demonstração</th><td>Procedimentos preliminares relacionados a contrato, a pedido do titular (inciso V)</td></tr>
+                  <tr><th scope="row">Guardar o registro do pedido e da sua concordância</th><td>Cumprimento de obrigação legal e exercício regular de direitos (incisos II e VI)</td></tr>
+                  <tr><th scope="row">Saber por qual campanha você chegou</th><td>Legítimo interesse (inciso IX), com o mínimo de dados</td></tr>
+                  <tr><th scope="row">Medir a audiência e melhorar o site</th><td>Consentimento (inciso I), que você pode retirar a qualquer momento</td></tr>
+                  <tr><th scope="row">Proteger o site contra spam, fraude e ataques</th><td>Legítimo interesse (inciso IX)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Não vendemos seus dados, não os usamos para publicidade de terceiros e não enviamos ofertas sem o seu pedido.</p>
+          </section>
+
+          <section id="compartilhamento" aria-labelledby="compartilhamento-title">
+            <h2 id="compartilhamento-title">4. Com quem compartilhamos</h2>
+            <p>Usamos fornecedores (operadores) que tratam dados em nosso nome, só para as finalidades acima:</p>
+            <ul>
+              <li><strong>Hospedagem do site:</strong> Vercel Inc. (Estados Unidos).</li>
+              <li><strong>Recebimento dos formulários:</strong> <mark class="todo">[a definir: Formspree, Basin ou serviço próprio]</mark>.</li>
+              <li><strong>Medição de audiência, só com o seu consentimento:</strong> <mark class="todo">[a definir: Plausible Analytics ou Google Analytics]</mark>.</li>
+              <li><strong>E-mail e agenda usados para combinar a demonstração:</strong> <mark class="todo">[a definir]</mark>.</li>
+            </ul>
+            <p>Também podemos compartilhar dados quando uma lei ou uma ordem de autoridade competente exigir.</p>
+          </section>
+
+          <section id="transferencia" aria-labelledby="transferencia-title">
+            <h2 id="transferencia-title">5. Transferência internacional</h2>
+            <p>Alguns desses fornecedores guardam dados fora do Brasil, por exemplo nos Estados Unidos. Nesses casos, a transferência segue o art. 33 da LGPD, com <mark class="todo">[a definir: cláusulas-padrão contratuais aprovadas pela ANPD ou outro mecanismo previsto em lei]</mark>.</p>
+          </section>
+
+          <section id="retencao" aria-labelledby="retencao-title">
+            <h2 id="retencao-title">6. Por quanto tempo guardamos</h2>
+            <ul>
+              <li><strong>Pedidos de demonstração:</strong> <mark class="todo">[a definir: por exemplo, até 12 meses após o último contato]</mark> ou até você pedir a exclusão, o que vier primeiro, salvo quando a lei exigir guarda por mais tempo.</li>
+              <li><strong>Registros de acesso ao site:</strong> pelo menos 6 meses, como exige o Marco Civil da Internet (Lei nº 12.965/2014, art. 15).</li>
+              <li><strong>Medição de audiência:</strong> <mark class="todo">[a definir conforme o provedor escolhido]</mark>. Relatórios agregados, que não identificam ninguém, podem ser mantidos por mais tempo.</li>
+            </ul>
+          </section>
+
+          <section id="direitos" aria-labelledby="direitos-title">
+            <h2 id="direitos-title">7. Seus direitos</h2>
+            <p>Pelo art. 18 da LGPD, você pode pedir, a qualquer momento:</p>
+            <ul>
+              <li>confirmação de que tratamos dados seus e acesso a eles;</li>
+              <li>correção de dados incompletos, inexatos ou desatualizados;</li>
+              <li>anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desacordo com a lei;</li>
+              <li>portabilidade dos dados a outro fornecedor;</li>
+              <li>eliminação dos dados tratados com o seu consentimento;</li>
+              <li>informação sobre com quem compartilhamos seus dados;</li>
+              <li>informação sobre a possibilidade de não consentir e o que acontece se você não consentir;</li>
+              <li>revogação do consentimento;</li>
+              <li>oposição a um tratamento feito com outra base legal, se ele descumprir a LGPD.</li>
+            </ul>
+            <p>Você também pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD), em <a href="https://www.gov.br/anpd">gov.br/anpd</a>.</p>
+          </section>
+
+          <section id="contato" aria-labelledby="contato-title">
+            <h2 id="contato-title">8. Como falar com a gente</h2>
+            <p>Para exercer seus direitos ou tirar dúvidas sobre esta política, escreva para o nosso encarregado pelo tratamento de dados: <mark class="todo">[a definir: nome]</mark>, no e-mail <mark class="todo">[a definir: e-mail do encarregado]</mark>.</p>
+            <p>Respondemos em até 15 dias, como prevê o art. 19 da LGPD. Para proteger você, podemos pedir uma confirmação de identidade antes de atender ao pedido.</p>
+          </section>
+
+          <section id="cookies" aria-labelledby="cookies-title">
+            <h2 id="cookies-title">9. Cookies e medição</h2>
+            <p>O site não usa cookies de publicidade. Ele guarda no seu navegador apenas o que precisa para funcionar:</p>
+            <div class="table-wrap" role="region" aria-label="Itens guardados no navegador" tabindex="0">
+              <table>
+                <thead><tr><th scope="col">Item</th><th scope="col">Para quê</th><th scope="col">Por quanto tempo</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row"><code>arco-theme</code></th><td>Lembrar se você escolheu o tema claro ou o escuro</td><td>Até você limpar os dados do navegador</td></tr>
+                  <tr><th scope="row"><code>arco-consent</code></th><td>Lembrar a sua escolha sobre a medição de audiência</td><td>12 meses; depois, perguntamos de novo</td></tr>
+                  <tr><th scope="row"><code>arco-utm</code></th><td>Lembrar por qual campanha você chegou, para enviar junto com o formulário</td><td>Até você fechar a aba</td></tr>
+                  <tr><th scope="row">Cookies do provedor de medição</th><td>Medir a audiência, só se você aceitar</td><td><mark class="todo">[a definir conforme o provedor]</mark></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p data-analytics-off>No momento, o site não usa nenhuma ferramenta de medição de audiência.</p>
+            <p data-analytics-on hidden>A medição de audiência só é carregada se você escolher “Aceitar” no aviso de privacidade. Se recusar, nada é medido. Você pode mudar a sua escolha quando quiser: <button class="link-btn" type="button" data-consent-open>rever preferências de privacidade</button>.</p>
+          </section>
+
+          <section id="seguranca" aria-labelledby="seguranca-title">
+            <h2 id="seguranca-title">10. Segurança</h2>
+            <p>O site usa conexão criptografada (HTTPS), e o acesso aos pedidos recebidos é restrito à equipe que agenda as demonstrações. Nenhum sistema é totalmente seguro: se houver um incidente que possa trazer risco ou dano relevante a você, avisaremos você e a ANPD, como prevê o art. 48 da LGPD.</p>
+          </section>
+
+          <section id="menores" aria-labelledby="menores-title">
+            <h2 id="menores-title">11. Crianças e adolescentes</h2>
+            <p>O pedido de demonstração é destinado a profissionais maiores de 18 anos. Não coletamos, de propósito, dados de crianças e adolescentes por este site.</p>
+          </section>
+
+          <section id="mudancas" aria-labelledby="mudancas-title">
+            <h2 id="mudancas-title">12. Mudanças nesta política</h2>
+            <p>Podemos atualizar esta política quando o site ou a lei mudarem. A data no topo mostra a versão em vigor, e mudanças importantes serão destacadas nesta página.</p>
+          </section>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <footer class="site-footer site-footer--simple surface-dark">
+    <div class="container">
+      <div class="footer__bottom">
+        <p>© <span data-year>2026</span> Arco. Todos os direitos reservados.</p>
+        <ul class="footer__legal" role="list">
+          <li><a href="./">Página inicial</a></li>
+          <li><a href="politica-de-privacidade.html" aria-current="page">Política de privacidade</a></li>
+          <li data-consent-item hidden><button type="button" data-consent-open>Preferências de privacidade</button></li>
+        </ul>
+        <a class="footer__top" href="#topo">Voltar ao topo<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

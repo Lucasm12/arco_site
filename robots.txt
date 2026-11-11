@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-# TODO: trocar arco.example pelo domínio definitivo
-Sitemap: https://arco.example/sitemap.xml
+# Domínio atual. Para trocar: node scripts/trocar-dominio.mjs https://novo-dominio
+Sitemap: https://arcosite.vercel.app/sitemap.xml

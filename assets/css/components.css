@@ -800,6 +800,7 @@
 .field { display: grid; gap: .5rem; }
 .field__label { font-size: .9375rem; font-weight: 700; }
 .field__hint { font-size: .8125rem; color: var(--arco-color-text-tertiary); }
+.field__optional { font-weight: 400; color: var(--arco-color-text-tertiary); }
 
 .field__control {
   width: 100%;
@@ -828,8 +829,62 @@ select.field__control {
 }
 
 .field__error { display: flex; align-items: flex-start; gap: .4rem; font-size: .875rem; font-weight: 700; color: var(--arco-color-error-fg); }
-.field__error .icon { --icon-size: 1.1rem; margin-top: .05rem; }
+.field__error .icon { --icon-size: 1.1rem; margin-top: .05rem; flex: none; }
 .field.is-invalid .field__control { border-width: 2px; border-color: var(--arco-color-error-solid); padding: calc(.75rem - 1px) calc(1rem - 1px); }
+
+/* Caixa de seleção (consentimento): nativa, com aparência da marca; o rótulo inteiro é clicável */
+.check { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .75rem; align-items: start; }
+
+.check__input {
+  appearance: none;
+  display: grid;
+  place-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: .05rem 0 0;
+  border: 2px solid var(--arco-color-border-strong);
+  border-radius: var(--arco-radius-sm);
+  background: var(--arco-color-bg-surface);
+  cursor: pointer;
+  transition: background-color var(--arco-duration-fast) var(--arco-ease-standard), border-color var(--arco-duration-fast) var(--arco-ease-standard);
+}
+
+.check__input::before {
+  content: "";
+  width: .8rem;
+  height: .8rem;
+  background: var(--arco-color-action-primary-fg);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+  transform: scale(0);
+  transition: transform var(--arco-duration-fast) var(--arco-ease-standard);
+}
+
+.check__input:checked { background: var(--arco-color-action-primary-bg); border-color: var(--arco-color-action-primary-bg); }
+.check__input:checked::before { transform: scale(1); }
+.check__input:hover { border-color: var(--arco-color-text-secondary); }
+.check__input:checked:hover { border-color: var(--arco-color-action-primary-bg-hover); background: var(--arco-color-action-primary-bg-hover); }
+.check__label { font-size: .9375rem; line-height: 1.45; color: var(--arco-color-text-secondary); cursor: pointer; text-wrap: pretty; }
+.check__label a { color: var(--arco-color-text-link); font-weight: 700; }
+.field.is-invalid .check__input { border-color: var(--arco-color-error-solid); }
+
+/* Antispam (honeypot): fora da tela, mas presente no formulário (robôs ignoram display: none) */
+.hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+/* Envio em andamento: o rótulo vira "Enviando…" e um anel gira ao lado */
+.btn__spinner {
+  display: none;
+  width: 1.1em;
+  height: 1.1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+.btn.is-busy { cursor: progress; }
+.btn.is-busy .btn__spinner { display: inline-block; }
+
+@keyframes spin { to { transform: rotate(1turn); } }
 
 /* ---- Abas (indicador em pílula) ---- */
 .tabs__list {
@@ -921,12 +976,45 @@ select.field__control {
   .accordion__item[open]::details-content { height: auto; }
 }
 
+/* ---- Aviso de privacidade (medição só com consentimento) ----
+   Não bloqueia a página; "Aceitar" e "Recusar" têm o mesmo peso visual (orientação da ANPD). */
+.consent {
+  position: fixed;
+  right: var(--site-gutter);
+  bottom: max(var(--site-gutter), env(safe-area-inset-bottom));
+  left: var(--site-gutter);
+  z-index: 60;
+  display: grid;
+  gap: 1rem;
+  max-width: 34rem;
+  padding: 1.25rem;
+  border: 1px solid var(--arco-color-border-default);
+  border-radius: var(--arco-radius-lg);
+  background: var(--arco-color-bg-surface);
+  box-shadow: var(--arco-shadow-4);
+  animation: consent-in var(--arco-duration-moderate) var(--arco-ease-enter);
+}
+
+.consent__text { font-size: .9375rem; line-height: 1.5; color: var(--arco-color-text-secondary); }
+.consent__text strong { color: var(--arco-color-text-primary); }
+.consent__text a { color: var(--arco-color-text-link); font-weight: 700; }
+.consent__actions { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+
+@media (min-width: 640px) {
+  .consent { left: auto; }
+}
+
+@keyframes consent-in { from { opacity: 0; transform: translateY(1rem); } }
+
 /* ---- Movimento reduzido: só o essencial ---- */
 @media (prefers-reduced-motion: reduce) {
   .live-dot::after,
   .ai-card--breathing .ai-card__border rect { animation: none; }
   .live-dot::after { display: none; }
   .media__video { transition: none; }
+  .btn__spinner { animation: none; border-right-color: currentColor; border-style: dotted; }
+  .consent { animation: none; }
+  .check__input, .check__input::before { transition: none; }
   .js .chart__forecast, .js .chart__point, .js .chart__label { opacity: 1; transition: none; }
   .js .chart__area { opacity: .1; transition: none; }
 }

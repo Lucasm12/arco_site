@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Arco · Treino guiado por profissionais e IA</title>
-  <meta name="description" content="Arco é a plataforma de treino guiado que conecta personal trainers e alunos: treinos com apoio da IA, acompanhamento ao vivo e evolução medida em números.">
+  <title>Software para personal trainer com IA · Arco</title>
+  <meta name="description" content="Monte treinos com apoio da IA, aprove cada ajuste e acompanhe seus alunos online, ao vivo. Para personal trainers e assessorias. Agende uma demonstração.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#F5F8F9" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#0D1719" media="(prefers-color-scheme: dark)">
   <meta name="color-scheme" content="light dark">
 
-  <!-- TODO: trocar arco.example pelo domínio definitivo (canonical, Open Graph, sitemap e JSON-LD) -->
-  <link rel="canonical" href="https://arco.example/">
+  <!-- Domínio: endereço publicado hoje. Para trocar pelo definitivo em todos os arquivos: node scripts/trocar-dominio.mjs https://novo-dominio -->
+  <link rel="canonical" href="https://arcosite.vercel.app/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="Arco">
   <meta property="og:title" content="Arco · A IA propõe. Você decide. Seu aluno evolui.">
-  <meta property="og:description" content="Plataforma de treino guiado para personal trainers e alunos: IA com autoria visível, acompanhamento ao vivo e evolução em números.">
-  <meta property="og:url" content="https://arco.example/">
-  <meta property="og:image" content="https://arco.example/assets/img/og-image.png">
+  <meta property="og:description" content="Software para personal trainers e assessorias: a IA propõe o treino, você aprova cada ajuste e acompanha seus alunos ao vivo.">
+  <meta property="og:url" content="https://arcosite.vercel.app/">
+  <meta property="og:image" content="https://arcosite.vercel.app/assets/img/og-image.png">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Logotipo do Arco sobre fundo petróleo, com o título: A IA propõe. Você decide. Seu aluno evolui.">
@@ -31,14 +33,18 @@
   <link rel="preload" as="image" href="assets/video/hero-mobile.webp" type="image/webp" media="(max-width: 767.98px)" fetchpriority="high">
   <link rel="preload" as="image" href="assets/video/hero.webp" type="image/webp" media="(min-width: 768px)" fetchpriority="high">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Barlow+Semi+Condensed:wght@500;600&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap">
+  <!-- Fontes no próprio site (assets/css/fonts.css): pré-carrega só as do topo, título e texto -->
+  <link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin.woff2" as="font" type="font/woff2" crossorigin>
 
+  <!-- No deploy (npm run build), os blocos build:* viram um único arquivo minificado e versionado -->
+  <!-- build:css -->
+  <link rel="stylesheet" href="assets/css/fonts.css">
   <link rel="stylesheet" href="assets/css/tokens.css">
   <link rel="stylesheet" href="assets/css/base.css">
   <link rel="stylesheet" href="assets/css/components.css">
   <link rel="stylesheet" href="assets/css/sections.css">
+  <!-- /build:css -->
 
   <!-- Aplica o tema salvo antes da pintura (evita piscar) e marca JS ativo -->
   <script>
@@ -51,7 +57,10 @@
       } catch (e) {}
     })();
   </script>
+  <!-- build:js -->
+  <script src="assets/js/config.js" defer></script>
   <script src="assets/js/main.js" defer></script>
+  <!-- /build:js -->
 
   <script type="application/ld+json">
   {
@@ -59,27 +68,91 @@
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://arco.example/#org",
+        "@id": "https://arcosite.vercel.app/#org",
         "name": "Arco",
-        "url": "https://arco.example/",
-        "logo": "https://arco.example/assets/img/icon-512.png"
+        "url": "https://arcosite.vercel.app/",
+        "logo": "https://arcosite.vercel.app/assets/img/icon-512.png"
       },
       {
         "@type": "WebSite",
-        "@id": "https://arco.example/#site",
-        "url": "https://arco.example/",
+        "@id": "https://arcosite.vercel.app/#site",
+        "url": "https://arcosite.vercel.app/",
         "name": "Arco",
         "inLanguage": "pt-BR",
-        "publisher": { "@id": "https://arco.example/#org" }
+        "publisher": {
+          "@id": "https://arcosite.vercel.app/#org"
+        }
       },
       {
         "@type": "SoftwareApplication",
+        "@id": "https://arcosite.vercel.app/#app",
         "name": "Arco",
+        "url": "https://arcosite.vercel.app/",
         "applicationCategory": "HealthApplication",
         "operatingSystem": "iOS, Android, Web",
-        "inLanguage": ["pt-BR", "es"],
-        "description": "Plataforma de treino guiado por profissionais e IA: a IA propõe, o profissional decide e o aluno evolui com acompanhamento ao vivo.",
-        "publisher": { "@id": "https://arco.example/#org" }
+        "inLanguage": "pt-BR",
+        "description": "Software para personal trainers e assessorias: a IA propõe o treino, o profissional revisa e aprova, e o aluno evolui com acompanhamento ao vivo.",
+        "audience": {
+          "@type": "BusinessAudience",
+          "audienceType": "Personal trainers, treinadores e assessorias esportivas"
+        },
+        "publisher": {
+          "@id": "https://arcosite.vercel.app/#org"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://arcosite.vercel.app/#perguntas",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "A IA substitui o personal trainer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Não. A IA propõe; o profissional revisa, ajusta e aprova. O aluno só recebe o que tem o seu aval, assinado por você, com a nota “montado com apoio da IA” nos detalhes."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Em que dados a IA se baseia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Na avaliação, no objetivo e na rotina do aluno, no histórico de cargas e na percepção de esforço (PSE) de cada série. Cada sugestão mostra essa base em uma linha."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Dá para acompanhar alunos online, a distância?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. O aluno treina com o app onde estiver, e as séries, o esforço e os relatos de dor chegam ao seu painel enquanto ele treina."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Funciona sem internet na academia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sim. No modo execução, as séries ficam salvas no celular e são enviadas assim que a conexão volta."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "O Arco está disponível em espanhol?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "O Arco nasce em português, no Brasil, com expansão prevista para a América Latina em espanhol."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como funciona a demonstração?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "É uma conversa com a nossa equipe. Você traz o caso de um aluno, sem precisar identificá-lo, e vê a IA montar a primeira proposta de treino ao vivo, com você revisando cada ajuste. Depois, decide se o Arco combina com o seu método, sem compromisso."
+            }
+          }
+        ]
       }
     ]
   }
@@ -173,19 +246,50 @@
 
         <div class="container hero__grid">
           <div class="hero__copy">
-            <p class="overline hero__overline">Plataforma de treino guiado</p>
+            <p class="overline hero__overline">Software para personal trainers e assessorias</p>
             <h1 class="hero__title t-display" id="hero-title">
               <span class="hero__line hero__line--soft">A IA propõe.</span>
               <span class="hero__line">Você decide.</span>
               <span class="hero__line hero__line--brand">Seu aluno evolui<span class="hero__dot">.</span></span>
             </h1>
             <p class="hero__lead">O Arco conecta personal trainers e alunos: treinos com apoio da IA, acompanhamento ao vivo e evolução medida em números.</p>
+            <!-- Pedido rápido: só o e-mail (baixa fricção). O sucesso convida a completar o pedido na seção #demonstracao,
+                 que já chega com o e-mail preenchido. Os dois envios vão para o mesmo endpoint, com "origem" diferente. -->
             <div class="hero__actions">
-              <a class="btn btn--energy btn--lg" href="#demonstracao">
-                Agendar demonstração
-                <svg class="icon btn__icon btn__icon--move" aria-hidden="true"><use href="#i-seta"/></svg>
-              </a>
-              <a class="btn btn--glass btn--lg" href="#como-funciona">Ver como funciona</a>
+              <div class="hero-lead">
+                <form class="hero-form" data-lead-form="hero" novalidate>
+                  <input type="hidden" name="origem" value="hero">
+                  <input type="hidden" name="_subject" value="Pedido rápido de demonstração · Arco">
+                  <label class="hero-form__label" for="hero-email">Seu e-mail profissional</label>
+                  <div class="hero-form__row">
+                    <div class="field hero-form__field">
+                      <input class="field__control" id="hero-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nome@email.com" required aria-describedby="hero-email-erro hero-form-nota" data-msg-required="Informe seu e-mail para enviarmos o convite." data-msg-type="Confira o e-mail: ele precisa ter @ e domínio, como nome@email.com.">
+                      <p class="field__error" id="hero-email-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+                    </div>
+                    <button class="btn btn--energy btn--lg" type="submit"><span class="btn__spinner" aria-hidden="true"></span><span class="btn__label">Agendar demonstração</span><svg class="icon btn__icon btn__icon--move" aria-hidden="true"><use href="#i-seta"/></svg></button>
+                  </div>
+                  <div class="hp" data-hp aria-hidden="true">
+                    <label for="hero-site">Deixe este campo em branco</label>
+                    <input id="hero-site" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+                  </div>
+                  <p class="visually-hidden" role="status" data-form-status></p>
+                  <p class="hero-form__note" id="hero-form-nota">Sem compromisso. Ao enviar, você concorda com a <a href="politica-de-privacidade.html">Política de Privacidade</a>.</p>
+                  <div class="field__error hero-form__fail" data-form-fail hidden>
+                    <svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>
+                    <p><span data-fail-text>Não foi possível enviar agora.</span> <a href="#demonstracao">Use o formulário completo</a></p>
+                  </div>
+                </form>
+                <div class="hero-success" data-form-success tabindex="-1" hidden>
+                  <p class="hero-success__title"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg>Recebido! Vamos escrever para você.</p>
+                  <p class="hero-success__text">Quer adiantar? Conte um pouco do seu trabalho e já preparamos a demonstração com um caso seu.</p>
+                  <a class="btn btn--glass" href="#demonstracao" data-track-local="hero-sucesso" data-focus-target="#lead-nome">Completar meu pedido<svg class="icon btn__icon btn__icon--move" aria-hidden="true"><use href="#i-seta"/></svg></a>
+                </div>
+              </div>
+              <p class="hero__alt">
+                <a class="hero__link" href="#como-funciona">Ver como funciona</a>
+                <!-- Aparece quando o WhatsApp estiver em assets/js/config.js -->
+                <a class="hero__link" data-contact="whatsapp" href="#" target="_blank" rel="noopener" hidden>Prefere conversar? Chame no WhatsApp<span class="visually-hidden"> (abre em nova aba)</span></a>
+              </p>
             </div>
           </div>
 
@@ -290,7 +394,7 @@
 
         <figure class="about__figure" data-reveal style="--reveal-delay:120ms">
           <div class="about__media media" data-media>
-            <img class="media__poster" src="assets/video/relacao.webp" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <img class="media__poster" src="assets/video/relacao.webp" alt="Personal trainer ajoelhado ao lado de uma aluna, orientando o agachamento em um campo esportivo ao ar livre." width="1280" height="720" loading="lazy" decoding="async">
             <video class="media__video" data-src="assets/video/relacao" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
             <div class="about__overlay" aria-hidden="true">
               <div class="ai-card ai-card--breathing about__ai">
@@ -305,7 +409,6 @@
               <svg class="icon media__icon-play" aria-hidden="true"><use href="#i-play"/></svg>
             </button>
           </div>
-          <figcaption class="visually-hidden">Vídeo: um profissional corrige o agachamento de uma aluna em um campo ao ar livre.</figcaption>
         </figure>
       </div>
     </section>
@@ -316,7 +419,7 @@
         <div class="section-head section-head--center" data-reveal>
           <p class="overline">Funcionalidades</p>
           <h2 class="t-h2" id="funcionalidades-title">Tudo o que o acompanhamento pede.</h2>
-          <p class="t-lead">Para o profissional montar e acompanhar. Para o aluno treinar com clareza.</p>
+          <p class="t-lead">Para o profissional montar treinos e acompanhar alunos, na academia ou online. Para o aluno, treinar com clareza.</p>
         </div>
 
         <ul class="feature-grid" role="list">
@@ -341,14 +444,14 @@
             <div class="feature-card__body">
               <span class="icon-badge icon-badge--ai"><svg class="icon" aria-hidden="true"><use href="#i-ia"/></svg></span>
               <h3 class="feature-card__title">Treinos criados com IA</h3>
-              <p class="feature-card__text">Treino, carga e volume propostos a partir do histórico de cada aluno.</p>
+              <p class="feature-card__text">A IA prepara treino, carga e volume a partir do histórico de cada aluno. Você revisa e publica.</p>
             </div>
           </li>
 
           <!-- Tempo real -->
           <li class="feature-card" data-reveal style="--reveal-delay:80ms">
             <div class="feature-card__media media" data-media>
-              <img class="media__poster" src="assets/video/ao-vivo.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <img class="media__poster" src="assets/video/ao-vivo.webp" alt="Treinador acompanha de perto a corrida de uma atleta na pista de um estádio." width="720" height="450" loading="lazy" decoding="async">
               <video class="media__video" data-src="assets/video/ao-vivo" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
               <div class="feature-card__ui ui-live" aria-hidden="true">
                 <div class="ui-live__head"><span class="chip chip--live"><span class="live-dot"></span>Ao vivo</span><span><span class="data">4</span> treinando</span></div>
@@ -371,7 +474,7 @@
             <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-tempo-real"/></svg></span>
               <h3 class="feature-card__title">Acompanhamento em tempo real</h3>
-              <p class="feature-card__text">Veja quem está treinando, em que série e em que zona cardíaca.</p>
+              <p class="feature-card__text">Saiba quem está treinando agora, em que série e em que intensidade, e quem precisa de você.</p>
             </div>
           </li>
 
@@ -395,7 +498,7 @@
             <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span>
               <h3 class="feature-card__title">Evolução em números</h3>
-              <p class="feature-card__text">Carga, volume e frequência semana a semana, com conquistas sem exagero.</p>
+              <p class="feature-card__text">Carga, volume e frequência semana a semana. O aluno vê o progresso e ganha motivo para continuar.</p>
             </div>
           </li>
 
@@ -417,14 +520,14 @@
             <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-intensidade"/></svg></span>
               <h3 class="feature-card__title">Esforço e dor registrados</h3>
-              <p class="feature-card__text">PSE ao fim de cada série. Dor relatada com um toque, alerta na hora.</p>
+              <p class="feature-card__text">O aluno marca o esforço de cada série e avisa se sentiu dor. Você é alertado na hora e ajusta o treino.</p>
             </div>
           </li>
 
           <!-- Dispositivos -->
           <li class="feature-card" data-reveal style="--reveal-delay:80ms">
             <div class="feature-card__media media" data-media>
-              <img class="media__poster" src="assets/video/dispositivos.webp" alt="" width="720" height="450" loading="lazy" decoding="async">
+              <img class="media__poster" src="assets/video/dispositivos.webp" alt="Homem confere o relógio inteligente no pulso durante o treino na academia." width="720" height="450" loading="lazy" decoding="async">
               <video class="media__video" data-src="assets/video/dispositivos" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
               <div class="feature-card__ui ui-hr" aria-hidden="true">
                 <div class="ui-hr__top">
@@ -448,7 +551,8 @@
             <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-relogio"/></svg></span>
               <h3 class="feature-card__title">Integração com dispositivos</h3>
-              <p class="feature-card__text">Relógios e cintas cardíacas, com zonas de Z1 a Z5 nas cores que os wearables já usam.</p>
+              <!-- VALIDAR (produto): quais relógios e cintas são compatíveis hoje. Ver docs/afirmacoes-para-validar.md -->
+              <p class="feature-card__text">Conecte relógios e cintas cardíacas e veja a intensidade de cada aluno por zona, sem pedir print da tela.</p>
             </div>
           </li>
 
@@ -465,7 +569,7 @@
             <div class="feature-card__body">
               <span class="icon-badge"><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg></span>
               <h3 class="feature-card__title">Gestão de alunos</h3>
-              <p class="feature-card__text">Agenda, biblioteca de exercícios, mensagens e relatórios em um só lugar.</p>
+              <p class="feature-card__text">Agenda, exercícios, mensagens e relatórios no mesmo lugar, sem pular entre planilha e WhatsApp.</p>
             </div>
           </li>
         </ul>
@@ -586,7 +690,7 @@
               <div class="step__visual" data-reveal style="--reveal-delay:120ms">
                 <div class="exec-shot">
                   <div class="exec-shot__media media" data-media>
-                    <img class="media__poster" src="assets/video/execucao.webp" alt="" width="960" height="720" loading="lazy" decoding="async">
+                    <img class="media__poster" src="assets/video/execucao.webp" alt="Aluna treina agachamento segurando um kettlebell junto ao peito, em uma academia." width="960" height="720" loading="lazy" decoding="async">
                     <video class="media__video" data-src="assets/video/execucao" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
                     <span class="chip chip--live exec-shot__live" aria-hidden="true"><span class="live-dot"></span>Ao vivo · série <span class="data">4</span> de <span class="data">4</span></span>
                     <button class="media__toggle" type="button" data-media-toggle aria-label="Pausar vídeo" hidden>
@@ -708,12 +812,15 @@
 
         <!-- Aluno: app -->
         <div class="tabs__panel showcase" role="tabpanel" id="panel-aluno" aria-labelledby="tab-aluno" tabindex="0" hidden>
+          <div class="showcase__side">
           <ul class="showcase__points" role="list">
             <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-timer"/></svg></span><div><h3 class="point__title">Sabe exatamente o que fazer</h3><p class="point__text">Treino do dia, cargas e descanso em uma tela.</p></div></li>
             <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg></span><div><h3 class="point__title">Entende cada ajuste</h3><p class="point__text">Toda mudança vem explicada e assinada pelo profissional.</p></div></li>
             <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg></span><div><h3 class="point__title">É ouvido na hora</h3><p class="point__text">Sentiu dor? Um toque e o profissional é avisado.</p></div></li>
             <li class="point"><span class="point__icon"><svg class="icon" aria-hidden="true"><use href="#i-evolucao"/></svg></span><div><h3 class="point__title">Vê a própria evolução</h3><p class="point__text">Número em vez de adjetivo, semana a semana.</p></div></li>
           </ul>
+          <p class="student-cta">Seu treinador ainda não usa o Arco? <a href="https://wa.me/?text=Conheci%20o%20Arco%2C%20uma%20plataforma%20de%20treino%20em%20que%20a%20IA%20prop%C3%B5e%20e%20o%20treinador%20decide.%20Acho%20que%20pode%20ajudar%20no%20nosso%20acompanhamento%3A%20https%3A%2F%2Farcosite.vercel.app%2F%3Futm_source%3Dindicacao%26utm_medium%3Daluno" target="_blank" rel="noopener" data-share data-share-local="aba-alunos">Indique para ele<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg><span class="visually-hidden"> (abre em nova aba)</span></a></p>
+          </div>
 
           <div class="showcase__visual showcase__visual--phones surface-light" data-reveal role="img" aria-label="App do aluno em dois celulares. Treino de hoje: Carla preparou 45 minutos de membros inferiores, com agachamento livre 4×8 com 62,5 quilos, afundo búlgaro 3×10 com 12 quilos e cadeira extensora 3×12. Evolução: treino concluído, 18 séries em 42 minutos, 6% mais carga no agachamento que na semana passada.">
             <div class="phone phone--light">
@@ -809,12 +916,69 @@
         </div>
 
         <div class="facts-band" data-reveal>
-          <p class="facts-band__title">Feito para ser lido no meio da série</p>
+          <!-- VALIDAR (produto): 1,5 m de leitura, ação com 1 toque e contraste AA vêm do manual de marca.
+               Confirmar no app antes de divulgar. Ver docs/afirmacoes-para-validar.md -->
+          <p class="facts-band__title">Feito para ser usado no meio da série</p>
           <dl class="facts">
-            <div class="fact"><dt class="fact__value data">1,5<span class="data__unit">m</span></dt><dd>distância de leitura dos números no modo execução</dd></div>
-            <div class="fact"><dt class="fact__value data">64<span class="data__unit">px</span></dt><dd>botões pensados para a mão suada</dd></div>
-            <div class="fact"><dt class="fact__value data">AA</dt><dd>contraste mínimo de todo o texto (WCAG 2.2)</dd></div>
+            <div class="fact"><dt class="fact__value data">1,5<span class="data__unit">m</span></dt><dd>Carga, série e descanso legíveis de longe, com o celular apoiado no banco.</dd></div>
+            <div class="fact"><dt class="fact__value data">1<span class="data__unit">toque</span></dt><dd>Para concluir a série ou avisar que sentiu dor, mesmo com a mão suada.</dd></div>
+            <div class="fact"><dt class="fact__value data">AA</dt><dd>Contraste alto (padrão WCAG) para ler sob o sol da pista ou na luz baixa da academia.</dd></div>
           </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== 06b · Prova social (RASCUNHO, fora do ar) =====================
+         TODO: publicar só com dados reais, com fonte e autorização por escrito de quem aparece.
+         Para ver o rascunho: abra o site com ?rascunho na URL. Para publicar: apague "hidden" e "data-draft" desta seção,
+         troque todos os TODO e remova os blocos que não tiverem conteúdo real (a seção funciona com só um deles). -->
+    <section class="section section--surface proof" id="resultados" aria-labelledby="resultados-title" data-draft hidden>
+      <div class="container">
+        <div class="section-head section-head--center">
+          <p class="overline">Quem já usa</p>
+          <h2 class="t-h2" id="resultados-title">TODO: título com um resultado real</h2>
+          <p class="t-lead">TODO: uma frase de contexto (quem são os profissionais, desde quando usam).</p>
+        </div>
+
+        <!-- Números: só métricas medidas no produto, com período. Ex. de formato: "1.240 treinos publicados em out/2026". -->
+        <dl class="proof__stats">
+          <div class="proof__stat"><dt class="proof__value data">TODO</dt><dd>TODO: o que o número mede e em que período</dd></div>
+          <div class="proof__stat"><dt class="proof__value data">TODO</dt><dd>TODO: o que o número mede e em que período</dd></div>
+          <div class="proof__stat"><dt class="proof__value data">TODO</dt><dd>TODO: o que o número mede e em que período</dd></div>
+        </dl>
+
+        <!-- Depoimentos: texto literal, aprovado pela pessoa; de preferência com um resultado concreto. -->
+        <ul class="proof__quotes" role="list">
+          <li>
+            <figure class="quote">
+              <blockquote><p>“TODO: depoimento real de um personal trainer.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">?</span><span><span class="quote__name">TODO: nome</span><span class="quote__role">TODO: função · cidade</span></span></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="quote">
+              <blockquote><p>“TODO: depoimento real de um treinador ou assessoria esportiva.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">?</span><span><span class="quote__name">TODO: nome</span><span class="quote__role">TODO: função · cidade</span></span></figcaption>
+            </figure>
+          </li>
+          <li>
+            <figure class="quote">
+              <blockquote><p>“TODO: depoimento real de um aluno, com autorização.”</p></blockquote>
+              <figcaption><span class="avatar" aria-hidden="true">?</span><span><span class="quote__name">TODO: nome</span><span class="quote__role">TODO: aluno de quem · cidade</span></span></figcaption>
+            </figure>
+          </li>
+        </ul>
+
+        <!-- Logos: só de quem autorizou o uso da marca. Use <img> com alt = nome da empresa. -->
+        <div class="proof__logos">
+          <p class="proof__logos-title">TODO: “Assessorias e estúdios que já usam o Arco”</p>
+          <ul role="list">
+            <li class="proof__logo">TODO: logo</li>
+            <li class="proof__logo">TODO: logo</li>
+            <li class="proof__logo">TODO: logo</li>
+            <li class="proof__logo">TODO: logo</li>
+            <li class="proof__logo">TODO: logo</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -829,15 +993,33 @@
           <p class="overline">Demonstração</p>
           <h2 class="t-h2" id="demonstracao-title">Seu método merece ir mais longe.</h2>
           <p class="t-lead">Veja o Arco montar a primeira proposta de treino para um aluno seu, com você no comando.</p>
-          <ul class="cta__list" role="list">
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Com um caso real da sua rotina</li>
-            <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg>Proposta montada ao vivo, revisada por você</li>
-          </ul>
+          <!-- TODO (comercial): quando estiverem definidos, acrescentar o prazo de resposta (ex.: "em até 1 dia útil")
+               e o formato e a duração da conversa (ex.: "30 min, por vídeo"). Não publicar sem confirmar. -->
+          <div class="cta__next">
+            <h3 class="cta__next-title">O que acontece depois de enviar</h3>
+            <ol class="cta__steps" role="list">
+              <li class="cta__step">
+                <span class="cta__step-n data" aria-hidden="true">1</span>
+                <p><strong>Respondemos por e-mail</strong> para combinar o dia e o horário da conversa.</p>
+              </li>
+              <li class="cta__step">
+                <span class="cta__step-n data" aria-hidden="true">2</span>
+                <p><strong>Montamos um treino para o caso de um aluno seu</strong>, sem precisar identificá-lo. A IA faz a proposta ao vivo e você revisa cada ajuste.</p>
+              </li>
+              <li class="cta__step">
+                <span class="cta__step-n data" aria-hidden="true">3</span>
+                <p><strong>Você decide</strong> se o Arco combina com o seu método. Sem compromisso.</p>
+              </li>
+            </ol>
+          </div>
         </div>
 
         <div class="cta__panel" data-reveal style="--reveal-delay:120ms">
-          <!-- Integração: defina data-endpoint com a URL do serviço de formulários. Sem endpoint, o envio é simulado. -->
-          <form class="lead-form" data-lead-form data-endpoint="" novalidate>
+          <!-- Envio: endpoint em assets/js/config.js (formEndpoint). No envio, o script anexa a página, as UTMs da visita
+               e a data/hora do consentimento. "_subject" vira o assunto do e-mail no Formspree. -->
+          <form class="lead-form" data-lead-form="demonstracao" novalidate>
+            <input type="hidden" name="origem" value="chamada-final">
+            <input type="hidden" name="_subject" value="Pedido de demonstração · Arco">
             <div class="field">
               <label class="field__label" for="lead-nome">Nome</label>
               <input class="field__control" id="lead-nome" name="nome" type="text" autocomplete="name" required aria-describedby="lead-nome-erro" data-msg-required="Informe seu nome para sabermos como chamar você.">
@@ -849,6 +1031,12 @@
               <p class="field__error" id="lead-email-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
             </div>
             <div class="field">
+              <label class="field__label" for="lead-telefone">WhatsApp ou telefone <span class="field__optional">(opcional)</span></label>
+              <input class="field__control" id="lead-telefone" name="telefone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(86) 99999-9999" aria-describedby="lead-telefone-dica lead-telefone-erro" data-validate="telefone" data-msg-type="Confira o número: use DDD e telefone, como (86) 99999-9999.">
+              <p class="field__hint" id="lead-telefone-dica">Se preferir combinar a demonstração por mensagem.</p>
+              <p class="field__error" id="lead-telefone-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+            </div>
+            <div class="field">
               <label class="field__label" for="lead-perfil">Você é</label>
               <select class="field__control" id="lead-perfil" name="perfil" required aria-describedby="lead-perfil-erro" data-msg-required="Escolha o perfil mais próximo do seu.">
                 <option value="">Selecione</option>
@@ -856,20 +1044,58 @@
                 <option>Treinador ou assessoria esportiva</option>
                 <option>Professor de academia</option>
                 <option>Gestor de academia ou estúdio</option>
-                <option>Aluno</option>
               </select>
               <p class="field__error" id="lead-perfil-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
             </div>
-            <button class="btn btn--energy btn--lg btn--block" type="submit">Agendar demonstração</button>
+            <div class="field">
+              <label class="field__label" for="lead-alunos">Quantos alunos você atende hoje?</label>
+              <select class="field__control" id="lead-alunos" name="alunos" required aria-describedby="lead-alunos-erro" data-msg-required="Escolha uma faixa. Uma estimativa já ajuda.">
+                <option value="">Selecione</option>
+                <option>Até 10</option>
+                <option>De 11 a 30</option>
+                <option>De 31 a 100</option>
+                <option>Mais de 100</option>
+              </select>
+              <p class="field__error" id="lead-alunos-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+            </div>
+            <div class="field field--check">
+              <div class="check">
+                <input class="check__input" id="lead-consentimento" name="consentimento" type="checkbox" value="sim" required aria-describedby="lead-consentimento-erro" data-msg-required="Para enviar, confirme que leu a Política de Privacidade.">
+                <label class="check__label" for="lead-consentimento">Li a <a href="politica-de-privacidade.html" target="_blank">Política de Privacidade<span class="visually-hidden"> (abre em nova aba)</span></a> e concordo com o uso dos meus dados para combinar a demonstração.</label>
+              </div>
+              <p class="field__error" id="lead-consentimento-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+            </div>
+            <!-- Antispam (honeypot): invisível para pessoas; robôs costumam preencher. "_gotcha" é o nome que o Formspree reconhece. -->
+            <div class="hp" data-hp aria-hidden="true">
+              <label for="lead-site">Deixe este campo em branco</label>
+              <input id="lead-site" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <button class="btn btn--energy btn--lg btn--block" type="submit"><span class="btn__spinner" aria-hidden="true"></span><span class="btn__label">Agendar demonstração</span></button>
+            <p class="visually-hidden" role="status" data-form-status></p>
             <p class="lead-form__note">Usamos seus dados só para combinar a demonstração. Sem spam.</p>
-            <p class="lead-form__fail field__error" data-form-fail hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span>Não foi possível enviar agora. Confira sua conexão e tente de novo.</span></p>
+            <div class="lead-form__fail field__error" data-form-fail hidden>
+              <svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>
+              <p><span data-fail-text>Não foi possível enviar agora. Confira sua conexão e tente de novo.</span>
+                <span class="lead-form__alt" data-contact-group hidden>Se preferir, fale com a gente:
+                  <a data-contact-item data-contact="whatsapp" href="#" target="_blank" rel="noopener" hidden>WhatsApp<span class="visually-hidden"> (abre em nova aba)</span></a>
+                  <a data-contact-item data-contact="email" href="#" hidden>e-mail</a>
+                </span>
+              </p>
+            </div>
           </form>
 
           <div class="form-success" data-form-success tabindex="-1" hidden>
             <span class="form-success__icon"><svg class="icon" aria-hidden="true"><use href="#i-serie"/></svg></span>
             <h3 class="t-h3">Pedido recebido.</h3>
-            <p class="t-body">Vamos escrever para o e-mail informado para combinar o melhor horário. Até lá, separe um aluno para usarmos de exemplo.</p>
+            <p class="t-body">Vamos escrever para o e-mail informado para combinar o melhor horário. Até lá, pense no caso de um aluno para usarmos de exemplo (não precisa trazer nome nem dados que o identifiquem).</p>
+            <p class="t-body" data-contact-group hidden>Com pressa? <a data-contact-item data-contact="whatsapp" href="#" target="_blank" rel="noopener" hidden>Fale com a gente no WhatsApp<span class="visually-hidden"> (abre em nova aba)</span></a></p>
           </div>
+
+          <!-- Aluno não é o público da demonstração: o caminho dele é indicar o Arco ao treinador -->
+          <p class="student-note">
+            <svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg>
+            <span>É aluno? O Arco chega até você pelo seu treinador. <a href="https://wa.me/?text=Conheci%20o%20Arco%2C%20uma%20plataforma%20de%20treino%20em%20que%20a%20IA%20prop%C3%B5e%20e%20o%20treinador%20decide.%20Acho%20que%20pode%20ajudar%20no%20nosso%20acompanhamento%3A%20https%3A%2F%2Farcosite.vercel.app%2F%3Futm_source%3Dindicacao%26utm_medium%3Daluno" target="_blank" rel="noopener" data-share data-share-local="formulario">Indique o Arco para ele<span class="visually-hidden"> (abre em nova aba)</span></a></span>
+          </p>
         </div>
       </div>
     </section>
@@ -880,7 +1106,7 @@
         <div class="section-head faq__head" data-reveal>
           <p class="overline">Perguntas frequentes</p>
           <h2 class="t-h2" id="perguntas-title">O que costumam nos perguntar.</h2>
-          <p class="t-lead">Na demonstração, mostramos tudo com os dados de um aluno seu.</p>
+          <p class="t-lead">Na demonstração, mostramos tudo com o caso de um aluno seu.</p>
           <a class="faq__link" href="#demonstracao">Agendar demonstração<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></a>
         </div>
 
@@ -893,14 +1119,27 @@
             <summary class="accordion__summary">Em que dados a IA se baseia?<span class="accordion__sign" aria-hidden="true"></span></summary>
             <div class="accordion__body"><p>Na avaliação, no objetivo e na rotina do aluno, no histórico de cargas e na percepção de esforço (PSE) de cada série. Cada sugestão mostra essa base em uma linha.</p></div>
           </details>
+          <!-- VALIDAR (produto): atualização ao vivo do painel (ver docs/afirmacoes-para-validar.md, itens 7 e 8) -->
+          <details class="accordion__item">
+            <summary class="accordion__summary">Dá para acompanhar alunos online, a distância?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>Sim. O aluno treina com o app onde estiver, e as séries, o esforço e os relatos de dor chegam ao seu painel enquanto ele treina.</p></div>
+          </details>
+          <!-- VALIDAR (produto): modo offline no modo execução e envio automático ao reconectar -->
           <details class="accordion__item">
             <summary class="accordion__summary">Funciona sem internet na academia?<span class="accordion__sign" aria-hidden="true"></span></summary>
             <div class="accordion__body"><p>Sim. No modo execução, as séries ficam salvas no celular e são enviadas assim que a conexão volta.</p></div>
           </details>
+          <!-- VALIDAR (produto/negócio): plano de expansão para a América Latina em espanhol -->
           <details class="accordion__item">
             <summary class="accordion__summary">O Arco está disponível em espanhol?<span class="accordion__sign" aria-hidden="true"></span></summary>
             <div class="accordion__body"><p>O Arco nasce em português, no Brasil, com expansão prevista para a América Latina em espanhol.</p></div>
           </details>
+          <details class="accordion__item">
+            <summary class="accordion__summary">Como funciona a demonstração?<span class="accordion__sign" aria-hidden="true"></span></summary>
+            <div class="accordion__body"><p>É uma conversa com a nossa equipe. Você traz o caso de um aluno, sem precisar identificá-lo, e vê a IA montar a primeira proposta de treino ao vivo, com você revisando cada ajuste. Depois, decide se o Arco combina com o seu método, sem compromisso.</p></div>
+          </details>
+          <!-- TODO (produto/comercial): quando houver resposta oficial, incluir "Quanto custa?" e "Meus alunos precisam de relógio?".
+               Ao mudar qualquer pergunta, atualize o FAQPage no JSON-LD do <head> (o build confere se os dois batem). -->
         </div>
       </div>
     </section>
@@ -936,13 +1175,26 @@
         </nav>
         <div class="footer__col">
           <h2 class="footer__title">Fale com a gente</h2>
-          <!-- TODO: adicionar e-mail, telefone e redes oficiais quando estiverem definidos (não publicar contatos provisórios) -->
           <p class="footer__text">Mostramos o Arco com o caso de um aluno seu.</p>
           <a class="btn btn--ghost" href="#demonstracao">Agendar demonstração</a>
+          <!-- Contatos e redes: preencha em assets/js/config.js (contato). Itens vazios continuam ocultos. -->
+          <ul class="footer__contact" role="list" data-contact-group hidden>
+            <li data-contact-item hidden><a data-contact="email" data-contact-text href="#">E-mail</a></li>
+            <li data-contact-item hidden><a data-contact="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+          </ul>
+          <ul class="footer__social" role="list" aria-label="Redes sociais do Arco" data-contact-group hidden>
+            <li data-contact-item hidden><a data-contact="instagram" href="#" target="_blank" rel="noopener">Instagram<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+            <li data-contact-item hidden><a data-contact="linkedin" href="#" target="_blank" rel="noopener">LinkedIn<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+            <li data-contact-item hidden><a data-contact="youtube" href="#" target="_blank" rel="noopener">YouTube<span class="visually-hidden"> (abre em nova aba)</span></a></li>
+          </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        <p>© <span data-year>2026</span> Arco. Todos os direitos reservados.</p>
+        <p>© <span data-year>2026</span> Arco. Todos os direitos reservados. <span class="footer__note"></span></p>
+        <ul class="footer__legal" role="list">
+          <li><a href="politica-de-privacidade.html">Política de privacidade</a></li>
+          <li data-consent-item hidden><button type="button" data-consent-open>Preferências de privacidade</button></li>
+        </ul>
         <a class="footer__top" href="#topo">Voltar ao topo<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></a>
       </div>
     </div>

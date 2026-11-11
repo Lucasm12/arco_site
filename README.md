@@ -2,7 +2,9 @@
 
 Landing page da plataforma Arco, construída sobre o manual de marca ([../Identidade Visual/manual-arco.html](../Identidade%20Visual/manual-arco.html)) e os design tokens ([../Identidade Visual/arco-tokens.css](../Identidade%20Visual/arco-tokens.css)).
 
-HTML, CSS e JavaScript puros: sem build, sem dependências e sem framework.
+HTML, CSS e JavaScript puros, sem framework. O código-fonte roda direto no navegador; no deploy, um build curto (esbuild) junta, minifica e versiona CSS e JS.
+
+> **Versão 2.1 (11/nov/2026).** Pronta para lançamento, falta só preencher a configuração: formulários conectáveis (Formspree, Basin ou endpoint próprio) com antispam e estados de envio, Política de Privacidade (LGPD), pedido rápido no hero, prova social em rascunho, SEO (FAQPage), fontes no próprio site, hero 40% mais leve, cache longo e medição com consentimento. Detalhes em [docs/relatorio-melhorias.md](docs/relatorio-melhorias.md).
 
 > **Versão 2 (nov/2026).** Reformulação com menos texto (texto de marketing de 1.511 para 720 palavras, −52%), vídeos de atividades físicas e mais telas do produto. A versão anterior está no commit `1ff37a2` deste repositório (e, na máquina de desenvolvimento, em `../Site-v1-backup-2026-11-10/`).
 
@@ -10,26 +12,53 @@ HTML, CSS e JavaScript puros: sem build, sem dependências e sem framework.
 
 ```bash
 cd Site
-python -m http.server 8080
-# abra http://localhost:8080
+python -m http.server 8080      # código-fonte, sem build: http://localhost:8080
+npm install && npm run preview  # versão de produção (dist/), igual à da Vercel
 ```
 
-Abrir o `index.html` direto também funciona; só o `site.webmanifest` exige HTTP.
+Abrir o `index.html` direto também funciona; só o `site.webmanifest` exige HTTP. Em `localhost`, o envio dos formulários é **simulado** se não houver endpoint, e cada evento de medição aparece no console (fora do localhost, use `?debug-analytics`).
+
+## Configuração: `assets/js/config.js`
+
+Único arquivo a preencher antes de divulgar. Campo vazio desliga o recurso, e nada provisório aparece para o visitante.
+
+| Campo | O que liga | Vazio |
+|---|---|---|
+| `formEndpoint` | Envio dos dois formulários (POST com `FormData`, resposta JSON). Formspree: `https://formspree.io/f/ID` | No ar, o visitante vê a mensagem de erro (nenhum pedido "some" em silêncio) |
+| `contato.email`, `contato.whatsapp` | E-mail e WhatsApp no rodapé, CTA "Chame no WhatsApp" no hero, contato alternativo nas mensagens de erro e de sucesso | Itens ocultos |
+| `contato.instagram`, `linkedin`, `youtube` | Redes no rodapé | Itens ocultos |
+| `analytics.provedor` + `analytics.id` | `plausible` (domínio) ou `ga4` (`G-…`), carregado só depois do "Aceitar" no aviso de privacidade | Sem medição, sem aviso |
+
+O domínio fica no HTML (para os buscadores). Para trocar em todos os arquivos: `node scripts/trocar-dominio.mjs https://novo-dominio` (use `--simular` para só conferir).
+
+## Build e deploy
+
+- `npm run build` gera `dist/`. Ele junta os blocos `<!-- build:css -->` e `<!-- build:js -->` em `site.<hash>.css` e `site.<hash>.js`, acrescenta `?v=<hash>` a imagens, vídeos e fontes e remove os comentários do HTML. Também **falha** se o FAQ visível e o JSON-LD divergirem e **avisa** sobre TODOs e configurações vazias.
+- A Vercel roda o build sozinha (`vercel.json`: `buildCommand`, `outputDirectory: dist`). Cache de 1 ano (`immutable`) em `/assets/*`, que é seguro porque toda URL de asset muda quando o arquivo muda. HTML sem cache, como antes.
+- Mudou uma pergunta do FAQ? Rode `npm run faq` para atualizar o JSON-LD.
 
 ## Estrutura
 
 ```
 Site/
 ├── index.html              Página única, com o sprite SVG (símbolo e ícones do manual)
+├── politica-de-privacidade.html  LGPD (noindex até a revisão jurídica; campos "a definir" destacados)
 ├── assets/
+│   ├── fonts/              Atkinson Hyperlegible Next, Barlow Semi Condensed, Bricolage Grotesque (woff2 + OFL)
 │   ├── css/
+│   │   ├── fonts.css       @font-face locais (latin e latin-ext, font-display: swap)
 │   │   ├── tokens.css      Cópia de Identidade Visual/arco-tokens.css (não editar aqui)
 │   │   ├── base.css        Reset, tokens --site-*, escopos .surface-dark e .surface-light, tipografia
 │   │   ├── components.css  Botões, chips, mídia (vídeo + pausa), celular, cartão da IA, gráficos, formulário, abas, acordeão
 │   │   └── sections.css    Layout de cada seção, na ordem da página
+│   ├── js/config.js        Endpoint do formulário, contatos e analytics (preencher antes de divulgar)
 │   ├── js/main.js          Interações, um módulo init* por recurso
 │   ├── video/              Vídeos (WebM VP9 + MP4 H.264) e posters WebP
 │   └── img/                favicon.svg, ícones PNG e og-image.png
+├── docs/                   Relatório das melhorias, afirmações a validar, testes A/B e SEO
+├── scripts/                build.mjs, faq.mjs, trocar-dominio.mjs
+├── package.json            Só o esbuild, para o build
+├── vercel.json             Build, cache longo em /assets e cabeçalhos de segurança
 ├── site.webmanifest
 ├── robots.txt
 └── sitemap.xml
@@ -45,8 +74,11 @@ Site/
 | 04 | `#como-funciona` (passo 2 = `#ia`) | Três passos com trilha de progresso | Ficha do aluno, demonstração interativa da IA, vídeo + notificação de evolução |
 | 05 | `#beneficios` | Acompanhamento: abas "Para profissionais" e "Para alunos" | Painel do profissional e app do aluno, com contadores e gráficos animados |
 | 06 | `#diferenciais` (também `#problema`) | Comparativo e números do produto | Arco ao centro, entre "apps de performance" e "sistemas de gestão" |
-| 07 | `#demonstracao` | Chamada final com formulário | Raia olímpica (moodboard do manual) sob véu petróleo |
-| 08 | `#perguntas` | Perguntas frequentes (4) | — |
+| 06b | `#resultados` | Prova social: números, depoimentos e logos. **Rascunho oculto** até haver dados reais; veja com `?rascunho` | — |
+| 07 | `#demonstracao` | Chamada final: "o que acontece depois" em 3 passos + formulário completo + caminho do aluno (indicar ao treinador) | Raia olímpica (moodboard do manual) sob véu petróleo |
+| 08 | `#perguntas` | Perguntas frequentes (6), espelhadas no JSON-LD `FAQPage` | — |
+
+O hero tem um **pedido rápido** (só e-mail). O sucesso convida a completar o pedido na seção 07, que já chega com o e-mail preenchido.
 
 O que mudou em relação à versão 1 (sem perda de informação):
 
@@ -61,7 +93,7 @@ Todos os vídeos são decorativos, mudos, em loop e sem áudio. O comportamento 
 
 - O **poster** é uma `<img>` comum: aparece sem JS, com "reduzir movimento" e com economia de dados ativa.
 - As fontes só são inseridas quando o vídeo chega perto da tela (400 px); ele toca quando ao menos 20% está visível e pausa fora da tela ou com a aba em segundo plano.
-- Cada vídeo tem um botão **Pausar/Reproduzir** (WCAG 2.2.2). Com "reduzir movimento", nada toca sozinho; o botão oferece "Reproduzir".
+- Cada vídeo tem um botão **Pausar/Reproduzir** (WCAG 2.2.2). Com "reduzir movimento", economia de dados ou conexão 2G/3G, nada toca sozinho; o botão oferece "Reproduzir".
 - O hero usa uma versão vertical (`hero-mobile`, 9:16) abaixo de 768 px.
 - O navegador escolhe WebM (VP9) e recorre ao MP4 (H.264, `faststart`) quando não suporta WebM. Na calibração, o VP9 ficou ~15% menor que o H.264 com qualidade superior (SSIM 0,974 × 0,964).
 
@@ -69,7 +101,7 @@ Tratamento de cor aplicado a todos os clipes, conforme o manual (§6.5): sombras
 
 | Arquivo | Uso | Peso (WebM) |
 |---|---|---|
-| `hero` / `hero-mobile` | Montagem do hero, 15,5 s | 1,6 MB / 0,9 MB |
+| `hero` / `hero-mobile` | Montagem do hero, 9,5 s (5 cenas de 2,2 s; antes 15,5 s) | 0,94 MB / 0,54 MB (antes 1,6 / 0,9) |
 | `relacao` | O que é o Arco | 0,4 MB |
 | `ao-vivo`, `evolucao`, `esforco`, `dispositivos` | Cartões de funcionalidades | 0,15–0,28 MB cada |
 | `execucao` | Como funciona, passo 3 | 0,16 MB |
@@ -119,14 +151,24 @@ Regras do manual aplicadas:
 
 ## Antes de publicar
 
-- [ ] Trocar `arco.example` pelo domínio definitivo em `index.html` (canonical, Open Graph, JSON-LD), `robots.txt` e `sitemap.xml`.
-- [ ] Conectar o formulário: preencher `data-endpoint` no `<form data-lead-form>`. Sem endpoint, o envio é **simulado**.
-- [ ] Adicionar e-mail, telefone e redes oficiais no rodapé (há um `TODO` no HTML; nenhum contato provisório foi publicado).
-- [ ] Criar a política de privacidade (LGPD) e linkar no formulário e no rodapé.
-- [ ] Validar com produto as afirmações vindas do manual (modo offline, integração com wearables, espanhol, "legível a 1,5 m") e as modalidades mostradas nos vídeos (corrida, natação, ciclismo).
+Feito na v2.1: domínio provisório trocado pelo publicado, formulário pronto para conectar, política de privacidade, contatos e redes prontos para preencher, fontes no próprio site, minificação e cache.
+
+Falta (decisões e dados que só o time tem):
+
+- [ ] **Formulário:** criar o formulário no Formspree, no Basin ou no endpoint próprio e colar a URL em `formEndpoint` (`assets/js/config.js`). No Formspree, ative o filtro de spam. O plano grátis recebe 50 envios por mês.
+- [ ] **Contatos:** preencher e-mail, WhatsApp e redes em `config.js`.
+- [ ] **Medição:** escolher Plausible ou GA4, preencher `analytics` em `config.js` e marcar `form_submit` como conversão no painel.
+- [ ] **Política de Privacidade:** preencher os campos "a definir" (razão social, CNPJ, encarregado, fornecedores, prazos), revisar com o jurídico e, depois, trocar `noindex` por `index` e incluir a página no `sitemap.xml`.
+- [ ] **Domínio definitivo:** `node scripts/trocar-dominio.mjs https://…` e cadastrar no Google Search Console.
+- [ ] **Afirmações do produto:** validar a lista de [docs/afirmacoes-para-validar.md](docs/afirmacoes-para-validar.md) (offline, wearables, espanhol, "1,5 m", modalidades, iOS/Android).
+- [ ] **Prova social:** publicar a seção `#resultados` só com dados reais e autorizados (instruções no comentário da seção).
+- [ ] **Comercial:** definir o prazo de resposta e o formato da demonstração para completar "O que acontece depois de enviar" (TODO no HTML).
 - [ ] Substituir os vídeos de banco por produção própria quando possível (ver "Trocar por vídeos próprios").
 - [ ] "Arco" é nome de trabalho: fazer a busca de anterioridade no INPI e conferir o domínio (manual, seção 00).
-- [ ] Opcional: hospedar as fontes localmente (desempenho e LGPD) e minificar CSS e JS no deploy.
+
+## Verificação feita (v2.1)
+
+64 verificações automatizadas, todas aprovadas (layout em 390/820/1440 px, axe-core sem violações, formulários, consentimento e eventos, âncoras e regressão visual do build). Lighthouse no mobile: FCP 3,31 → 1,41 s, LCP 3,39 → 2,74 s, peso 1.327 → 849 KB. Detalhes e checklist de QA em [docs/relatorio-melhorias.md](docs/relatorio-melhorias.md).
 
 ## Verificação feita (v2)
 

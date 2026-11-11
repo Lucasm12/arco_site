@@ -1,0 +1,19 @@
+{
+  "name": "arco-site",
+  "version": "2.1.0",
+  "private": true,
+  "description": "Site institucional do Arco. HTML, CSS e JS puros; o build só junta, minifica e versiona os arquivos.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "preview": "npm run build && python -m http.server 8080 --directory dist",
+    "faq": "node scripts/faq.mjs --atualizar",
+    "dominio": "node scripts/trocar-dominio.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
