@@ -27,6 +27,7 @@
 }
 
 .icon-badge--ai { background: var(--arco-color-ai-bg); color: var(--arco-color-ai-fg); }
+.icon-badge--energy { background: var(--site-avatar-energy-bg); color: var(--site-avatar-energy-fg); }
 
 /* ---- Marca ---- */
 .logo {

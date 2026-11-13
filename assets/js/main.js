@@ -594,6 +594,26 @@
     servidor: 'Não foi possível enviar agora. Tente de novo em alguns minutos.'
   };
 
+  /* Valida um .field: borda de 2 px + ícone + mensagem que diz como corrigir (manual §11.1).
+     As mensagens ficam no HTML (data-msg-required, data-msg-type). */
+  function validateField(field) {
+    var control = $('input, select, textarea', field);
+    var error = $('.field__error', field);
+    var validity = control.validity;
+    var message = '';
+    if (validity.valueMissing) message = control.getAttribute('data-msg-required');
+    else if (validity.typeMismatch) message = control.getAttribute('data-msg-type');
+    else if (control.getAttribute('data-validate') === 'telefone' && control.value.trim()) {
+      var digits = control.value.replace(/\D/g, '').length;
+      if (digits < 10 || digits > 13) message = control.getAttribute('data-msg-type');
+    }
+    field.classList.toggle('is-invalid', !!message);
+    control.setAttribute('aria-invalid', String(!!message));
+    $('span', error).textContent = message;
+    error.hidden = !message;
+    return !message;
+  }
+
   function initLeadForms() {
     var forms = $$('[data-lead-form]');
     if (!forms.length) return;
@@ -638,27 +658,10 @@
       var idleLabel = label.textContent;
       var fields = $$('.field', form);
       var honeypot = $('[data-hp] input', form);
+      var validate = validateField;
       var attempted = false;
       var started = false;
       var sending = false;
-
-      function validate(field) {
-        var control = $('input, select, textarea', field);
-        var error = $('.field__error', field);
-        var validity = control.validity;
-        var message = '';
-        if (validity.valueMissing) message = control.getAttribute('data-msg-required');
-        else if (validity.typeMismatch) message = control.getAttribute('data-msg-type');
-        else if (control.getAttribute('data-validate') === 'telefone' && control.value.trim()) {
-          var digits = control.value.replace(/\D/g, '').length;
-          if (digits < 10 || digits > 13) message = control.getAttribute('data-msg-type');
-        }
-        field.classList.toggle('is-invalid', !!message);
-        control.setAttribute('aria-invalid', String(!!message));
-        $('span', error).textContent = message;
-        error.hidden = !message;
-        return !message;
-      }
 
       function setBusy(busy) {
         sending = busy;
@@ -745,6 +748,233 @@
         });
       });
     });
+  }
+
+  /* ---- Entrar (entrar.html): primeiro o perfil, depois e-mail e senha ----
+     O perfil vai na URL (?perfil=professor | ?perfil=aluno): o "voltar" do navegador retorna
+     à escolha e qualquer página pode apontar direto para um perfil. O envio é um POST comum
+     para ARCO_CONFIG.acesso.endpoint: o app autentica e redireciona. Se recusar, o app devolve
+     o visitante para entrar.html?perfil=…&erro=credenciais (ou erro=sessao). */
+  var LOGIN_PERFIS = {
+    professor: { nome: 'professor', texto: 'Use o e-mail da sua conta Arco.' },
+    aluno: { nome: 'aluno', texto: 'Use o e-mail que seu professor cadastrou no Arco.' }
+  };
+
+  var LOGIN_ERRORS = {
+    credenciais: 'E-mail ou senha não conferem. Confira os dois e tente de novo.',
+    sessao: 'Sua sessão terminou. Entre de novo para continuar.',
+    indisponivel: 'O acesso pelo site ainda não está disponível. Tente de novo em breve.',
+    servidor: 'Não foi possível entrar agora. Tente de novo em alguns minutos.'
+  };
+
+  function initLogin() {
+    var page = $('[data-login]');
+    if (!page) return;
+    var stepChoice = $('[data-login-step="perfil"]', page);
+    var stepAccess = $('[data-login-step="acesso"]', page);
+    var success = $('[data-login-success]', page);
+    var form = $('[data-login-form]', page);
+    var fail = $('[data-login-fail]', page);
+    var failText = $('[data-fail-text]', fail);
+    var status = $('[data-login-status]', page);
+    var submit = $('[type="submit"]', form);
+    var label = $('.btn__label', submit);
+    var idleLabel = label.textContent;
+    var fields = $$('.field', form);
+    var email = form.elements.email;
+    var password = form.elements.senha;
+    var reveal = $('[data-senha-toggle]', form);
+    var caps = $('[data-caps]', form);
+    var forgot = $('[data-login-recuperar]', form);
+    var settings = config.acesso || {};
+    var endpoint = String(settings.endpoint || '').trim();
+    var recover = String(settings.recuperarSenha || '').trim();
+    var current = null;
+    var attempted = false;
+    var sending = false;
+
+    if (endpoint) {
+      form.action = endpoint;
+      if (!/^https:\/\//.test(endpoint) && !isLocal) console.warn('[Arco] acesso.endpoint sem HTTPS: a senha trafegaria sem criptografia.');
+    } else {
+      console.warn('[Arco] acesso.endpoint vazio em assets/js/config.js: ' +
+        (isLocal ? 'login simulado (ambiente local).' : 'o login mostra "indisponível" até ele ser preenchido.'));
+    }
+
+    if (forgot && recover) {
+      forgot.href = recover;
+      forgot.hidden = false;
+    }
+
+    function perfilFromUrl() {
+      var value = new URLSearchParams(location.search).get('perfil');
+      return Object.prototype.hasOwnProperty.call(LOGIN_PERFIS, value) ? value : null;
+    }
+
+    function urlFor(perfil) {
+      var params = new URLSearchParams(location.search);
+      params.delete('erro');
+      if (perfil) params.set('perfil', perfil);
+      else params.delete('perfil');
+      var query = params.toString();
+      return location.pathname + (query ? '?' + query : '');
+    }
+
+    function navigate(url, push) {
+      try {
+        if (push) history.pushState({ arcoLogin: true }, '', url);
+        else history.replaceState(null, '', url);
+      } catch (e) { /* file:// em alguns navegadores: segue sem mudar a URL */ }
+    }
+
+    // Selo "Último acesso" no cartão do perfil usado da última vez neste aparelho
+    function markLast() {
+      var last = store.get('arco-perfil');
+      $$('[data-perfil-escolha]', page).forEach(function (link) {
+        $('[data-perfil-ultimo]', link).hidden = link.getAttribute('data-perfil-escolha') !== last;
+      });
+    }
+
+    function show(perfil) {
+      current = perfil;
+      page.setAttribute('data-perfil', perfil || '');
+      stepChoice.hidden = !!perfil;
+      stepAccess.hidden = !perfil;
+      success.hidden = true;
+      fail.hidden = true;
+      // Partes que mudam com o perfil (frase do painel, ícone, ajuda); "nenhum" = antes da escolha
+      $$('[data-perfil-mostra]', page).forEach(function (el) {
+        el.hidden = el.getAttribute('data-perfil-mostra') !== (perfil || 'nenhum');
+      });
+      if (perfil) {
+        form.elements.perfil.value = perfil;
+        $$('[data-perfil-nome]', page).forEach(function (el) { el.textContent = LOGIN_PERFIS[perfil].nome; });
+        $('[data-perfil-texto]', page).textContent = LOGIN_PERFIS[perfil].texto;
+      } else {
+        markLast();
+      }
+      document.title = (perfil ? 'Entrar como ' + LOGIN_PERFIS[perfil].nome : 'Entrar') + ' · Arco';
+    }
+
+    function focusChoice(perfil) {
+      var link = $('[data-perfil-escolha="' + perfil + '"]', page) || $('[data-perfil-escolha]', page);
+      link.focus();
+    }
+
+    $$('[data-perfil-escolha]', page).forEach(function (link) {
+      link.addEventListener('click', function (event) {
+        // Ctrl/Cmd + clique abre o perfil em outra aba, como qualquer link
+        if (event.button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        var perfil = link.getAttribute('data-perfil-escolha');
+        navigate(urlFor(perfil), true);
+        show(perfil);
+        email.focus();
+        track('login_perfil', { perfil: perfil });
+      });
+    });
+
+    $('[data-perfil-trocar]', page).addEventListener('click', function () {
+      // Veio da escolha nesta página: volta no histórico (o popstate redesenha e devolve o foco)
+      if (history.state && history.state.arcoLogin) { history.back(); return; }
+      var previous = current;
+      navigate(urlFor(null), false);
+      show(null);
+      focusChoice(previous);
+    });
+
+    window.addEventListener('popstate', function () {
+      var perfil = perfilFromUrl();
+      if (perfil === current) return; // ex.: só mudou o #âncora
+      var previous = current;
+      show(perfil);
+      if (perfil) email.focus();
+      else focusChoice(previous);
+    });
+
+    /* Senha: mostrar/ocultar e aviso de Caps Lock */
+    function setReveal(visible) {
+      password.type = visible ? 'text' : 'password';
+      reveal.setAttribute('aria-pressed', String(visible));
+    }
+
+    reveal.addEventListener('click', function () { setReveal(password.type === 'password'); });
+
+    function checkCaps(event) {
+      if (event.getModifierState) caps.hidden = !event.getModifierState('CapsLock');
+    }
+
+    password.addEventListener('keydown', checkCaps);
+    password.addEventListener('keyup', checkCaps);
+    password.addEventListener('blur', function () { caps.hidden = true; });
+
+    /* Validação: só depois da primeira tentativa, para não acusar erro enquanto a pessoa digita */
+    fields.forEach(function (field) {
+      var control = $('input', field);
+      control.addEventListener('input', function () {
+        if (attempted || field.classList.contains('is-invalid')) validateField(field);
+      });
+      control.addEventListener('blur', function () { if (attempted) validateField(field); });
+    });
+
+    function setBusy(busy) {
+      sending = busy;
+      // aria-disabled (e não disabled) para o foco continuar no botão durante o envio
+      submit.setAttribute('aria-disabled', String(busy));
+      submit.classList.toggle('is-busy', busy);
+      label.textContent = busy ? 'Entrando…' : idleLabel;
+      status.textContent = busy ? 'Entrando…' : '';
+    }
+
+    function showFail(kind) {
+      failText.textContent = LOGIN_ERRORS[kind] || LOGIN_ERRORS.servidor;
+      fail.hidden = false;
+    }
+
+    form.addEventListener('submit', function (event) {
+      if (sending) { event.preventDefault(); return; }
+      attempted = true;
+      fail.hidden = true;
+
+      var invalid = fields.filter(function (field) { return !validateField(field); });
+      if (invalid.length) {
+        event.preventDefault();
+        $('input', invalid[0]).focus();
+        track('login_error', { perfil: current, motivo: 'validacao' });
+        return;
+      }
+
+      setReveal(false); // envia como campo de senha: o gerenciador de senhas oferece salvar
+      store.set('arco-perfil', current);
+      setBusy(true);
+      track('login_submit', { perfil: current });
+      if (endpoint) return; // POST comum: o navegador segue para o app
+
+      event.preventDefault();
+      window.setTimeout(function () {
+        setBusy(false);
+        if (isLocal) {
+          stepAccess.hidden = true;
+          success.hidden = false;
+          success.focus();
+        } else {
+          showFail('indisponivel');
+          track('login_error', { perfil: current, motivo: 'indisponivel' });
+        }
+      }, isLocal ? 700 : 400);
+    });
+
+    // Voltou do app pelo botão "voltar" (cache de página): o botão não pode ficar em "Entrando…"
+    window.addEventListener('pageshow', function (event) { if (event.persisted) setBusy(false); });
+
+    var initial = perfilFromUrl();
+    var error = new URLSearchParams(location.search).get('erro');
+    show(initial);
+    if (initial && error) {
+      showFail(Object.prototype.hasOwnProperty.call(LOGIN_ERRORS, error) ? error : 'servidor');
+      navigate(urlFor(initial), false); // recarregar a página não repete a mensagem
+      track('login_error', { perfil: initial, motivo: error });
+    }
   }
 
   /* ---- Medição de audiência com consentimento (LGPD) ----
@@ -999,6 +1229,7 @@
   initTabs();
   initContacts();
   initLeadForms();
+  initLogin();
   initFocusLinks();
   initShare();
   initYear();

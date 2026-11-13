@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Entrar · Arco</title>
+  <meta name="description" content="Entre no Arco como professor ou como aluno.">
+  <!-- TODO: trocar "noindex, follow" por "index, follow" quando o login estiver ligado ao app (acesso.endpoint em config.js). -->
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#F5F8F9" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0D1719" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="https://arcosite.vercel.app/entrar.html">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/atkinson-hyperlegible-next-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Mesmo pacote de CSS e JS das outras páginas: quem vem do site já tem tudo em cache -->
+  <!-- build:css -->
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/sections.css">
+  <!-- /build:css -->
+
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try {
+        var t = localStorage.getItem('arco-theme');
+        if (t === 'light' || t === 'dark') d.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+  <!-- build:js -->
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/main.js" defer></script>
+  <!-- /build:js -->
+</head>
+
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="arco-mark" viewBox="0 0 48 48">
+        <path d="M40.05 26.83L39.86 27.84L39.62 28.84L39.31 29.83L38.94 30.79L38.52 31.74L38.03 32.65L37.49 33.54L36.89 34.39L36.23 35.21L35.53 35.99L34.78 36.72L33.98 37.40L33.13 38.04L32.25 38.62L31.33 39.15L30.38 39.61L29.40 40.02L28.39 40.37L27.36 40.66L26.31 40.88L25.24 41.03L24.17 41.12L23.09 41.14L22.00 41.09L20.92 40.97L19.85 40.79L18.79 40.53L17.74 40.21L16.71 39.83L15.71 39.38L14.73 38.86L13.79 38.29L12.88 37.65L12.01 36.96L11.19 36.21L10.41 35.40L9.68 34.55L9.01 33.66L8.39 32.71L7.83 31.73L7.33 30.72L6.89 29.67L6.52 28.59L6.22 27.49L5.99 26.37L5.83 25.24L5.74 24.09L5.72 22.94L5.78 21.78L5.91 20.63L6.11 19.48L6.38 18.35L6.73 17.23L7.14 16.14L7.63 15.07L8.18 14.03L8.80 13.03L9.49 12.06L10.23 11.13L11.03 10.26L11.89 9.43L12.81 8.65L13.77 7.94L14.78 7.28L15.82 6.69L16.91 6.16L18.03 5.70L19.19 5.31L20.36 5.00L21.56 4.76L22.78 4.59L24.00 4.50A4.50 4.50 0 0 1 24.00 13.50L23.34 13.47L22.67 13.48L22.00 13.54L21.33 13.63L20.67 13.78L20.01 13.96L19.36 14.18L18.73 14.45L18.11 14.76L17.51 15.11L16.93 15.50L16.38 15.92L15.85 16.38L15.35 16.88L14.88 17.41L14.44 17.97L14.03 18.56L13.67 19.18L13.34 19.82L13.05 20.49L12.80 21.17L12.60 21.88L12.44 22.59L12.33 23.32L12.26 24.06L12.24 24.80L12.27 25.54L12.34 26.29L12.46 27.03L12.63 27.77L12.85 28.49L13.11 29.21L13.42 29.91L13.77 30.59L14.17 31.24L14.61 31.88L15.09 32.49L15.61 33.06L16.17 33.61L16.77 34.12L17.39 34.59L18.05 35.03L18.74 35.42L19.45 35.77L20.19 36.08L20.95 36.34L21.72 36.55L22.51 36.71L23.32 36.82L24.12 36.88L24.94 36.89L25.75 36.85L26.57 36.75L27.38 36.61L28.18 36.41L28.97 36.16L29.74 35.86L30.50 35.51L31.23 35.11L31.94 34.66L32.62 34.17L33.27 33.64L33.88 33.06L34.46 32.44L35.01 31.79L35.50 31.10L35.96 30.37L36.37 29.62L36.73 28.84L37.04 28.04L37.29 27.22L37.49 26.38A1.30 1.30 0 0 1 40.05 26.83Z" style="fill:var(--mark-arc, currentColor)"/>
+        <circle cx="35.49" cy="14.36" r="4.5" style="fill:var(--mark-dot, currentColor)"/>
+      </symbol>
+      <symbol id="i-treino" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9.5 4.5V3h5v1.5M8.5 10h7M8.5 14h7M8.5 18h4"/></symbol>
+      <symbol id="i-aluno" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+      <symbol id="i-seta" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M10.3 4.6a2 2 0 0 1 3.4 0l7 12.2A2 2 0 0 1 19 19.8H5a2 2 0 0 1-1.7-3l7-12.2z"/><path d="M12 9.5v4"/><circle cx="12" cy="16.6" r=".9" fill="currentColor" stroke="none"/></symbol>
+      <symbol id="i-olho" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-olho-fechado" viewBox="0 0 24 24"><path d="M10.6 5.6c.5-.1.9-.1 1.4-.1 6 0 9.5 6.5 9.5 6.5a16.6 16.6 0 0 1-2.3 3.1M6.6 6.6C3.9 8.4 2.5 12 2.5 12S6 18.5 12 18.5c1.9 0 3.6-.6 5-1.5M9.9 9.9a3 3 0 0 0 4.2 4.2M3.5 3.5l17 17"/></symbol>
+      <symbol id="i-sol" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6l1.4 1.4M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4L6 18M18 6l1.4-1.4"/></symbol>
+      <symbol id="i-lua" viewBox="0 0 24 24"><path d="M19.5 14.6A8 8 0 0 1 9.4 4.5a8 8 0 1 0 10.1 10.1z"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Dois passos na mesma página: 1. o perfil (professor ou aluno); 2. e-mail e senha.
+       O perfil fica na URL (entrar.html?perfil=aluno): o "voltar" do navegador retorna à escolha
+       e qualquer página pode apontar direto para um perfil. Lógica em main.js (initLogin). -->
+  <div class="login" data-login>
+
+    <!-- Painel da marca (desktop): grafismo Trilha (manual §6.2) e uma frase que acompanha o perfil escolhido -->
+    <aside class="login__brand surface-dark noise" aria-label="Sobre o Arco">
+      <a class="logo logo--inverse" href="./" aria-label="Arco, página inicial">
+        <svg viewBox="0 0 160 48" aria-hidden="true" focusable="false"><use href="#arco-mark" width="48" height="48"/><text class="wm" x="58" y="39">arco</text></svg>
+      </a>
+
+      <div class="login__pitch">
+        <div class="login__claim-group" data-perfil-mostra="nenhum">
+          <p class="overline">Treino guiado</p>
+          <p class="login__claim">Cada treino é um arco.</p>
+          <p class="login__sub">A ponte entre quem orienta e quem treina: a IA propõe, o professor decide, o aluno evolui.</p>
+        </div>
+        <div class="login__claim-group" data-perfil-mostra="professor" hidden>
+          <p class="overline">Para professores</p>
+          <p class="login__claim">A IA propõe. Você decide.</p>
+          <p class="login__sub">Treinos da semana, sugestões para revisar e quem está treinando agora, no mesmo painel.</p>
+        </div>
+        <div class="login__claim-group" data-perfil-mostra="aluno" hidden>
+          <p class="overline">Para alunos</p>
+          <p class="login__claim">Treine com quem acompanha você.</p>
+          <p class="login__sub">O treino que seu professor preparou, série a série, e a sua evolução semana a semana.</p>
+        </div>
+      </div>
+
+      <svg class="login__trilha" viewBox="140 20 170 150" aria-hidden="true" focusable="false" data-reveal>
+        <g fill="none" stroke-linecap="round">
+          <path class="draw" pathLength="1" d="M300 170A140 140 0 0 1 160 30" stroke-opacity=".18" stroke-width="2" style="--draw-delay: 100ms"/>
+          <path class="draw" pathLength="1" d="M270 170A110 110 0 0 1 160 60" stroke-opacity=".3" stroke-width="3" style="--draw-delay: 240ms"/>
+          <path class="draw" pathLength="1" d="M240 170A80 80 0 0 1 160 90" stroke-opacity=".5" stroke-width="4" style="--draw-delay: 380ms"/>
+          <path class="draw" pathLength="1" d="M210 170A50 50 0 0 1 160 120" stroke-width="6" style="--draw-delay: 520ms"/>
+        </g>
+        <circle class="login__trilha-dot" cx="150" cy="122" r="7"/>
+      </svg>
+    </aside>
+
+    <div class="login__main">
+      <header class="login__top">
+        <a class="logo login__logo" href="./" aria-label="Arco, página inicial">
+          <svg viewBox="0 0 160 48" aria-hidden="true" focusable="false"><use href="#arco-mark" width="48" height="48"/><text class="wm" x="58" y="39">arco</text></svg>
+        </a>
+        <div class="login__actions">
+          <button class="icon-btn theme-toggle" type="button" data-theme-toggle aria-pressed="false" aria-label="Tema escuro">
+            <svg class="icon theme-toggle__moon" aria-hidden="true"><use href="#i-lua"/></svg>
+            <svg class="icon theme-toggle__sun" aria-hidden="true"><use href="#i-sol"/></svg>
+          </button>
+          <a class="btn btn--ghost btn--sm" href="./">Voltar ao site</a>
+        </div>
+      </header>
+
+      <main class="login__content" id="conteudo" tabindex="-1">
+        <noscript>
+          <p class="login__alert">Para entrar, ative o JavaScript do navegador.</p>
+        </noscript>
+
+        <!-- ===================== Passo 1 · Perfil ===================== -->
+        <section class="login__step" data-login-step="perfil" aria-labelledby="perfil-title">
+          <header class="login__head">
+            <p class="overline">Entrar</p>
+            <h1 class="login__title" id="perfil-title">Como você usa o Arco?</h1>
+            <p class="login__lead">Escolha seu perfil para entrar na área certa.</p>
+          </header>
+
+          <ul class="perfis" role="list">
+            <li>
+              <a class="perfil" href="?perfil=professor" data-perfil-escolha="professor">
+                <span class="icon-badge perfil__icon"><svg class="icon" aria-hidden="true"><use href="#i-treino"/></svg></span>
+                <span class="perfil__body">
+                  <span class="perfil__title">Sou professor <span class="perfil__last" data-perfil-ultimo hidden>Último acesso</span></span>
+                  <span class="perfil__desc">Monte treinos, aprove as sugestões da IA e acompanhe seus alunos.</span>
+                </span>
+                <svg class="icon perfil__arrow" aria-hidden="true"><use href="#i-seta"/></svg>
+              </a>
+            </li>
+            <li>
+              <a class="perfil" href="?perfil=aluno" data-perfil-escolha="aluno">
+                <span class="icon-badge icon-badge--energy perfil__icon"><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg></span>
+                <span class="perfil__body">
+                  <span class="perfil__title">Sou aluno <span class="perfil__last" data-perfil-ultimo hidden>Último acesso</span></span>
+                  <span class="perfil__desc">Veja o treino de hoje, registre suas séries e acompanhe sua evolução.</span>
+                </span>
+                <svg class="icon perfil__arrow" aria-hidden="true"><use href="#i-seta"/></svg>
+              </a>
+            </li>
+          </ul>
+
+          <p class="login__note">Novo por aqui? Professores começam com uma <a href="./#demonstracao">demonstração</a>. Alunos entram pelo convite do professor.</p>
+        </section>
+
+        <!-- ===================== Passo 2 · E-mail e senha ===================== -->
+        <section class="login__step" data-login-step="acesso" aria-labelledby="acesso-title" hidden>
+          <button class="login__back" type="button" data-perfil-trocar>
+            <svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg>Trocar perfil
+          </button>
+
+          <header class="login__head">
+            <span class="icon-badge" data-perfil-mostra="professor"><svg class="icon" aria-hidden="true"><use href="#i-treino"/></svg></span>
+            <span class="icon-badge icon-badge--energy" data-perfil-mostra="aluno" hidden><svg class="icon" aria-hidden="true"><use href="#i-aluno"/></svg></span>
+            <h1 class="login__title" id="acesso-title">Entrar como <span data-perfil-nome>professor</span></h1>
+            <p class="login__lead" data-perfil-texto>Use o e-mail da sua conta Arco.</p>
+          </header>
+
+          <!-- Erro do envio ou devolvido pelo app (?erro=credenciais | ?erro=sessao) -->
+          <div class="login__alert" role="alert" data-login-fail hidden>
+            <svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>
+            <p data-fail-text></p>
+          </div>
+
+          <!-- POST comum para ARCO_CONFIG.acesso.endpoint (o JS preenche o action): o app autentica e redireciona -->
+          <form class="login__form" method="post" novalidate data-login-form>
+            <input type="hidden" name="perfil" value="">
+            <div class="field">
+              <label class="field__label" for="login-email">E-mail</label>
+              <input class="field__control" id="login-email" name="email" type="email" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false" required aria-describedby="login-email-erro" data-msg-required="Informe seu e-mail." data-msg-type="Confira o e-mail: ele precisa ter @ e domínio, como nome@email.com.">
+              <p class="field__error" id="login-email-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+            </div>
+            <div class="field">
+              <div class="field__top">
+                <label class="field__label" for="login-senha">Senha</label>
+                <!-- Aparece quando acesso.recuperarSenha estiver preenchido em config.js -->
+                <a class="login__forgot" href="#" data-login-recuperar hidden>Esqueci minha senha</a>
+              </div>
+              <div class="field__affix">
+                <input class="field__control" id="login-senha" name="senha" type="password" autocomplete="current-password" required aria-describedby="login-senha-caps login-senha-erro" data-msg-required="Informe sua senha.">
+                <button class="field__reveal" type="button" data-senha-toggle aria-controls="login-senha" aria-pressed="false" aria-label="Mostrar senha">
+                  <svg class="icon field__reveal-show" aria-hidden="true"><use href="#i-olho"/></svg>
+                  <svg class="icon field__reveal-hide" aria-hidden="true"><use href="#i-olho-fechado"/></svg>
+                </button>
+              </div>
+              <p class="field__hint login__caps" id="login-senha-caps" data-caps hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg>Caps Lock ativado.</p>
+              <p class="field__error" id="login-senha-erro" hidden><svg class="icon" aria-hidden="true"><use href="#i-alerta"/></svg><span></span></p>
+            </div>
+            <div class="check">
+              <input class="check__input" id="login-lembrar" name="lembrar" type="checkbox" value="1">
+              <label class="check__label" for="login-lembrar">Manter conectado neste aparelho</label>
+            </div>
+            <button class="btn btn--primary btn--lg btn--block" type="submit"><span class="btn__spinner" aria-hidden="true"></span><span class="btn__label">Entrar</span></button>
+            <p class="visually-hidden" role="status" data-login-status></p>
+          </form>
+
+          <div class="login__note">
+            <p data-perfil-mostra="professor">Ainda não usa o Arco? <a href="./#demonstracao">Agende uma demonstração<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg></a></p>
+            <!-- VALIDAR (afirmações #21): o aluno recebe um convite do professor para criar a senha -->
+            <p data-perfil-mostra="aluno" hidden>Primeiro acesso? Abra o convite que seu professor enviou e crie sua senha por lá.</p>
+            <p data-perfil-mostra="aluno" hidden>Seu professor ainda não usa o Arco? <a href="https://wa.me/?text=Conheci%20o%20Arco%2C%20uma%20plataforma%20de%20treino%20em%20que%20a%20IA%20prop%C3%B5e%20e%20o%20treinador%20decide.%20Acho%20que%20pode%20ajudar%20no%20nosso%20acompanhamento%3A%20https%3A%2F%2Farcosite.vercel.app%2F%3Futm_source%3Dindicacao%26utm_medium%3Daluno" target="_blank" rel="noopener" data-share data-share-local="entrar">Indique para ele<svg class="icon" aria-hidden="true"><use href="#i-seta"/></svg><span class="visually-hidden"> (abre em nova aba)</span></a></p>
+          </div>
+        </section>
+
+        <!-- Só em ambiente local, enquanto acesso.endpoint estiver vazio: confirma o fluxo sem app -->
+        <section class="login__step form-success" data-login-success tabindex="-1" aria-labelledby="sucesso-title" hidden>
+          <span class="form-success__icon"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>
+          <h1 class="login__title" id="sucesso-title">Login simulado</h1>
+          <p class="login__lead">Ambiente local, sem endereço de acesso em <code>config.js</code> (<code>acesso.endpoint</code>). Com ele preenchido, você entraria no app como <span data-perfil-nome>professor</span>.</p>
+          <a class="btn btn--ghost" href="entrar.html">Recomeçar</a>
+        </section>
+      </main>
+
+      <footer class="login__foot">
+        <p>© <span data-year>2026</span> Arco</p>
+        <a href="politica-de-privacidade.html">Política de privacidade</a>
+      </footer>
+    </div>
+  </div>
+</body>
+</html>

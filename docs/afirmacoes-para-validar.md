@@ -39,6 +39,7 @@ No HTML, as afirmações 🔴 mais sensíveis têm um comentário `<!-- VALIDAR 
 | 18 | "Montamos um treino para o caso de um aluno seu… A IA faz a proposta ao vivo" | Chamada final, FAQ | A demonstração consegue mesmo montar uma proposta ao vivo com um caso trazido pelo profissional? |
 | 19 | "Usamos seus dados só para combinar a demonstração. Sem spam." | Formulário | Tem de bater com a Política de Privacidade e com o que o comercial fizer (nada de colocar o contato em lista de newsletter sem pedido). |
 | 20 | "Sem compromisso" | Hero, chamada final | A demonstração é gratuita e não exige cadastro de cartão. |
+| 21 | "Primeiro acesso? Abra o convite que seu professor enviou e crie sua senha por lá" e "Use o e-mail que seu professor cadastrou no Arco" | Login (`entrar.html`), perfil aluno | O aluno entra no Arco por convite do professor (por e-mail ou outro canal) e cria a senha a partir dele. | Trocar pelo fluxo real de cadastro do aluno. |
 
 ## 🟢 Dados ilustrativos (ok com a nota do rodapé)
 

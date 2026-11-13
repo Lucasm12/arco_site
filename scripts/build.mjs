@@ -19,7 +19,7 @@ import { conferirFaq } from './faq.mjs';
 
 const raiz = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const dist = path.join(raiz, 'dist');
-const PAGINAS = ['index.html', 'politica-de-privacidade.html'];
+const PAGINAS = ['index.html', 'politica-de-privacidade.html', 'entrar.html'];
 const RAIZ_ARQUIVOS = ['robots.txt', 'sitemap.xml', 'site.webmanifest'];
 const PASTAS = ['assets/img', 'assets/video', 'assets/fonts'];
 
@@ -123,6 +123,7 @@ fs.writeFileSync(path.join(dist, 'site.webmanifest'), JSON.stringify(manifesto, 
 const config = ler('assets/js/config.js').toString('utf8');
 if (/formEndpoint:\s*''/.test(config)) avisos.push('config.js: formEndpoint vazio. No ar, os formulários mostram erro em vez de enviar.');
 if (/provedor:\s*''/.test(config)) avisos.push('config.js: analytics sem provedor. Nenhum evento será medido.');
+if (/\bendpoint:\s*''/.test(config)) avisos.push('config.js: acesso.endpoint vazio. No ar, o login (entrar.html) avisa que o acesso ainda não está disponível.');
 
 /* ---- Relatório ---- */
 console.log('\nArco · build de produção → dist/');

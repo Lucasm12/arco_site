@@ -16,7 +16,7 @@ python -m http.server 8080      # código-fonte, sem build: http://localhost:808
 npm install && npm run preview  # versão de produção (dist/), igual à da Vercel
 ```
 
-Abrir o `index.html` direto também funciona; só o `site.webmanifest` exige HTTP. Em `localhost`, o envio dos formulários é **simulado** se não houver endpoint, e cada evento de medição aparece no console (fora do localhost, use `?debug-analytics`).
+O login (`entrar.html`) aceita `?perfil=professor` ou `?perfil=aluno` para abrir direto no passo do e-mail e senha. Abrir o `index.html` direto também funciona; só o `site.webmanifest` exige HTTP. Em `localhost`, o envio dos formulários é **simulado** se não houver endpoint, e cada evento de medição aparece no console (fora do localhost, use `?debug-analytics`).
 
 ## Configuração: `assets/js/config.js`
 
@@ -25,6 +25,8 @@ Abrir o `index.html` direto também funciona; só o `site.webmanifest` exige HTT
 | Campo | O que liga | Vazio |
 |---|---|---|
 | `formEndpoint` | Envio dos dois formulários (POST com `FormData`, resposta JSON). Formspree: `https://formspree.io/f/ID` | No ar, o visitante vê a mensagem de erro (nenhum pedido "some" em silêncio) |
+| `acesso.endpoint` | Login da página `entrar.html`: POST comum com `perfil`, `email`, `senha` e `lembrar`; o app autentica e redireciona. Se recusar, devolve para `entrar.html?perfil=…&erro=credenciais` (ou `erro=sessao`) | Em `localhost`, login simulado; no ar, mensagem de "acesso ainda não disponível" |
+| `acesso.recuperarSenha` | Link "Esqueci minha senha" no login | Link oculto |
 | `contato.email`, `contato.whatsapp` | E-mail e WhatsApp no rodapé, CTA "Chame no WhatsApp" no hero, contato alternativo nas mensagens de erro e de sucesso | Itens ocultos |
 | `contato.instagram`, `linkedin`, `youtube` | Redes no rodapé | Itens ocultos |
 | `analytics.provedor` + `analytics.id` | `plausible` (domínio) ou `ga4` (`G-…`), carregado só depois do "Aceitar" no aviso de privacidade | Sem medição, sem aviso |
@@ -43,6 +45,7 @@ O domínio fica no HTML (para os buscadores). Para trocar em todos os arquivos: 
 Site/
 ├── index.html              Página única, com o sprite SVG (símbolo e ícones do manual)
 ├── politica-de-privacidade.html  LGPD (noindex até a revisão jurídica; campos "a definir" destacados)
+├── entrar.html             Login em dois passos: perfil (professor ou aluno), depois e-mail e senha (noindex até ligar ao app)
 ├── assets/
 │   ├── fonts/              Atkinson Hyperlegible Next, Barlow Semi Condensed, Bricolage Grotesque (woff2 + OFL)
 │   ├── css/
@@ -157,6 +160,7 @@ Falta (decisões e dados que só o time tem):
 
 - [ ] **Formulário:** criar o formulário no Formspree, no Basin ou no endpoint próprio e colar a URL em `formEndpoint` (`assets/js/config.js`). No Formspree, ative o filtro de spam. O plano grátis recebe 50 envios por mês.
 - [ ] **Contatos:** preencher e-mail, WhatsApp e redes em `config.js`.
+- [ ] **Login:** preencher `acesso.endpoint` (e `acesso.recuperarSenha`) em `config.js` com os endereços do app e, depois, trocar `noindex` por `index` em `entrar.html`.
 - [ ] **Medição:** escolher Plausible ou GA4, preencher `analytics` em `config.js` e marcar `form_submit` como conversão no painel.
 - [ ] **Política de Privacidade:** preencher os campos "a definir" (razão social, CNPJ, encarregado, fornecedores, prazos), revisar com o jurídico e, depois, trocar `noindex` por `index` e incluir a página no `sitemap.xml`.
 - [ ] **Domínio definitivo:** `node scripts/trocar-dominio.mjs https://…` e cadastrar no Google Search Console.

@@ -10,6 +10,16 @@ window.ARCO_CONFIG = {
      só em localhost; no ar, o visitante vê a mensagem de erro (nenhum pedido se perde em silêncio). */
   formEndpoint: '',
 
+  /* Login (entrar.html). O formulário faz um POST comum (não JSON) para acesso.endpoint, com os campos
+     perfil ('professor' ou 'aluno'), email, senha e lembrar ('1' quando marcado). O app autentica e
+     redireciona para a área do perfil. Se recusar, devolva o visitante para
+     entrar.html?perfil=<perfil>&erro=credenciais (ou erro=sessao, quando a sessão expirar).
+     Vazio: em localhost o login é simulado; no ar, o visitante vê "acesso ainda não disponível". */
+  acesso: {
+    endpoint: '',       // TODO: URL HTTPS de login do app, ex.: 'https://app.arco.com.br/entrar'
+    recuperarSenha: ''  // TODO: página "Esqueci minha senha" do app. Vazio = link oculto
+  },
+
   contato: {
     email: '',     // TODO: e-mail comercial, ex.: 'contato@arco.com.br'
     whatsapp: '',  // TODO: só dígitos, com 55 + DDD, ex.: '5586999999999'
